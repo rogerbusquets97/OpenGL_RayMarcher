@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 #ifdef PLATFORM_WINDOWS
 	#ifdef BUILD_DLL
 		#define ENGINE_API __declspec(dllexport)
@@ -8,3 +10,5 @@
 #else
 	#error Only Windows supported!
 #endif
+
+typedef std::iostream EventData;

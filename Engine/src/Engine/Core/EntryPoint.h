@@ -1,5 +1,4 @@
 #pragma once
-#include "Log.h"
 
 #ifdef PLATFORM_WINDOWS
 extern Engine::Application* Engine::CreateApplication();
@@ -9,7 +8,23 @@ int main(int argc, char** argv)
 	Engine::Log::Init();
 	ENGINE_CORE_INFO("Engine Start");
 	auto app = Engine::CreateApplication();
-	app->Run();
+
+	if (app->Init())
+	{
+		bool Exit(false);
+
+		while (!Exit)
+		{
+			Exit = !app->Run();
+		}
+
+		app->CleanUp();
+	}
+	else
+	{
+		ENGINE_CORE_ERROR("Failed to Initialize engine");
+	}
+
 	delete app;
 }
 #endif

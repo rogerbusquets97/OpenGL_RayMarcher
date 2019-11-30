@@ -7,25 +7,36 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Engine\Application.h">
+    <ClInclude Include="src\Engine\Log\Log.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Core.h">
+    <ClInclude Include="src\Engine\Modules\Module.h" />
+    <ClInclude Include="src\Engine\Core\Application.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\EntryPoint.h">
+    <ClInclude Include="src\Engine\Core\Core.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Log.h">
+    <ClInclude Include="src\Engine\Core\EntryPoint.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Modules\Renderer\ModuleRenderer.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Events\Event.h" />
+    <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h" />
+    <ClInclude Include="src\Engine\Core\Window\Window.h" />
+    <ClInclude Include="src\Engine\Core\Window\GLFWWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Application.cpp">
+    <ClCompile Include="src\Engine\Log\Log.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Log.cpp">
+    <ClCompile Include="src\Engine\Core\Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp" />
+    <ClCompile Include="src\Engine\Core\Window\GLFWWindow.cpp" />
   </ItemGroup>
 </Project>
