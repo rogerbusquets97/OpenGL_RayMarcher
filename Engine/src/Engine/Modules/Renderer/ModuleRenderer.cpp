@@ -1,4 +1,5 @@
 #include "ModuleRenderer.h"
+#include "../../Core/Application.h"
 
 namespace Engine
 {
@@ -24,5 +25,8 @@ namespace Engine
 	bool ModuleRenderer::CleanUp()
 	{
 		return false;
+	}
+	void ModuleRenderer::OnEvent(EventData& aData)
+	{
 	}
 }

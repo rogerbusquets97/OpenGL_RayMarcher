@@ -9,6 +9,12 @@ workspace "RayMarcher"
 	}
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "Engine/ThirdParty/GLFW/include"
+
+	group "Dependencies"
+	include "Engine/ThirdParty/GLFW"
+	group ""
 
 project "Engine"
 	location "Engine"
@@ -26,18 +32,25 @@ project "Engine"
 
 	includedirs
 	{
-		"%{prj.name}/ThirdParty/spdlog/include"
+		"%{prj.name}/ThirdParty/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.16299.0"
+		systemversion "latest"
 
 		defines
 		{
 			"PLATFORM_WINDOWS",
-			"BUILD_DLL"
+			"BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 	filter "configurations:Debug"
@@ -76,7 +89,7 @@ project "Sandbox"
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
-		systemversion "10.0.16299.0"
+		systemversion "latest"
 
 		defines
 		{

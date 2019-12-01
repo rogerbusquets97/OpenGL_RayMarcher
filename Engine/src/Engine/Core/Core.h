@@ -11,4 +11,4 @@
 	#error Only Windows supported!
 #endif
 
-typedef std::iostream EventData;
+#define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

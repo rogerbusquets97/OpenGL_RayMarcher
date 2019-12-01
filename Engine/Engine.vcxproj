@@ -58,8 +58,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_WINDOWS;BUILD_DLL;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_WINDOWS;BUILD_DLL;GLFW_INCLUDE_NONE;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;ThirdParty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -75,8 +75,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>PLATFORM_WINDOWS;BUILD_DLL;RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>PLATFORM_WINDOWS;BUILD_DLL;GLFW_INCLUDE_NONE;RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>ThirdParty\spdlog\include;ThirdParty\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -93,26 +93,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine\Core\Window\GLFWWindow.h" />
-    <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h" />
-    <ClInclude Include="src\Engine\Core\Events\Event.h" />
-    <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
-    <ClInclude Include="src\Engine\Modules\Renderer\ModuleRenderer.h" />
-    <ClInclude Include="src\Engine\Modules\Module.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Core\Application.h" />
     <ClInclude Include="src\Engine\Core\Core.h" />
     <ClInclude Include="src\Engine\Core\EntryPoint.h" />
-    <ClInclude Include="src\Engine\Log\Log.h" />
+    <ClInclude Include="src\Engine\Core\Events\Event.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Window\GLWindow.h" />
     <ClInclude Include="src\Engine\Core\Window\Window.h" />
+    <ClInclude Include="src\Engine\Log\Log.h" />
+    <ClInclude Include="src\Engine\Modules\Module.h" />
+    <ClInclude Include="src\Engine\Modules\Renderer\ModuleRenderer.h" />
+    <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Core\Window\GLFWWindow.cpp" />
-    <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp" />
-    <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
+    <ClCompile Include="src\Engine\Core\Events\Event.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\Engine\Core\Application.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\Engine\Core\Window\GLWindow.cpp" />
     <ClCompile Include="src\Engine\Log\Log.cpp" />
+    <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
+    <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ThirdParty\GLFW\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

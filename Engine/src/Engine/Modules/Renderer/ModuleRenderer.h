@@ -1,7 +1,6 @@
 #pragma once
 #include "../Module.h"
 #include "../../Core/Core.h"
-#include "../../Core/Application.h"
 
 namespace Engine
 {
@@ -14,6 +13,7 @@ namespace Engine
 		virtual bool Init() override;
 		virtual bool Update() override;
 		virtual bool CleanUp() override;
+		virtual void OnEvent(EventData& aData) override;
 	};
 }
 

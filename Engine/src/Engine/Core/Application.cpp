@@ -1,14 +1,20 @@
 #include "Application.h"
+#include "../Modules/Window/ModuleWindow.h"
 
 namespace Engine
 {
-	Application::Application()
+	Application::Application() : mWindow(nullptr)
 	{
+		mWindow = new ModuleWindow(this);
+		AddModule(mWindow);
 	}
-
-
+	
 	Application::~Application()
 	{
+		for (auto& Module : mModules)
+		{
+			delete Module;
+		}
 	}
 
 	bool Application::Run()
@@ -31,6 +37,7 @@ namespace Engine
 			ReturnValue = Module->Init();
 		}
 
+		mWindow->SetEventCallback(EventHandler(BIND_EVENT_FN(Application::OnEvent)));
 		return ReturnValue;
 	}
 	bool Application::CleanUp()
@@ -44,15 +51,19 @@ namespace Engine
 
 		return ReturnValue;
 	}
-	void Application::AddModule(Module * aModule)
+	void Application::AddModule(Module* aModule)
 	{
 		mModules.push_back(aModule);
 	}
-	void Application::RemoveModule(Module * aModule)
+	void Application::RemoveModule(Module* aModule)
 	{
-		mModules.remove(aModule);
+		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
-	void Application::OnEvent(const EventData & aData)
+	void Application::OnEvent(EventData & aData)
 	{
+		for (auto& Module : mModules)
+		{
+			Module->OnEvent(aData);
+		}
 	}
 }

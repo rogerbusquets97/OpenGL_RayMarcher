@@ -1,4 +1,6 @@
 #include "ModuleWindow.h"
+#include "../../Core/Application.h"
+#include <memory>
 
 namespace Engine
 {
@@ -13,17 +15,29 @@ namespace Engine
 
 	bool ModuleWindow::Init()
 	{
-		return false;
+		mWindow = Window::Create();
+
+		return true;
 	}
 
 	bool ModuleWindow::Update()
 	{
-		return false;
+		mWindow->Update();
+		return true;
 	}
 
 	bool ModuleWindow::CleanUp()
 	{
-		return false;
+		return true;
+	}
+
+	void ModuleWindow::OnEvent(EventData& aData)
+	{
+	}
+
+	void ModuleWindow::SetEventCallback(const EventHandler & aCallback)
+	{
+		mWindow->SetEventCallback(aCallback);
 	}
 
 

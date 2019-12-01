@@ -4,39 +4,90 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{DBC7D3B0-C769-FE86-B024-12DB9C6585D7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{130D9B61-7FC2-1357-08B7-0D2E746B0A5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Events">
+      <UniqueIdentifier>{97E562D1-83C9-2327-EC29-1E7AD82C0EA9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Renderer">
+      <UniqueIdentifier>{19B6ADAC-0545-3776-AE63-4B719AD1471C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core\Window">
+      <UniqueIdentifier>{9A4679FA-862A-3A50-EF8A-34A3DB8D24D2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Log">
+      <UniqueIdentifier>{2C55F502-180D-3750-8114-10AC6DEBD140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Modules">
+      <UniqueIdentifier>{A3FFB9C7-8FCD-ADCD-7861-1EF464CE8932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Modules\Renderer">
+      <UniqueIdentifier>{A98AAE17-15C2-F6AE-1ECC-5AD28A821DA8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Modules\Window">
+      <UniqueIdentifier>{2AB71BB3-9623-D7AD-5F17-6F0BCB42F915}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Engine\Log\Log.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Engine\Modules\Module.h" />
     <ClInclude Include="src\Engine\Core\Application.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Core.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\EntryPoint.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Modules\Renderer\ModuleRenderer.h" />
-    <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
-    <ClInclude Include="src\Engine\Core\Events\Event.h" />
-    <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h" />
-    <ClInclude Include="src\Engine\Core\Window\Window.h" />
-    <ClInclude Include="src\Engine\Core\Window\GLFWWindow.h" />
+    <ClInclude Include="src\Engine\Core\Events\Event.h">
+      <Filter>Engine\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Window\Window.h">
+      <Filter>Engine\Core\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Log\Log.h">
+      <Filter>Engine\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Modules\Module.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Modules\Renderer\ModuleRenderer.h">
+      <Filter>Engine\Modules\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h">
+      <Filter>Engine\Modules\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Window\GLWindow.h">
+      <Filter>Engine\Core\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\Log\Log.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="src\Engine\Core\Application.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Engine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
-    <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
-    <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp" />
-    <ClCompile Include="src\Engine\Core\Window\GLFWWindow.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Log\Log.cpp">
+      <Filter>Engine\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp">
+      <Filter>Engine\Modules\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp">
+      <Filter>Engine\Modules\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Window\GLWindow.cpp">
+      <Filter>Engine\Core\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Engine\Core\Events\Event.cpp" />
   </ItemGroup>
 </Project>

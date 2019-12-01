@@ -1,10 +1,13 @@
 #pragma once
 #include "Core.h"
+#include <vector>
+#include "Events/Event.h"
 #include "../Modules/Module.h"
-#include <list>
 
 namespace Engine
 {
+	class ModuleWindow;
+
 	class ENGINE_API Application
 	{
 	public:
@@ -15,9 +18,10 @@ namespace Engine
 		bool CleanUp();
 		void AddModule(Module* aModule);
 		void RemoveModule(Module* aModule);
-		void OnEvent(const EventData& aData);
+		void OnEvent(EventData& aData);
 	private:
-		std::list<Module*> mModules;
+		std::vector<Module*> mModules;
+		ModuleWindow* mWindow;
 	};
 
 	Application* CreateApplication();

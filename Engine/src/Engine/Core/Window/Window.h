@@ -5,13 +5,13 @@
 
 namespace Engine
 {
-	struct WindowData
+	struct WindowSettings
 	{
 		std::string Title;
 		unsigned int Width;
 		unsigned int Height;
 		
-		WindowData(const std::string& aTitle = "RayMarcher", unsigned int aWidth = 1280, unsigned int aHeight = 720) :
+		WindowSettings(const std::string& aTitle = "OpenGL Renderer", unsigned int aWidth = 1280, unsigned int aHeight = 720) :
 			Title(aTitle),
 			Width(aWidth),
 			Height(aHeight)
@@ -22,21 +22,21 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
-		Window(const WindowData& aData) : mData(aData) {}
+		Window(const WindowSettings& aSettings) : mSettings(aSettings) {}
 		virtual ~Window() {};
 
 		virtual void Update() = 0;
-		virtual unsigned int GetWidth() = 0;
-		virtual unsigned int GetHeight() = 0;
-		virtual void SetEventCallback(EventHandler aCallback) = 0;
+		virtual unsigned int GetWidth() const = 0;
+		virtual unsigned int GetHeight() const = 0;
+		virtual void SetEventCallback(const EventHandler& aCallback) = 0;
 		virtual void SetVSync(const bool aEnabled) = 0;
-		virtual bool IsVSyncEnabled() = 0;
+		virtual bool IsVSyncEnabled() const = 0;
 
-		static Window* Create(const WindowData& aData = WindowData());
+		static Window* Create(const WindowSettings& aData = WindowSettings());
 
 	private:
 
-		WindowData mData;
+		WindowSettings mSettings;
 	};
 }
 
