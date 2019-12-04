@@ -1,8 +1,8 @@
 #include "GraphicsContext.h"
 #include "OpenGL/OpenGLContext.h"
 #include "RenderAPI.h"
-#include "../../Log/Log.h"
-#include "../Window/GLWindow.h"
+#include <Log/Log.h>
+#include <Window/GLWindow.h>
 
 namespace Engine
 {

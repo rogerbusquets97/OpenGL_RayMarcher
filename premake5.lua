@@ -33,6 +33,8 @@ project "Engine"
 	includedirs
 	{
 		"%{prj.name}/ThirdParty/spdlog/include",
+		"%{prj.name}/src/Engine/Core",
+		"%{prj.name}/src/Engine/Modules",
 		"%{IncludeDir.GLFW}"
 	}
 
@@ -78,7 +80,9 @@ project "Sandbox"
 	includedirs
 	{
 		"Engine/ThirdParty/spdlog/include",
-		"Engine/src"
+		"Engine/src",
+		"Engine/src/Engine/Core",
+		"Engine/src/Engine/Modules"
 	}
 
 	links

@@ -1,8 +1,8 @@
 #pragma once
 
 // For include in extern applications
-#include "Engine/Core/Application.h"
-#include "Engine/Log/Log.h"
+#include <Application.h>
+#include <Log/Log.h>
 //--EntryPoint-----------------
-#include "Engine/Core/EntryPoint.h"
+#include <EntryPoint.h>
 //-----------------------------

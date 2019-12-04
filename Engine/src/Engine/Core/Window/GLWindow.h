@@ -1,8 +1,9 @@
 #pragma once
 #include "Window.h"
-#include "../Core.h"
+#include <Core.h>
 #include "GLFW/glfw3.h"
-#include "../Renderer/GraphicsContext.h"
+#include <Renderer/GraphicsContext.h>
+
 namespace Engine
 {
 	struct WindowData
@@ -10,7 +11,7 @@ namespace Engine
 		std::string Title;
 		unsigned int Width, Height;
 		bool VSync;
-		EventHandler EventCallback;
+		Event EventCallback;
 	};
 
 	class ENGINE_API GLWindow : public Window

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Core/Core.h"
-#include "../../Core/Window/Window.h"
-#include "../Module.h"
+#include <Core.h>
+#include <Window/Window.h>
+#include <Module.h>
 
 namespace Engine
 {
@@ -14,8 +14,8 @@ namespace Engine
 		virtual bool Init() override;
 		virtual bool Update() override;
 		virtual bool CleanUp() override;
-		virtual void OnEvent(EventData& aData) override;
-		void SetEventCallback(const EventHandler& aCallback);
+		virtual void OnEvent(MemoryBuffer& aData) override;
+		virtual void SetEventCallback(const EventHandler& aCallback);
 
 	private:
 		Window* mWindow;

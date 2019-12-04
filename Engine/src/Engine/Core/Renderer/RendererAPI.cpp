@@ -1,5 +1,5 @@
 #include "RenderAPI.h"
-#include "../../Log/Log.h"
+#include <Log/Log.h>
 
 namespace Engine
 {

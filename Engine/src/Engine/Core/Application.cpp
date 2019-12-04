@@ -1,12 +1,12 @@
 #include "Application.h"
-#include "../Modules/Window/ModuleWindow.h"
+#include "Window/ModuleWindow.h"
+#include <Log/Log.h>
 
 namespace Engine
 {
-	Application::Application() : mWindow(nullptr)
+	Application::Application()
 	{
-		mWindow = new ModuleWindow(this);
-		AddModule(mWindow);
+		AddModule(new ModuleWindow(this));
 	}
 	
 	Application::~Application()
@@ -37,7 +37,6 @@ namespace Engine
 			ReturnValue = Module->Init();
 		}
 
-		mWindow->SetEventCallback(EventHandler(BIND_EVENT_FN(Application::OnEvent)));
 		return ReturnValue;
 	}
 	bool Application::CleanUp()
@@ -59,8 +58,19 @@ namespace Engine
 	{
 		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
-	void Application::OnEvent(EventData & aData)
+	void Application::OnEvent(MemoryBuffer & aData)
 	{
+		aData.Reset();
+		EVENT_TYPE Type;
+		aData.Read(Type);
+
+		switch (Type)
+		{
+			case EVENT_TYPE::MOUSE_BUTTON_PRESSED:
+				ENGINE_CORE_ERROR("Mouse Button Pressed!");
+			break;	
+		}
+
 		for (auto& Module : mModules)
 		{
 			Module->OnEvent(aData);

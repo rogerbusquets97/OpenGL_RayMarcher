@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Core.h"
+#include <Core.h>
 #include "../GraphicsContext.h"
-#include "../../Window/GLWindow.h"
+#include <Window/GLWindow.h>
 
 namespace Engine
 {

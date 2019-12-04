@@ -7,8 +7,9 @@ namespace Engine
 	EventHandler::EventHandler(const Func & aFunc)
 	{
 		this->id = ++EventHandler::counter;
+		this->mFunc = aFunc;
 	}
-	void EventHandler::operator()(EventData & aData)
+	void EventHandler::operator()(MemoryBuffer & aData)
 	{
 		this->mFunc(aData);
 	}
@@ -44,7 +45,7 @@ namespace Engine
 			}
 		}
 	}
-	void Event::operator()(EventData & aData)
+	void Event::operator()(MemoryBuffer & aData)
 	{
 		this->Notify(aData);
 	}
@@ -66,7 +67,7 @@ namespace Engine
 		return *this;
 	}
 
-	void Event::Notify(EventData & aData)
+	void Event::Notify(MemoryBuffer & aData)
 	{
 		std::vector<EventHandler*>::iterator func = this->mHandlers.begin();
 		for (; func != this->mHandlers.end(); ++func)

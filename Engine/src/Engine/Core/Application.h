@@ -2,12 +2,10 @@
 #include "Core.h"
 #include <vector>
 #include "Events/Event.h"
-#include "../Modules/Module.h"
+#include <Module.h>
 
 namespace Engine
 {
-	class ModuleWindow;
-
 	class ENGINE_API Application
 	{
 	public:
@@ -18,10 +16,9 @@ namespace Engine
 		bool CleanUp();
 		void AddModule(Module* aModule);
 		void RemoveModule(Module* aModule);
-		void OnEvent(EventData& aData);
+		void OnEvent(MemoryBuffer& aData);
 	private:
 		std::vector<Module*> mModules;
-		ModuleWindow* mWindow;
 	};
 
 	Application* CreateApplication();

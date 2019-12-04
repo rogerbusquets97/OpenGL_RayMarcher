@@ -1,5 +1,5 @@
 #include "GLWindow.h"
-#include "../../Log/Log.h"
+#include <Log/Log.h>
 
 namespace Engine
 {
@@ -37,7 +37,7 @@ namespace Engine
 
 	void GLWindow::SetEventCallback(const EventHandler& aCallback)
 	{
-		mData.EventCallback = aCallback;
+		mData.EventCallback += aCallback;
 	}
 
 	void GLWindow::SetVSync(const bool aEnabled)
@@ -91,6 +91,19 @@ namespace Engine
 				SetVSync(true);
 
 				//Callbacks
+
+				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+
+					MemoryBuffer Buffer;
+					Buffer.Write(EVENT_TYPE::MOUSE_BUTTON_PRESSED);
+					Buffer.Write(aButton);
+					Buffer.Write(aAction);
+
+					Data.EventCallback(Buffer);
+				});
+
 			}
 		}
 	}
@@ -106,21 +119,14 @@ namespace Engine
 		return new GLWindow(aSettings);
 	}
 
-	static void MouseButtonCallback(GLFWwindow* aWindow, int button, int action, int mods)
+	/*static void MouseButtonCallback(GLFWwindow* aWindow, int button, int action, int mods)
 	{
-		const WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
-		
-		switch (action)
-		{
-			case GLFW_PRESS:
-			{
-				break;
-			}
-			case GLFW_RELEASE:
-			{
-				break;
-			}
-		}
-	}
+		MemoryBuffer Buffer;
+		Buffer.Write(EVENT_TYPE::MOUSE_BUTTON_PRESSED);
+		Buffer.Write(button);
+		Buffer.Write(action);
 
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+		data.EventCallback(Buffer);
+	}*/
 }
