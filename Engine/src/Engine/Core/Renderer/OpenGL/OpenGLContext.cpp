@@ -1,5 +1,6 @@
 #include "OpenGLContext.h"
 #include <Log/Log.h>
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {

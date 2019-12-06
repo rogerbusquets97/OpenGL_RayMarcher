@@ -60,17 +60,6 @@ namespace Engine
 	}
 	void Application::OnEvent(MemoryBuffer & aData)
 	{
-		aData.Reset();
-		EVENT_TYPE Type;
-		aData.Read(Type);
-
-		switch (Type)
-		{
-			case EVENT_TYPE::MOUSE_BUTTON_PRESSED:
-				ENGINE_CORE_ERROR("Mouse Button Pressed!");
-			break;	
-		}
-
 		for (auto& Module : mModules)
 		{
 			Module->OnEvent(aData);

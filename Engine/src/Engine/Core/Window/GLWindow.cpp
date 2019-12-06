@@ -1,5 +1,7 @@
 #include "GLWindow.h"
 #include <Log/Log.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
@@ -86,6 +88,12 @@ namespace Engine
 			{
 				mContext = GraphicsContext::Create(this);
 				mContext->Init();
+				int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+				if (!status)
+				{
+					ENGINE_CORE_ERROR("Couldn't initialize GLAD");
+				}
 
 				glfwSetWindowUserPointer(mWindow, &mData);
 				SetVSync(true);
@@ -118,15 +126,4 @@ namespace Engine
 	{
 		return new GLWindow(aSettings);
 	}
-
-	/*static void MouseButtonCallback(GLFWwindow* aWindow, int button, int action, int mods)
-	{
-		MemoryBuffer Buffer;
-		Buffer.Write(EVENT_TYPE::MOUSE_BUTTON_PRESSED);
-		Buffer.Write(button);
-		Buffer.Write(action);
-
-		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
-		data.EventCallback(Buffer);
-	}*/
 }

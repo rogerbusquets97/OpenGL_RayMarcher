@@ -11,9 +11,11 @@ workspace "RayMarcher"
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "Engine/ThirdParty/GLFW/include"
+	IncludeDir["GLAD"] = "Engine/ThirdParty/GLAD/include"
 
 	group "Dependencies"
 	include "Engine/ThirdParty/GLFW"
+	include "Engine/ThirdParty/GLAD"
 	group ""
 
 project "Engine"
@@ -35,12 +37,14 @@ project "Engine"
 		"%{prj.name}/ThirdParty/spdlog/include",
 		"%{prj.name}/src/Engine/Core",
 		"%{prj.name}/src/Engine/Modules",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}"
 	}
 
 	links
 	{
-		"GLFW"
+		"GLFW",
+		"GLAD"
 	}
 
 	filter "system:windows"
