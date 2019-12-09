@@ -2,6 +2,7 @@
 #include <Core.h>
 #include <string>
 #include <Events/Event.h>
+#include <vec2.hpp>
 
 namespace Engine
 {
@@ -11,7 +12,7 @@ namespace Engine
 		unsigned int Width;
 		unsigned int Height;
 		
-		WindowSettings(const std::string& aTitle = "OpenGL Renderer", unsigned int aWidth = 1280, unsigned int aHeight = 720) :
+		WindowSettings(const std::string& aTitle = "OpenGL Renderer", unsigned int aWidth = 720, unsigned int aHeight = 720) :
 			Title(aTitle),
 			Width(aWidth),
 			Height(aHeight)
@@ -33,10 +34,11 @@ namespace Engine
 		virtual bool IsVSyncEnabled() const = 0;
 
 		static Window* Create(const WindowSettings& aData = WindowSettings());
-
+		inline static glm::vec2 GetResolution() { return mResolution; }
 	private:
 
 		WindowSettings mSettings;
+		static glm::vec2 mResolution;
 	};
 }
 

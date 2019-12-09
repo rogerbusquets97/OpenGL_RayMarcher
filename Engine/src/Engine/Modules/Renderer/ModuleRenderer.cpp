@@ -1,5 +1,6 @@
 #include "ModuleRenderer.h"
 #include <Application.h>
+#include <Log/Log.h>
 
 namespace Engine
 {
@@ -14,19 +15,58 @@ namespace Engine
 
 	bool ModuleRenderer::Init()
 	{
-		return false;
+		bool ReturnValue(false);
+
+		mAPI = RenderAPI::Create();
+		if (mAPI != nullptr)
+		{
+			ReturnValue = mAPI->Init();
+		}
+		else
+		{
+			ENGINE_CORE_ERROR("Failed to create Renderer");
+		}
+		
+		return ReturnValue;
 	}
 
 	bool ModuleRenderer::Update()
 	{
-		return false;
+		bool ReturnValue(false);
+
+		if (mAPI != nullptr)
+		{
+			ReturnValue = mAPI->Update();
+		}
+
+		return ReturnValue;
 	}
 
 	bool ModuleRenderer::CleanUp()
 	{
-		return false;
+		bool ReturnValue(false);
+
+		if (mAPI != nullptr)
+		{
+			ReturnValue = mAPI->CleanUp();
+		}
+
+		return ReturnValue;
+	}
+	bool ModuleRenderer::Awake()
+	{
+		return true;
+	}
+	bool ModuleRenderer::PreUpdate()
+	{
+		return true;
+	}
+	bool ModuleRenderer::PostUpdate()
+	{
+		return true;
 	}
 	void ModuleRenderer::OnEvent(MemoryBuffer& aData)
 	{
+		//Handle window resize
 	}
 }

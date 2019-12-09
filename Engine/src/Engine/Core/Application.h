@@ -16,11 +16,14 @@ namespace Engine
 		bool CleanUp();
 		void AddModule(Module* aModule);
 		void RemoveModule(Module* aModule);
+		//I know sending a buffer is kinda dangerous ... It's the simplest solution right now. (Will properly implement events in the future).
 		void OnEvent(MemoryBuffer& aData);
-	private:
+	private:		
 		std::vector<Module*> mModules;
 	};
 
 	Application* CreateApplication();
 }
+
+
 

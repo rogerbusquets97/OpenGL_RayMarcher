@@ -6,7 +6,6 @@ namespace Engine
 {
 	Application::Application()
 	{
-		AddModule(new ModuleWindow(this));
 	}
 	
 	Application::~Application()
@@ -23,7 +22,17 @@ namespace Engine
 
 		for (auto& Module : mModules)
 		{
+			ReturnValue = Module->PreUpdate();
+		}
+
+		for (auto& Module : mModules)
+		{
 			ReturnValue = Module->Update();
+		}
+
+		for (auto& Module : mModules)
+		{
+			ReturnValue = Module->PostUpdate();
 		}
 
 		return ReturnValue;
@@ -31,6 +40,11 @@ namespace Engine
 	bool Application::Init()
 	{
 		bool ReturnValue(true);
+
+		for (auto& Module : mModules)
+		{
+			ReturnValue = Module->Awake();
+		}
 
 		for (auto& Module : mModules)
 		{
@@ -58,6 +72,7 @@ namespace Engine
 	{
 		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
+	
 	void Application::OnEvent(MemoryBuffer & aData)
 	{
 		for (auto& Module : mModules)

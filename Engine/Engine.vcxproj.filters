@@ -58,13 +58,28 @@
     <ClInclude Include="src\Engine\Core\Memory\MemoryBuffer.h">
       <Filter>Engine\Core\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\ComputeShader.h">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Core\Renderer\GraphicsContext.h">
       <Filter>Engine\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLComputeShader.h">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.h">
       <Filter>Engine\Core\Renderer\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.h">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.h">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\Shader.h">
       <Filter>Engine\Core\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Core\Window\GLWindow.h">
@@ -96,13 +111,28 @@
     <ClCompile Include="src\Engine\Core\Memory\MemoryBuffer.cpp">
       <Filter>Engine\Core\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\ComputeShader.cpp">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\Core\Renderer\GraphicsContext.cpp">
       <Filter>Engine\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLComputeShader.cpp">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.cpp">
       <Filter>Engine\Core\Renderer\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.cpp">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.cpp">
+      <Filter>Engine\Core\Renderer\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp">
+      <Filter>Engine\Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\Shader.cpp">
       <Filter>Engine\Core\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Core\Window\GLWindow.cpp">

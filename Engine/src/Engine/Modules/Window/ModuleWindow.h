@@ -14,6 +14,9 @@ namespace Engine
 		virtual bool Init() override;
 		virtual bool Update() override;
 		virtual bool CleanUp() override;
+		virtual bool Awake() override;
+		virtual bool PreUpdate() override;
+		virtual bool PostUpdate() override;
 		virtual void OnEvent(MemoryBuffer& aData) override;
 		virtual void SetEventCallback(const EventHandler& aCallback);
 

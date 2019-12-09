@@ -1,5 +1,6 @@
 #include "RenderAPI.h"
 #include <Log/Log.h>
+#include <Renderer/OpenGL/OpenGLRenderer.h>
 
 namespace Engine
 {
@@ -10,7 +11,7 @@ namespace Engine
 		switch (mCurrentAPI)
 		{
 			case RENDER_API::None: ENGINE_CORE_ERROR("Engine API None not supported"); return nullptr;
-			case RENDER_API::OPENGL: return nullptr;//return openglrenderer
+			case RENDER_API::OPENGL: return new OpenGLRenderer();
 			case RENDER_API::DIRECTX: ENGINE_CORE_ERROR("DIRECTX not supported yet"); return nullptr;
 		}
 

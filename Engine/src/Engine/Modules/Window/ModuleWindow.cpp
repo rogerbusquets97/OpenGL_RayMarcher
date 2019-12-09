@@ -15,8 +15,6 @@ namespace Engine
 
 	bool ModuleWindow::Init()
 	{
-		mWindow = Window::Create();
-		mWindow->SetEventCallback(EventHandler(std::bind(&Application::OnEvent, mApplication, std::placeholders::_1)));
 		return true;
 	}
 
@@ -27,6 +25,23 @@ namespace Engine
 	}
 
 	bool ModuleWindow::CleanUp()
+	{
+		return true;
+	}
+
+	bool ModuleWindow::Awake()
+	{
+		mWindow = Window::Create();
+		mWindow->SetEventCallback(EventHandler(std::bind(&Application::OnEvent, mApplication, std::placeholders::_1)));
+		return true;
+	}
+
+	bool ModuleWindow::PreUpdate()
+	{
+		return true;
+	}
+
+	bool ModuleWindow::PostUpdate()
 	{
 		return true;
 	}

@@ -12,6 +12,7 @@ workspace "RayMarcher"
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "Engine/ThirdParty/GLFW/include"
 	IncludeDir["GLAD"] = "Engine/ThirdParty/GLAD/include"
+	IncludeDir["GLM"] = "Engine/ThirdParty/glm/glm"
 
 	group "Dependencies"
 	include "Engine/ThirdParty/GLFW"
@@ -38,7 +39,8 @@ project "Engine"
 		"%{prj.name}/src/Engine/Core",
 		"%{prj.name}/src/Engine/Modules",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}"
+		"%{IncludeDir.GLAD}",
+		"%{IncludeDir.GLM}"
 	}
 
 	links
@@ -84,6 +86,7 @@ project "Sandbox"
 	includedirs
 	{
 		"Engine/ThirdParty/spdlog/include",
+		"Engine/ThirdParty/glm/glm",
 		"Engine/src",
 		"Engine/src/Engine/Core",
 		"Engine/src/Engine/Modules"

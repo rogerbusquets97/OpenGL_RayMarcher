@@ -5,6 +5,8 @@
 
 namespace Engine
 {
+	glm::vec2 Window::mResolution = glm::vec2();
+
 	static void ErrorCallback(int aError, const char* aDescription)
 	{
 		ENGINE_CORE_ERROR("GLFW Error ({0}) : {1}", aError, aDescription);
@@ -124,6 +126,7 @@ namespace Engine
 
 	Window* Window::Create(const WindowSettings& aSettings)
 	{
+		Window::mResolution = glm::vec2(aSettings.Width, aSettings.Height);
 		return new GLWindow(aSettings);
 	}
 }
