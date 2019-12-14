@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-	Application::Application()
+	Application::Application() : mModules()
 	{
 	}
 	

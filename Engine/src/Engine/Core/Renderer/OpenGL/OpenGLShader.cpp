@@ -65,6 +65,11 @@ namespace Engine
 		}
 	}
 
+	void OpenGLShader::Unbind()
+	{
+		glUseProgram(0);
+	}
+
 	void Engine::OpenGLShader::SetBool(const std::string & aName, bool aValue) const
 	{
 		glUniform1i(glGetUniformLocation(mID, aName.c_str()), (int)aValue);

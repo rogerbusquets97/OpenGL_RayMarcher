@@ -5,14 +5,12 @@
 
 namespace Engine
 {
-	glm::vec2 Window::mResolution = glm::vec2();
-
 	static void ErrorCallback(int aError, const char* aDescription)
 	{
 		ENGINE_CORE_ERROR("GLFW Error ({0}) : {1}", aError, aDescription);
 	}
 
-	GLWindow::GLWindow(const WindowSettings& aSettings) : Window(aSettings)
+	GLWindow::GLWindow(const WindowSettings& aSettings) : mWindow(nullptr), mData(), mContext()
 	{
 		Init(aSettings);
 	}
@@ -63,7 +61,7 @@ namespace Engine
 		return mData.VSync;
 	}
 
-	GLFWwindow * GLWindow::GetGLFWwindow() const
+	void * GLWindow::GetNativeWindow() const
 	{
 		return mWindow;
 	}
@@ -88,7 +86,7 @@ namespace Engine
 			}
 			else
 			{
-				mContext = GraphicsContext::Create(this);
+				mContext = GraphicsContext::Create(GetNativeWindow());
 				mContext->Init();
 				int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
@@ -124,9 +122,8 @@ namespace Engine
 		glfwTerminate();
 	}
 
-	Window* Window::Create(const WindowSettings& aSettings)
+	std::shared_ptr<Window> Window::Create(const WindowSettings& aSettings)
 	{
-		Window::mResolution = glm::vec2(aSettings.Width, aSettings.Height);
-		return new GLWindow(aSettings);
+		return std::make_shared<GLWindow>(aSettings);
 	}
 }

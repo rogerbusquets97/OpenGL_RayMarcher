@@ -56,6 +56,11 @@ namespace Engine
 		}
 	}
 
+	void OpenGLComputeShader::Unbind()
+	{
+		glUseProgram(0);
+	}
+
 	void OpenGLComputeShader::Dispatch(unsigned int aSizeX, unsigned int aSizeY, unsigned int aSizeZ)
 	{
 		glDispatchCompute((GLuint)aSizeX, (GLuint)aSizeY, (GLuint)aSizeZ);

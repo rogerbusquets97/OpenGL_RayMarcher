@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-	ModuleWindow::ModuleWindow(Application* aApplication) : Module("Window", aApplication)
+	ModuleWindow::ModuleWindow(Application* aApplication) : Module("Window", aApplication), mWindow(nullptr)
 	{
 	}
 

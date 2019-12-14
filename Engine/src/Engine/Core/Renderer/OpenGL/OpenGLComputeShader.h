@@ -11,6 +11,7 @@ namespace Engine
 		virtual ~OpenGLComputeShader();
 		virtual void Load(const char* aSource) override;
 		virtual void Bind() override;
+		virtual void Unbind() override;
 		virtual void Dispatch(unsigned int aSizeX, unsigned int aSizeY, unsigned int aSizeZ) override;
 		virtual void SetBool(const std::string& aName, bool aValue) const override;
 		virtual void SetInt(const std::string& aName, int aValue) const override;

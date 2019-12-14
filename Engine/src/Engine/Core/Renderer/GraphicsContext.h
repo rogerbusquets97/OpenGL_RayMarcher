@@ -1,5 +1,6 @@
 #pragma once
 #include <Core.h>
+#include <Window/Window.h>
 
 namespace Engine
 {
@@ -9,7 +10,7 @@ namespace Engine
 		virtual void Init() = 0;
 		virtual void SwapBuffers() = 0;
 
-		static GraphicsContext* Create(void* aWindow);
+		static std::shared_ptr<GraphicsContext> Create(void* aWindow);
 	};
 }
 

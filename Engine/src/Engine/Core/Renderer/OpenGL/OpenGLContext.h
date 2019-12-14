@@ -8,13 +8,13 @@ namespace Engine
 	class ENGINE_API OpenGLContext : public GraphicsContext
 	{
 	public:
-		OpenGLContext(GLWindow* aWindow);
+		OpenGLContext(GLFWwindow* aWindow);
 		virtual ~OpenGLContext();
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
 
 	private:
-		GLWindow* mWindowHandle;
+		GLFWwindow* mWindowHandle;
 	};
 }
 

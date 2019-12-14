@@ -1,2 +1,2 @@
-call ThirdParty\Premake\bin\premake5.exe vs2017
+call ThirdParty\Premake\bin\premake5.exe vs2019
 PAUSE

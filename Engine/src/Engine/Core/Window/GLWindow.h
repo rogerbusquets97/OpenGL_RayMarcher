@@ -26,7 +26,7 @@ namespace Engine
 		virtual void SetEventCallback(const EventHandler& aCallback) override;
 		virtual void SetVSync(const bool aEnabled) override;
 		virtual bool IsVSyncEnabled() const override;
-		GLFWwindow* GetGLFWwindow() const;
+		virtual void* GetNativeWindow() const override;
 
 	private:
 		virtual void Init(const WindowSettings& aSettings);
@@ -35,7 +35,7 @@ namespace Engine
 	private:
 		GLFWwindow* mWindow;
 		WindowData mData;
-		GraphicsContext* mContext;
+		std::shared_ptr<GraphicsContext> mContext;
 	};
 }
 

@@ -3,6 +3,7 @@
 #include <Core.h>
 #include <Renderer/Shader.h>
 #include <Renderer/ComputeShader.h>
+#include <Renderer/VertexArray.h>
 
 
 namespace Engine
@@ -14,18 +15,12 @@ namespace Engine
 		~OpenGLRenderer();
 		virtual bool Init() override;
 		virtual bool CleanUp() override;
-		virtual bool Update() override;
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) override;
-
-	private: 
-		void DrawQuad();
-
-	private:
-		unsigned int QuadVAO; 
-		unsigned int QuadVBO;
-		Shader* QuadShader;
-		ComputeShader* mComputeShader;
-		unsigned int OutputTexture;
+		virtual void Clear() override;
+		virtual void ClearColor(const glm::vec4& aColor) override;
+		virtual void ClearDepth(float aDepth) override;
+		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& aArray) const override;
+		virtual void DrawArray(unsigned int aFirst, unsigned int aCount) const override;
 	};
 }
 

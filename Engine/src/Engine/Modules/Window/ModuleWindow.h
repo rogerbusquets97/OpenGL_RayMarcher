@@ -21,7 +21,7 @@ namespace Engine
 		virtual void SetEventCallback(const EventHandler& aCallback);
 
 	private:
-		Window* mWindow;
+		std::shared_ptr<Window> mWindow;
 	};
 }
 

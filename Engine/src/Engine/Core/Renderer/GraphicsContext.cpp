@@ -6,12 +6,12 @@
 
 namespace Engine
 {
-	GraphicsContext* GraphicsContext::Create(void* aWindow)
+	std::shared_ptr<GraphicsContext> GraphicsContext::Create(void* aWindow)
 	{
 		switch (RenderAPI::GetAPI())
 		{
 			case RENDER_API::None: ENGINE_CORE_ERROR("None API not supported"); return nullptr;
-			case RENDER_API::OPENGL: return new OpenGLContext(static_cast<GLWindow*>(aWindow));
+			case RENDER_API::OPENGL: return std::make_shared<OpenGLContext>(static_cast<GLFWwindow*>(aWindow));
 			case RENDER_API::DIRECTX: ENGINE_CORE_ERROR("DirectX not supported yet"); return nullptr;
 		}
 
