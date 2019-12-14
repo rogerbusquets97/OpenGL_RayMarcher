@@ -61,6 +61,11 @@ project "Engine"
 			"GLFW_INCLUDE_NONE"
 		}
 
+	postbuildcommands 
+	{
+		"copy %{cfg.buildtarget.directory}%{prj.name}.dll %{cfg.buildtarget.directory}..\\%{cfg.startproject}"
+	}
+
 	filter "configurations:Debug"
 		defines "DEBUG"
 		symbols "On"
