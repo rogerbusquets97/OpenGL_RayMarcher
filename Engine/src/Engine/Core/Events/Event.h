@@ -1,43 +1,21 @@
-#pragma once
+#ifndef ENGINE_EVENT
+#define ENGINE_EVENT
+
 #include <vector>
-#include <memory>
-#include <functional>
-#include <Core.h>
-#include <Memory/MemoryBuffer.h>
+#include "Core.h"
+#include "Events/EventHandler.h"
 
 namespace Engine
 {
-	enum EVENT_TYPE
+
+	enum class eEventType
 	{
-		KEY_PRESSED,
-		WINDOW_RESIZE,
-		MOUSE_BUTTON_PRESSED,
-		NONE
+		KeyPressed,
+		WindowResize,
+		MouseButtonPressed,
+		None
 	};
 
-	class ENGINE_API EventHandler
-	{
-	public:
-		using Func = std::function<void(MemoryBuffer&)>;
-
-		EventHandler() : id(0) {}
-		EventHandler(const Func &aFunc);
-	
-
-		void operator()(MemoryBuffer& aData);
-
-		void operator=(const EventHandler &aFunc);
-
-		bool operator==(const EventHandler &aHandler);
-
-		bool operator!=(nullptr_t);
-
-	public:
-		int id;
-		static int counter;
-	private:
-		std::function<void(MemoryBuffer&)> mFunc;
-	};
 
 	class ENGINE_API Event
 	{
@@ -46,7 +24,7 @@ namespace Engine
 		void AddHandler(const EventHandler& aHandler);
 		void RemoveHandler(const EventHandler& aHandler);
 		void operator()(MemoryBuffer& aData);
-		Event& operator+=(const EventHandler aHandler);
+		Event& operator+=(const EventHandler& aHandler);
 		Event& operator+=(const EventHandler::Func& aHandler);
 		Event& operator-=(const EventHandler& aHandler);
 	private:
@@ -55,3 +33,5 @@ namespace Engine
 		std::vector<EventHandler*> mHandlers;
 	};
 }
+
+#endif

@@ -105,7 +105,7 @@ namespace Engine
 					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
 					MemoryBuffer Buffer;
-					Buffer.Write(EVENT_TYPE::MOUSE_BUTTON_PRESSED);
+					Buffer.Write(eEventType::MouseButtonPressed);
 					Buffer.Write(aButton);
 					Buffer.Write(aAction);
 
