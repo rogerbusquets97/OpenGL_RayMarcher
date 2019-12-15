@@ -13,6 +13,9 @@ namespace Engine
 		unsigned int Width, Height;
 		bool VSync;
 		Event EventCallback;
+
+		WindowData() : Title(), Width(0U), Height(0U), VSync(true), EventCallback()
+		{}
 	};
 
 	class ENGINE_API GLWindow : public Window

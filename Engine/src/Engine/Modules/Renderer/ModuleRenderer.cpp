@@ -7,7 +7,9 @@
 
 namespace Engine
 {
-	ModuleRenderer::ModuleRenderer(Application* aApplication) : Module("Renderer", aApplication), mQuadShader(), mQuadVA()
+	bool ModuleRenderer::mNeedRepaint = true;
+
+	ModuleRenderer::ModuleRenderer(Application* aApplication) : Module("Renderer", aApplication), mQuadMaterial(nullptr), mComputeShader(nullptr), mQuadVA(nullptr), mQuadTexture(nullptr)
 	{
 	}
 
@@ -44,53 +46,42 @@ namespace Engine
 		mQuadVA->AddVertexBuffer(QuadVBO);
 
 		//Quad Shader
-		mQuadShader = Shader::Create();
+		std::shared_ptr<Shader> QuadShader = Shader::Create();
 		std::string CurrentDirectory = std::filesystem::current_path().string();
 		CurrentDirectory.substr(CurrentDirectory.find_last_of("\\/"));
 		std::string VertexPath = CurrentDirectory + "/Resources/StandardShader.vs";
 		std::string FragmentPath = CurrentDirectory + "/Resources/StandardShader.fs";
-		mQuadShader->Load(VertexPath.c_str(), FragmentPath.c_str());
+		QuadShader->Load(VertexPath.c_str(), FragmentPath.c_str());
 
 		mComputeShader = ComputeShader::Create();
 		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";
 		mComputeShader->Load(ComputePath.c_str());
 
 		mQuadTexture = RenderTexture2D::Create(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
+		mQuadMaterial = Material::Create(QuadShader);
 		return ReturnValue;
-
-		//Example Compute shader texture
-		/*mComputeShader = ComputeShader::Create();
-		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";
-		mComputeShader->Load(ComputePath.c_str());
-
-		//Texture - This could be implemented in a OpenGLTexture class (just like shaders)
-		glm::vec2 Resolution = Window::GetResolution();
-		glGenTextures(1, &OutputTexture);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, OutputTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, Resolution.x, Resolution.y, 0, GL_RGBA, GL_FLOAT, NULL);
-		glBindImageTexture(0, OutputTexture, 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA32F);
-		*/
 	}
 
 	bool ModuleRenderer::Update()
 	{
-		bool ReturnValue(false);
-
+		bool ReturnValue(true);
+				
 		Renderer::ClearColor(glm::vec4(0));
 		Renderer::ClearDepth(1.0f);
 		Renderer::Clear();
 
 		mQuadTexture->Bind();
-		mComputeShader->Bind();
-		mComputeShader->Dispatch(ModuleWindow::GetWidth(), ModuleWindow::GetHeight(), 1);
+
+		if (mNeedRepaint)
+		{
+			mComputeShader->Bind();
+			mComputeShader->Dispatch(ModuleWindow::GetWidth(), ModuleWindow::GetHeight(), 1);
+			mNeedRepaint = false;
+		}
+
 		//Draw stuff
-		mQuadShader->Bind();
-		Renderer::DrawArray(0,4);
+		mQuadMaterial->Use();
+		Renderer::DrawArray(0, 4);
 
 		return ReturnValue;
 	}
@@ -102,6 +93,7 @@ namespace Engine
 	}
 	bool ModuleRenderer::Awake()
 	{
+		mNeedRepaint = true;
 		return true;
 	}
 	bool ModuleRenderer::PreUpdate()
@@ -115,5 +107,9 @@ namespace Engine
 	void ModuleRenderer::OnEvent(MemoryBuffer& aData)
 	{
 		//TODO: Handle window resize
+	}
+	void ModuleRenderer::NeedRepaint(bool aRepaint)
+	{
+		mNeedRepaint = aRepaint;
 	}
 }
