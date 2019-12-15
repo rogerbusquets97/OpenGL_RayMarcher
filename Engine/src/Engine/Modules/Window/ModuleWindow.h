@@ -20,8 +20,12 @@ namespace Engine
 		virtual void OnEvent(MemoryBuffer& aData) override;
 		virtual void SetEventCallback(const EventHandler& aCallback);
 
+		static uint32_t GetWidth();
+		static uint32_t GetHeight();
+		static void* GetNativeWindow();
+
 	private:
-		std::shared_ptr<Window> mWindow;
+		static std::shared_ptr<Window> mWindow;
 	};
 }
 

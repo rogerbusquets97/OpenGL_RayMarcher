@@ -17,6 +17,7 @@ namespace Engine
 	
 	OpenGLShader::~OpenGLShader()
 	{
+		glDeleteProgram(mID);
 	}
 
 	void Engine::OpenGLShader::Load(const char * aVertex, const char * aFragment)

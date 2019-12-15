@@ -15,6 +15,7 @@ namespace Engine
 
 	OpenGLComputeShader::~OpenGLComputeShader()
 	{
+		glDeleteProgram(mID);
 	}
 
 	void OpenGLComputeShader::Load(const char * aSource)

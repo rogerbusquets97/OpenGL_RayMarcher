@@ -118,6 +118,8 @@
     <ClInclude Include="src\Engine\Modules\Window\ModuleWindow.h">
       <Filter>Engine\Modules\Window</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\Renderer\Texture.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -183,5 +185,7 @@
     <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp">
       <Filter>Engine\Modules\Window</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Core\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.cpp" />
   </ItemGroup>
 </Project>

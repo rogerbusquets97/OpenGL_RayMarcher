@@ -111,10 +111,12 @@
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
     <ClInclude Include="src\Engine\Core\Renderer\Renderer.h" />
     <ClInclude Include="src\Engine\Core\Renderer\Shader.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\Texture.h" />
     <ClInclude Include="src\Engine\Core\Renderer\VertexArray.h" />
     <ClInclude Include="src\Engine\Core\Window\GLWindow.h" />
     <ClInclude Include="src\Engine\Core\Window\Window.h" />
@@ -136,10 +138,12 @@
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\Texture.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Engine\Core\Window\GLWindow.cpp" />
     <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
