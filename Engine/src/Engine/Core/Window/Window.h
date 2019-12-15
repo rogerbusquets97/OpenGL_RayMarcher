@@ -23,8 +23,7 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
-		Window(const WindowSettings& aSettings) : mSettings(aSettings) {}
-		virtual ~Window() {};
+		virtual ~Window() = default;
 
 		virtual void Update() = 0;
 		virtual unsigned int GetWidth() const = 0;
@@ -32,13 +31,8 @@ namespace Engine
 		virtual void SetEventCallback(const EventHandler& aCallback) = 0;
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
-
-		static Window* Create(const WindowSettings& aData = WindowSettings());
-		inline static glm::vec2 GetResolution() { return mResolution; }
-	private:
-
-		WindowSettings mSettings;
-		static glm::vec2 mResolution;
+		virtual void* GetNativeWindow() const = 0;
+		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
 	};
 }
 

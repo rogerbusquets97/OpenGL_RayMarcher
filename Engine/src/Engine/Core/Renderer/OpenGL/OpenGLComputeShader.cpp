@@ -15,6 +15,7 @@ namespace Engine
 
 	OpenGLComputeShader::~OpenGLComputeShader()
 	{
+		glDeleteProgram(mID);
 	}
 
 	void OpenGLComputeShader::Load(const char * aSource)
@@ -54,6 +55,11 @@ namespace Engine
 		{
 			ENGINE_CORE_ERROR("Tried to use an invalid shader");
 		}
+	}
+
+	void OpenGLComputeShader::Unbind()
+	{
+		glUseProgram(0);
 	}
 
 	void OpenGLComputeShader::Dispatch(unsigned int aSizeX, unsigned int aSizeY, unsigned int aSizeZ)

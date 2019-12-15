@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -15,20 +15,20 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -101,14 +101,23 @@
     <ClInclude Include="src\Engine\Core\Log\Log.h" />
     <ClInclude Include="src\Engine\Core\Memory\ByteSwap.h" />
     <ClInclude Include="src\Engine\Core\Memory\MemoryBuffer.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\AttributeArray.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\Buffer.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\Camera.h" />
     <ClInclude Include="src\Engine\Core\Renderer\ComputeShader.h" />
     <ClInclude Include="src\Engine\Core\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLComputeShader.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.h" />
     <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Engine\Core\Renderer\RenderAPI.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\Renderer.h" />
     <ClInclude Include="src\Engine\Core\Renderer\Shader.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\Texture.h" />
+    <ClInclude Include="src\Engine\Core\Renderer\VertexArray.h" />
     <ClInclude Include="src\Engine\Core\Window\GLWindow.h" />
     <ClInclude Include="src\Engine\Core\Window\Window.h" />
     <ClInclude Include="src\Engine\Modules\Module.h" />
@@ -120,14 +129,22 @@
     <ClCompile Include="src\Engine\Core\Events\Event.cpp" />
     <ClCompile Include="src\Engine\Core\Log\Log.cpp" />
     <ClCompile Include="src\Engine\Core\Memory\MemoryBuffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\Camera.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\ComputeShader.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLComputeShader.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLShader.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLTexture.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\OpenGL\OpenGLVertexArray.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\Engine\Core\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Engine\Core\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Engine\Core\Window\GLWindow.cpp" />
     <ClCompile Include="src\Engine\Modules\Renderer\ModuleRenderer.cpp" />
     <ClCompile Include="src\Engine\Modules\Window\ModuleWindow.cpp" />

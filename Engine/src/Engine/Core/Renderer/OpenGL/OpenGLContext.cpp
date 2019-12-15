@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-	OpenGLContext::OpenGLContext(GLWindow* aWindow) : mWindowHandle(aWindow)
+	OpenGLContext::OpenGLContext(GLFWwindow* aWindow) : mWindowHandle(aWindow)
 	{
 	}
 	OpenGLContext::~OpenGLContext()
@@ -14,7 +14,7 @@ namespace Engine
 	{
 		if (mWindowHandle != nullptr)
 		{
-			glfwMakeContextCurrent(mWindowHandle->GetGLFWwindow());
+			glfwMakeContextCurrent(mWindowHandle);
 		}
 		else
 		{
@@ -23,6 +23,6 @@ namespace Engine
 	}
 	void OpenGLContext::SwapBuffers()
 	{
-		glfwSwapBuffers(mWindowHandle->GetGLFWwindow());
+		glfwSwapBuffers(mWindowHandle);
 	}
 }

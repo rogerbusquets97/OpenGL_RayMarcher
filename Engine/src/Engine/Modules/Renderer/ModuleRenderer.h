@@ -2,6 +2,9 @@
 #include <Module.h>
 #include <Core.h>
 #include <Renderer/RenderAPI.h>
+#include <Renderer/Shader.h>
+#include <Renderer/ComputeShader.h>
+#include <Renderer/VertexArray.h>
 
 namespace Engine
 {
@@ -20,8 +23,8 @@ namespace Engine
 		virtual void OnEvent(MemoryBuffer& aData) override;
 
 	private:
-
-		RenderAPI* mAPI;
+		std::shared_ptr<Shader> mQuadShader;
+		std::shared_ptr<VertexArray> mQuadVA;
 	};
 }
 

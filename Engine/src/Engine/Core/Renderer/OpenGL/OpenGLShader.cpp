@@ -17,6 +17,7 @@ namespace Engine
 	
 	OpenGLShader::~OpenGLShader()
 	{
+		glDeleteProgram(mID);
 	}
 
 	void Engine::OpenGLShader::Load(const char * aVertex, const char * aFragment)
@@ -63,6 +64,11 @@ namespace Engine
 		{
 			ENGINE_CORE_ERROR("Tried to use an invalid shader");
 		}
+	}
+
+	void OpenGLShader::Unbind()
+	{
+		glUseProgram(0);
 	}
 
 	void Engine::OpenGLShader::SetBool(const std::string & aName, bool aValue) const

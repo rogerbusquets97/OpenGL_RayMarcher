@@ -11,6 +11,7 @@ namespace Engine
 		virtual ~OpenGLShader();
 		virtual void Load(const char* aVertex, const char* aFragment) override;
 		virtual void Bind() override;
+		virtual void Unbind() override;
 		virtual void SetBool(const std::string& aName, bool aValue) const override;
 		virtual void SetInt(const std::string& aName, int aValue) const override;
 		virtual void SetFloat(const std::string& aName, float aValue) const override;
