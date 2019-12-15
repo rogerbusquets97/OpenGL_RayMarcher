@@ -37,10 +37,10 @@ namespace Engine
 		return mData.Height;
 	}
 
-	void GLWindow::SetEventCallback(const EventHandler& aCallback)
+	/*void GLWindow::SetEventCallback(const EventHandler& aCallback)
 	{
 		mData.EventCallback += aCallback;
-	}
+	}*/
 
 	void GLWindow::SetVSync(const bool aEnabled)
 	{
@@ -104,12 +104,7 @@ namespace Engine
 				{
 					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					MemoryBuffer Buffer;
-					Buffer.Write(eEventType::MouseButtonPressed);
-					Buffer.Write(aButton);
-					Buffer.Write(aAction);
-
-					Data.EventCallback(Buffer);
+					Data.EventCallback(aButton, aAction);
 				});
 
 			}

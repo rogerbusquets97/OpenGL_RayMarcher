@@ -1,36 +1,62 @@
 #ifndef ENGINE_EVENT
 #define ENGINE_EVENT
 
-#include <vector>
+#include <list>
 #include "Core.h"
 #include "Events/EventHandler.h"
 
 namespace Engine
 {
-
-	enum class eEventType
-	{
-		KeyPressed,
-		WindowResize,
-		MouseButtonPressed,
-		None
-	};
-
-
+	template<typename... Args>
 	class ENGINE_API Event
 	{
 	public:
+		typedef EventHandler<Args...> tHandlerType;
+		typedef std::list<tHandlerType> tHandlerContainer;
 
-		void AddHandler(const EventHandler& aHandler);
-		void RemoveHandler(const EventHandler& aHandler);
-		void operator()(MemoryBuffer& aData);
-		Event& operator+=(const EventHandler& aHandler);
-		Event& operator+=(const EventHandler::Func& aHandler);
-		Event& operator-=(const EventHandler& aHandler);
+		void AddHandler(const tHandlerType& aHandler)
+		{
+			mHandlers.push_back(aHandler);
+		}
+
+		void RemoveHandler(const tHandlerType& aHandler)
+		{
+			auto HandlerToRemoveIterator = std::find(mHandlers.begin(), mHandlers.end(), aHandler);
+			if (HandlerToRemoveIterator != mHandlers.end())
+			{
+				mHandlers.erase(HandlerToRemoveIterator);
+			}
+		}
+
+		void operator()(Args... aArgs) const
+		{
+			tHandlerContainer HandlersCopy(mHandlers);
+			for (const auto& Handler : HandlersCopy)
+			{
+				Handler(aArgs...);
+			}
+		}
+
+		Event& operator+=(const tHandlerType& aHandler)
+		{
+			AddHandler(aHandler);
+			return *this;
+		}
+
+		/*Event& operator+=(const tHandlerType::tHandlerFunction& aHandler)
+		{
+			AddHandler(tHandlerContainer(aHandler));
+			return *this;
+		}*/
+
+		Event& operator-=(const tHandlerType& aHandler)
+		{
+			RemoveHandler(aHandler);
+			return *this;
+		}
+
 	private:
-		void Notify(MemoryBuffer& aData);
-	private:
-		std::vector<EventHandler*> mHandlers;
+		tHandlerContainer mHandlers;
 	};
 }
 

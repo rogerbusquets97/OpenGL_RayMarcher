@@ -20,7 +20,9 @@ namespace Engine
 		virtual bool Awake() override;
 		virtual bool PreUpdate() override;
 		virtual bool PostUpdate() override;
-		virtual void OnEvent(MemoryBuffer& aData) override;
+
+	
+		void OnMouseEvent(int aButton, int aAction) override;
 
 	private:
 		std::shared_ptr<Shader> mQuadShader;

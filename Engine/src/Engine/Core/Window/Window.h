@@ -28,7 +28,7 @@ namespace Engine
 		virtual void Update() = 0;
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
-		virtual void SetEventCallback(const EventHandler& aCallback) = 0;
+		//virtual void SetEventCallback(const EventHandler& aCallback) = 0;
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
 		virtual void* GetNativeWindow() const = 0;

@@ -112,8 +112,9 @@ namespace Engine
 	{
 		return true;
 	}
-	void ModuleRenderer::OnEvent(MemoryBuffer& aData)
+
+	void ModuleRenderer::OnMouseEvent(int aButton, int aAction)
 	{
-		//TODO: Handle window resize
+		//TODO: Handle window resize OnResizeWindowEvent
 	}
 }
