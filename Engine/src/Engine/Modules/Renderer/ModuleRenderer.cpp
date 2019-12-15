@@ -3,6 +3,7 @@
 #include <Log/Log.h>
 #include <filesystem>
 #include <Renderer/Renderer.h>
+#include <Window/ModuleWindow.h>
 
 namespace Engine
 {
@@ -49,6 +50,12 @@ namespace Engine
 		std::string VertexPath = CurrentDirectory + "/Resources/StandardShader.vs";
 		std::string FragmentPath = CurrentDirectory + "/Resources/StandardShader.fs";
 		mQuadShader->Load(VertexPath.c_str(), FragmentPath.c_str());
+
+		mComputeShader = ComputeShader::Create();
+		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";
+		mComputeShader->Load(ComputePath.c_str());
+
+		mQuadTexture = RenderTexture2D::Create(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
 		return ReturnValue;
 
 		//Example Compute shader texture
@@ -78,6 +85,9 @@ namespace Engine
 		Renderer::ClearDepth(1.0f);
 		Renderer::Clear();
 
+		mQuadTexture->Bind();
+		mComputeShader->Bind();
+		mComputeShader->Dispatch(ModuleWindow::GetWidth(), ModuleWindow::GetHeight(), 1);
 		//Draw stuff
 		mQuadShader->Bind();
 		Renderer::DrawArray(0,4);

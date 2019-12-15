@@ -5,7 +5,7 @@
 #include <Renderer/Shader.h>
 #include <Renderer/ComputeShader.h>
 #include <Renderer/VertexArray.h>
-
+#include <Renderer/Texture.h>
 namespace Engine
 {
 	class ENGINE_API ModuleRenderer : public Module
@@ -24,7 +24,9 @@ namespace Engine
 
 	private:
 		std::shared_ptr<Shader> mQuadShader;
+		std::shared_ptr<ComputeShader> mComputeShader;
 		std::shared_ptr<VertexArray> mQuadVA;
+		std::shared_ptr<RenderTexture2D> mQuadTexture;
 	};
 }
 

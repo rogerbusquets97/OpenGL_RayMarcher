@@ -40,9 +40,9 @@ namespace Engine
 		glCreateTextures(GL_TEXTURE_2D, 1, &mRendererID);
 		glTextureStorage2D(mRendererID, 1, mInternalFormat, mWidth, mHeight);
 		glTextureParameteri(mRendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTextureParameteri(mRendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTextureParameteri(mRendererID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTextureParameteri(mRendererID, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	}
 	OpenGLRenderTexture2D::~OpenGLRenderTexture2D()
 	{
@@ -50,6 +50,7 @@ namespace Engine
 	}
 	void OpenGLRenderTexture2D::Bind(uint32_t aSlot) const
 	{
+		glBindTexture(GL_TEXTURE_2D, mRendererID);
 		glBindImageTexture(aSlot, mRendererID, 0, GL_FALSE, 0, mAccessLevel, mInternalFormat);
 	}
 }
