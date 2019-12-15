@@ -24,12 +24,14 @@ namespace Engine
 
 	class Texture2D : public Texture
 	{
+	public:
 		static std::shared_ptr<Texture2D> Create(uint32_t aWidth, uint32_t aHeight);
 		//static std::shared_ptr<Texture2D> Create(const std::string& aPath);
 	};
 
 	class RenderTexture2D : public RenderTexture
 	{
+	public:
 		static std::shared_ptr<RenderTexture2D> Create(uint32_t aWidth, uint32_t aHeight);
 	};
 }
