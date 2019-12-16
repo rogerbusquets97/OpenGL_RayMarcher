@@ -28,7 +28,8 @@ namespace Engine
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
-			tMouseEvent EventCallback;
+			tMouseEvent MouseEventCallback;
+			tResizeWindowEvent ResizeEventCallback;
 		};
 
 		Window() : mData() {};
@@ -36,13 +37,27 @@ namespace Engine
 		virtual ~Window() = default;
 
 		virtual void Update() = 0;
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+
+		unsigned int GetWidth() const
+		{
+			return mData.Width;
+		}
+
+		unsigned int GetHeight() const
+		{
+			return mData.Height;
+		}
 		
 		template<typename... Args>
-		void SetEventCallback(const EventHandler<Args...>& aCallback)
+		void AddMouseEventCallback(const EventHandler<Args...>& aCallback)
 		{
-			mData.EventCallback += aCallback;
+			mData.MouseEventCallback += aCallback;
+		}
+		//Not very neat...
+		template<typename... Args>
+		void AddResizeWindowEventCallback(const EventHandler<Args...>& aCallback)
+		{
+			mData.ResizeEventCallback += aCallback;
 		}
 
 		virtual void SetVSync(const bool aEnabled) = 0;

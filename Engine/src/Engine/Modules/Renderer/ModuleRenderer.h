@@ -22,7 +22,7 @@ namespace Engine
 		virtual bool PostUpdate() override;
 
 	
-		void OnMouseEvent(int aButton, int aAction) override;
+		virtual void OnResizeWindowEvent(int aWidth, int aHeight) override;
 
 	private:
 		std::shared_ptr<Shader> mQuadShader;

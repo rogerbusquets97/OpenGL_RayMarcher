@@ -113,8 +113,9 @@ namespace Engine
 		return true;
 	}
 
-	void ModuleRenderer::OnMouseEvent(int aButton, int aAction)
+	void ModuleRenderer::OnResizeWindowEvent(int aWidth, int aHeight)
 	{
+		std::cout << aWidth << " " << aHeight << std::endl;
 		//TODO: Handle window resize OnResizeWindowEvent
 	}
 }

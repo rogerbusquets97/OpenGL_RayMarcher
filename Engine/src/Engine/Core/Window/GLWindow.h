@@ -13,8 +13,6 @@ namespace Engine
 		GLWindow(const WindowSettings& aSettings);
 		virtual ~GLWindow();
 		virtual void Update() override;
-		virtual unsigned int GetWidth() const override;
-		virtual unsigned int GetHeight() const override;
 		virtual void SetVSync(const bool aEnabled) override;
 		virtual bool IsVSyncEnabled() const override;
 		virtual void* GetNativeWindow() const override;

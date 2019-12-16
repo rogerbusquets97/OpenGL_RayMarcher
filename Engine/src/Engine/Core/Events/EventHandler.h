@@ -49,8 +49,8 @@ namespace Engine
 		}
 
 	public:
-		int mId;
-		inline static int mCounter = 0U;
+		unsigned int mId;
+		inline static unsigned int mCounter = 0U;
 
 	private:
 		tHandlerFunction mFunc;

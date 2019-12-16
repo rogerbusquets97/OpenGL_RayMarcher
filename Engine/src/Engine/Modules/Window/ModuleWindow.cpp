@@ -37,7 +37,8 @@ namespace Engine
 		mWindow = Window::Create();
 		if (mWindow != nullptr)
 		{
-			mWindow->SetEventCallback(EventHandler<int, int>(std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
+			mWindow->AddMouseEventCallback(EventHandler<int, int>(std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
+			mWindow->AddResizeWindowEventCallback(EventHandler<int, int>(std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
 			ReturnValue = true;
 		}
 		return ReturnValue;
@@ -84,4 +85,5 @@ namespace Engine
 	{
 		return mWindow->GetNativeWindow();
 	}
+
 }

@@ -26,16 +26,6 @@ namespace Engine
 		mContext->SwapBuffers();
 	}
 
-	unsigned int GLWindow::GetWidth() const
-	{
-		return mData.Width;
-	}
-
-	unsigned int GLWindow::GetHeight() const
-	{
-		return mData.Height;
-	}
-
 	void GLWindow::SetVSync(const bool aEnabled)
 	{
 		if(aEnabled)
@@ -95,12 +85,20 @@ namespace Engine
 				//Callbacks
 
 				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
-				{
-					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+					{
+						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					Data.EventCallback(aButton, aAction);
-				});
+						Data.MouseEventCallback(aButton, aAction);
+					});
 
+				glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* aWindow, int aWidth, int aHeight)
+					{
+						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+						
+						Data.Width = aWidth;
+						Data.Height	= aWidth;
+						Data.ResizeEventCallback(aWidth, aHeight);
+					});
 			}
 		}
 	}

@@ -80,4 +80,12 @@ namespace Engine
 			Module->OnMouseEvent(aButton, aAction);
 		}
 	}
+	
+	void Application::OnResizeWindowEvent(int aWidth, int aHeight)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnResizeWindowEvent(aWidth, aHeight);
+		}
+	}
 }
