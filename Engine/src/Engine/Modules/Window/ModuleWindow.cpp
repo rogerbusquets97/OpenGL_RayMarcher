@@ -37,7 +37,7 @@ namespace Engine
 		mWindow = Window::Create();
 		if (mWindow != nullptr)
 		{
-			//mWindow->SetEventCallback(EventHandler(std::bind(&Application::OnEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
+			mWindow->SetEventCallback(EventHandler<int, int>(std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
 			ReturnValue = true;
 		}
 		return ReturnValue;
@@ -57,11 +57,6 @@ namespace Engine
 	{
 
 	}
-
-	/*void ModuleWindow::SetEventCallback(const EventHandler& aCallback)
-	{
-		mWindow->SetEventCallback(aCallback);
-	}*/
 
 	uint32_t ModuleWindow::GetWidth()
 	{

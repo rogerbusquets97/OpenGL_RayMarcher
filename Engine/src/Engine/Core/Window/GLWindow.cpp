@@ -10,11 +10,10 @@ namespace Engine
 		ENGINE_CORE_ERROR("GLFW Error ({0}) : {1}", aError, aDescription);
 	}
 
-	GLWindow::GLWindow(const WindowSettings& aSettings) : mWindow(nullptr), mData(), mContext()
+	GLWindow::GLWindow(const WindowSettings& aSettings) : Window(), mWindow(nullptr), mContext()
 	{
 		Init(aSettings);
 	}
-
 
 	GLWindow::~GLWindow()
 	{
@@ -36,11 +35,6 @@ namespace Engine
 	{
 		return mData.Height;
 	}
-
-	/*void GLWindow::SetEventCallback(const EventHandler& aCallback)
-	{
-		mData.EventCallback += aCallback;
-	}*/
 
 	void GLWindow::SetVSync(const bool aEnabled)
 	{

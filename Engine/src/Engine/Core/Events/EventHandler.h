@@ -19,8 +19,8 @@ namespace Engine
 
 		EventHandler(const tHandlerFunction& aFunc)
 		{
-			this->mId = ++EventHandler::mCounter;
-			this->mFunc = aFunc;
+			mId = ++EventHandler::mCounter;
+			mFunc = aFunc;
 		}
 
 
@@ -31,22 +31,21 @@ namespace Engine
 
 		void operator=(const EventHandler& aFunc)
 		{
-			if (this->mFunc == nullptr)
+			if (mFunc == nullptr)
 			{
-				this->mFunc = aFunc;
-				this->mId = ++EventHandler::mCounter;
+				mFunc = aFunc;
+				mId = ++EventHandler::mCounter;
 			}
 		}
 
 		bool operator==(const EventHandler& aHandler)
 		{
-			return this->mId == aHandler.mId;
-
+			return mId == aHandler.mId;
 		}
 
 		bool operator!=(nullptr_t)
 		{
-			return this->mFunc != nullptr;
+			return mFunc != nullptr;
 		}
 
 	public:

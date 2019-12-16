@@ -1,7 +1,7 @@
 #pragma once
 #include <Core.h>
 #include <string>
-#include <Events/Event.h>
+#include <Events/EventTypes.h>
 #include <vec2.hpp>
 
 namespace Engine
@@ -23,16 +23,36 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
+		struct WindowData
+		{
+			std::string Title;
+			unsigned int Width, Height;
+			bool VSync;
+			tMouseEvent EventCallback;
+		};
+
+		Window() : mData() {};
+
 		virtual ~Window() = default;
 
 		virtual void Update() = 0;
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
-		//virtual void SetEventCallback(const EventHandler& aCallback) = 0;
+		
+		template<typename... Args>
+		void SetEventCallback(const EventHandler<Args...>& aCallback)
+		{
+			mData.EventCallback += aCallback;
+		}
+
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
+
+	protected:
+		WindowData mData;
+
 	};
 }
 
