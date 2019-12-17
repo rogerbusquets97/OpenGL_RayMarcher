@@ -17,7 +17,7 @@ namespace Engine
 		void RemoveModule(Module* aModule);
 		
 		void OnMouseEvent(int aButton, int aAction);
-		void OnResizeWindowEvent(int aWidth, int aHeight);
+		void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
 	
 	private:		
 		std::vector<Module*> mModules;

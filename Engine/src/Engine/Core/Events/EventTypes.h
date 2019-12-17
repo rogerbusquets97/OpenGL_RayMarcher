@@ -6,8 +6,9 @@
 namespace Engine
 {
 
+
 	typedef Event<int, int> tMouseEvent;
-	typedef Event<int, int> tResizeWindowEvent;
+	typedef Event<unsigned int, unsigned int> tResizeWindowEvent;
 
 }
 

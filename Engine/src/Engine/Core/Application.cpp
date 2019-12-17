@@ -81,7 +81,7 @@ namespace Engine
 		}
 	}
 	
-	void Application::OnResizeWindowEvent(int aWidth, int aHeight)
+	void Application::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
 		for (auto& Module : mModules)
 		{

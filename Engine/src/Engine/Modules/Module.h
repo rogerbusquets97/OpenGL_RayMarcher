@@ -27,7 +27,7 @@ namespace Engine
 		virtual bool PostUpdate() = 0;
 
 		virtual void OnMouseEvent(int aButton, int aAction) {}
-		virtual void OnResizeWindowEvent(int aWidth, int aHeight) {}
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
 
 		inline const std::string& GetName() const { return mName; }
 

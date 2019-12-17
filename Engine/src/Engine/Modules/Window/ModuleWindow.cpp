@@ -38,7 +38,7 @@ namespace Engine
 		if (mWindow != nullptr)
 		{
 			mWindow->AddMouseEventCallback(EventHandler<int, int>(std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
-			mWindow->AddResizeWindowEventCallback(EventHandler<int, int>(std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
+			mWindow->AddResizeWindowEventCallback(EventHandler<unsigned int, unsigned int>(std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2)));
 			ReturnValue = true;
 		}
 		return ReturnValue;

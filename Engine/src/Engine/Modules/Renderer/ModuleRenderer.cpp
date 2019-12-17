@@ -113,9 +113,10 @@ namespace Engine
 		return true;
 	}
 
-	void ModuleRenderer::OnResizeWindowEvent(int aWidth, int aHeight)
+	void ModuleRenderer::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
-		std::cout << aWidth << " " << aHeight << std::endl;
-		//TODO: Handle window resize OnResizeWindowEvent
+		mComputeShader->Dispatch(ModuleWindow::GetWidth(), ModuleWindow::GetHeight(), 1);
+
+		Renderer::Resize(aWidth, aHeight);
 	}
 }

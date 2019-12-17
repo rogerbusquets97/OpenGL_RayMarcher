@@ -25,6 +25,7 @@ namespace Engine
 		virtual void ClearDepth(float aDepth) = 0;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& aArray) const = 0;
 		virtual void DrawArray(unsigned int aFirst, unsigned int aCount) const = 0;
+		virtual void Resize(unsigned int aWidth, unsigned int aHeight) = 0;
 		inline static RENDER_API GetAPI() { return mCurrentAPI; }
 		static std::unique_ptr<RenderAPI> Create();
 	
