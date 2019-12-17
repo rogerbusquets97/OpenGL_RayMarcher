@@ -8,7 +8,9 @@ namespace Engine
 	public:
 		virtual void Init() override;
 		virtual void CleanUp() override;
-		virtual void Begin() override;
-		virtual void End() override;
+		virtual void BeginFrame() override;
+		virtual void EndFrame() override;
+		virtual void BeginWindow(const char* aName, bool* aOpen) override;
+		virtual void EndWindow() override;
 	};
 }

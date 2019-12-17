@@ -24,6 +24,7 @@ namespace Engine
 		virtual bool PreUpdate() = 0;
 		virtual bool Update() = 0;
 		virtual bool PostUpdate() = 0;
+		virtual void OnGUI() {};
 		virtual void OnEvent(MemoryBuffer& aData) = 0;
 		inline const std::string& GetName() const { return mName; }
 

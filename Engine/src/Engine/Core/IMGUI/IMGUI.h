@@ -1,6 +1,5 @@
 #pragma once
 #include <Core.h>
-#include <imgui.h>
 #include <IMGUI/ImGuiPlatformHandler.h>
 
 namespace Engine
@@ -10,8 +9,10 @@ namespace Engine
 	public:
 		static void Init();
 		static void CleanUp();
-		static void Begin();
-		static void End();
+		static void BeginFrame();
+		static void EndFrame();
+		static void BeginWindow(const char* aName, bool* aOpen);
+		static void EndWindow();
 
 	private:
 		static std::shared_ptr<ImGuiPlatformHandler> mHandler;
