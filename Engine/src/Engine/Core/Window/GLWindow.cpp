@@ -2,6 +2,7 @@
 #include <Log/Log.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Events/Event.h"
 
 namespace Engine
 {
@@ -88,7 +89,7 @@ namespace Engine
 					{
 						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-						Data.MouseEventCallback(aButton, aAction);
+						(*Data.WindowEvents.mMouseEvent)(aButton, aAction);
 					});
 
 				glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* aWindow, int aWidth, int aHeight)
@@ -97,7 +98,8 @@ namespace Engine
 						
 						Data.Width = aWidth;
 						Data.Height	= aWidth;
-						Data.ResizeEventCallback(aWidth, aHeight);
+						
+						(*Data.WindowEvents.mResizeWindowsEvent)(aWidth, aHeight);
 					});
 			}
 		}

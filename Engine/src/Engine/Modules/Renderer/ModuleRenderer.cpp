@@ -115,8 +115,6 @@ namespace Engine
 
 	void ModuleRenderer::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
-		mComputeShader->Dispatch(ModuleWindow::GetWidth(), ModuleWindow::GetHeight(), 1);
-
 		Renderer::Resize(aWidth, aHeight);
 	}
 }

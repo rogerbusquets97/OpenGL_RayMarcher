@@ -43,11 +43,11 @@ namespace Engine
 			return *this;
 		}
 
-		/*Event& operator+=(const tHandlerType::tHandlerFunction& aHandler)
+		Event& operator+=(typename const tHandlerType::tHandlerFunction& aHandler)
 		{
-			AddHandler(tHandlerContainer(aHandler));
+			AddHandler(tHandlerType(aHandler));
 			return *this;
-		}*/
+		}
 
 		Event& operator-=(const tHandlerType& aHandler)
 		{

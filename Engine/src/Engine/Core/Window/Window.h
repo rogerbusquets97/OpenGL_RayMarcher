@@ -1,8 +1,7 @@
 #pragma once
 #include <Core.h>
 #include <string>
-#include <Events/EventTypes.h>
-#include <vec2.hpp>
+#include "WindowEventsContainer.h"
 
 namespace Engine
 {
@@ -28,8 +27,7 @@ namespace Engine
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
-			tMouseEvent MouseEventCallback;
-			tResizeWindowEvent ResizeEventCallback;
+			WindowEventsContainer WindowEvents;
 		};
 
 		Window() : mData() {};
@@ -48,16 +46,9 @@ namespace Engine
 			return mData.Height;
 		}
 		
-		template<typename... Args>
-		void AddMouseEventCallback(const EventHandler<Args...>& aCallback)
+		WindowEventsContainer& GetWindowEvents()
 		{
-			mData.MouseEventCallback += aCallback;
-		}
-		//Not very neat...
-		template<typename... Args>
-		void AddResizeWindowEventCallback(const EventHandler<Args...>& aCallback)
-		{
-			mData.ResizeEventCallback += aCallback;
+			return mData.WindowEvents;
 		}
 
 		virtual void SetVSync(const bool aEnabled) = 0;
