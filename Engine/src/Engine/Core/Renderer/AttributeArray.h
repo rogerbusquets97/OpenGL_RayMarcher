@@ -66,8 +66,8 @@ namespace Engine
 	class AttributeArray
 	{
 	public:
-		AttributeArray() {}
-		AttributeArray(const std::initializer_list<sArrayAttribute>& aAttributes) : mAttributes(aAttributes), mStride(0)
+		AttributeArray() : mAttributes(), mStride(0U) {}
+		AttributeArray(const std::initializer_list<sArrayAttribute>& aAttributes) : mAttributes(aAttributes), mStride(0U)
 		{
 			CalculateStride();
 		}

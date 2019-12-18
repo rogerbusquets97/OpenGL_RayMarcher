@@ -6,6 +6,8 @@
 #include <Renderer/ComputeShader.h>
 #include <Renderer/VertexArray.h>
 #include <Renderer/Texture.h>
+#include <Renderer/Material.h>
+
 namespace Engine
 {
 	class ENGINE_API ModuleRenderer : public Module
@@ -21,14 +23,16 @@ namespace Engine
 		virtual bool PreUpdate() override;
 		virtual bool PostUpdate() override;
 
-	
+		static void NeedRepaint(bool aRepaint);
+
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
 
 	private:
-		std::shared_ptr<Shader> mQuadShader;
+		std::shared_ptr<Material> mQuadMaterial;
 		std::shared_ptr<ComputeShader> mComputeShader;
 		std::shared_ptr<VertexArray> mQuadVA;
 		std::shared_ptr<RenderTexture2D> mQuadTexture;
+		static bool mNeedRepaint;
 	};
 }
 
