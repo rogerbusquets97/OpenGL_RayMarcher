@@ -22,8 +22,10 @@ namespace Engine
 		virtual bool Awake() override;
 		virtual bool PreUpdate() override;
 		virtual bool PostUpdate() override;
-		virtual void OnEvent(MemoryBuffer& aData) override;
+
 		static void NeedRepaint(bool aRepaint);
+
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
 
 	private:
 		std::shared_ptr<Material> mQuadMaterial;

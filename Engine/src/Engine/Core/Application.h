@@ -1,7 +1,6 @@
 #pragma once
 #include "Core.h"
 #include <vector>
-#include "Events/Event.h"
 #include <Module.h>
 
 namespace Engine
@@ -16,8 +15,10 @@ namespace Engine
 		bool CleanUp();
 		void AddModule(Module* aModule);
 		void RemoveModule(Module* aModule);
-		//I know sending a buffer is kinda dangerous ... It's the simplest solution right now. (Will properly implement events in the future).
-		void OnEvent(MemoryBuffer& aData);
+		
+		void OnMouseEvent(int aButton, int aAction);
+		void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
+	
 	private:		
 		std::vector<Module*> mModules;
 	};

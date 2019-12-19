@@ -1,8 +1,7 @@
 #pragma once
 #include <Core.h>
 #include <string>
-#include <Events/Event.h>
-#include <vec2.hpp>
+#include "WindowEventsContainer.h"
 
 namespace Engine
 {
@@ -23,16 +22,43 @@ namespace Engine
 	class ENGINE_API Window
 	{
 	public:
+		struct WindowData
+		{
+			std::string Title;
+			unsigned int Width, Height;
+			bool VSync;
+			WindowEventsContainer WindowEvents;
+		};
+
+		Window() : mData() {};
+
 		virtual ~Window() = default;
 
 		virtual void Update() = 0;
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
-		virtual void SetEventCallback(const EventHandler& aCallback) = 0;
+
+		unsigned int GetWidth() const
+		{
+			return mData.Width;
+		}
+
+		unsigned int GetHeight() const
+		{
+			return mData.Height;
+		}
+		
+		WindowEventsContainer& GetWindowEvents()
+		{
+			return mData.WindowEvents;
+		}
+
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
+
+	protected:
+		WindowData mData;
+
 	};
 }
 

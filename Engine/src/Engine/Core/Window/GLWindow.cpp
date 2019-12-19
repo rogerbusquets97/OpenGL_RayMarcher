@@ -2,6 +2,7 @@
 #include <Log/Log.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "Events/Event.h"
 
 namespace Engine
 {
@@ -10,11 +11,10 @@ namespace Engine
 		ENGINE_CORE_ERROR("GLFW Error ({0}) : {1}", aError, aDescription);
 	}
 
-	GLWindow::GLWindow(const WindowSettings& aSettings) : mWindow(nullptr), mData(), mContext()
+	GLWindow::GLWindow(const WindowSettings& aSettings) : Window(), mWindow(nullptr), mContext()
 	{
 		Init(aSettings);
 	}
-
 
 	GLWindow::~GLWindow()
 	{
@@ -25,21 +25,6 @@ namespace Engine
 	{
 		glfwPollEvents();
 		mContext->SwapBuffers();
-	}
-
-	unsigned int GLWindow::GetWidth() const
-	{
-		return mData.Width;
-	}
-
-	unsigned int GLWindow::GetHeight() const
-	{
-		return mData.Height;
-	}
-
-	void GLWindow::SetEventCallback(const EventHandler& aCallback)
-	{
-		mData.EventCallback += aCallback;
 	}
 
 	void GLWindow::SetVSync(const bool aEnabled)
@@ -101,17 +86,21 @@ namespace Engine
 				//Callbacks
 
 				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
-				{
-					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+					{
+						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					MemoryBuffer Buffer;
-					Buffer.Write(EVENT_TYPE::MOUSE_BUTTON_PRESSED);
-					Buffer.Write(aButton);
-					Buffer.Write(aAction);
+						(*Data.WindowEvents.mMouseEvent)(aButton, aAction);
+					});
 
-					Data.EventCallback(Buffer);
-				});
-
+				glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* aWindow, int aWidth, int aHeight)
+					{
+						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+						
+						Data.Width = aWidth;
+						Data.Height	= aWidth;
+						
+						(*Data.WindowEvents.mResizeWindowsEvent)(aWidth, aHeight);
+					});
 			}
 		}
 	}

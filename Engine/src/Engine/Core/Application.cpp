@@ -80,11 +80,19 @@ namespace Engine
 		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
 	
-	void Application::OnEvent(MemoryBuffer & aData)
+	void Application::OnMouseEvent(int aButton, int aAction)
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnEvent(aData);
+			Module->OnMouseEvent(aButton, aAction);
+		}
+	}
+	
+	void Application::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnResizeWindowEvent(aWidth, aHeight);
 		}
 	}
 }
