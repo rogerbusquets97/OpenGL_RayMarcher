@@ -10,7 +10,5 @@ namespace Engine
 		virtual void CleanUp() override;
 		virtual void BeginFrame() override;
 		virtual void EndFrame() override;
-		virtual void BeginWindow(const char* aName, bool* aOpen) override;
-		virtual void EndWindow() override;
 	};
 }

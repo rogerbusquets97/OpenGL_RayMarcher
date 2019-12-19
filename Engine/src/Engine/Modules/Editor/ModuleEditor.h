@@ -2,6 +2,7 @@
 #include <Core.h>
 #include <Module.h>
 #include <Events/Event.h>
+#include <Editor/EditorElement.h>
 
 namespace Engine
 {
@@ -20,6 +21,7 @@ namespace Engine
 		virtual void OnGUI() override;
 
 	private:
-		bool mWindowOpen = true;
+		std::vector<EditorElement*> mElements;
+		bool mOpen;
 	};
 }

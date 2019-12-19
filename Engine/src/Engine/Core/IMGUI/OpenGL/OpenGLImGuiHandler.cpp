@@ -64,12 +64,4 @@ namespace Engine
 			glfwMakeContextCurrent(backup_current_context);
 		}
 	}
-	void OpenGLImGuiHandler::BeginWindow(const char* aName, bool* aOpen)
-	{
-		ImGui::Begin(aName, aOpen);
-	}
-	void OpenGLImGuiHandler::EndWindow()
-	{
-		ImGui::End();
-	}
 }
