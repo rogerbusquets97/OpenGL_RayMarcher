@@ -13,45 +13,41 @@ namespace Engine
 
 	void Engine::MainMenuBar::Draw()
 	{
-		IMGUI::BeginMainMenuBar();
-
-		if (IMGUI::BeginMenu("File"))
+		if (IMGUI::BeginMainMenuBar())
 		{
-			if (IMGUI::AddMenuItem("Open"))
+			if (IMGUI::BeginMenu("File"))
 			{
+				if (IMGUI::AddMenuItem("Open"))
+				{
 
+				}
+
+				if (IMGUI::AddMenuItem("Save"))
+				{
+
+				}
+
+				if (IMGUI::AddMenuItem("Close"))
+				{
+
+				}
+
+				IMGUI::EndMenu();
+			}
+			if (IMGUI::BeginMenu("Edit"))
+			{
+				IMGUI::EndMenu();
+			}
+			if (IMGUI::BeginMenu("About"))
+			{
+				IMGUI::EndMenu();
+			}
+			if (IMGUI::BeginMenu("Help"))
+			{
+				IMGUI::EndMenu();
 			}
 
-			if (IMGUI::AddMenuItem("Save"))
-			{
-
-			}
-
-			if (IMGUI::AddMenuItem("Close"))
-			{
-
-			}
-
-			IMGUI::EndMenu();
-		}
-		if (IMGUI::BeginMenu("Edit"))
-		{
-			IMGUI::EndMenu();
-		}
-		if (IMGUI::BeginMenu("About"))
-		{
-			IMGUI::EndMenu();
-		}
-		if (IMGUI::BeginMenu("Help"))
-		{
-			IMGUI::EndMenu();
-		}
-		IMGUI::EndMainMenuBar();
-
-		bool opened = true;
-		if (IMGUI::BeginWindow("Test Window", &opened))
-		{
-			IMGUI::EndWindow();
+			IMGUI::EndMainMenuBar();
 		}
 	}
 }

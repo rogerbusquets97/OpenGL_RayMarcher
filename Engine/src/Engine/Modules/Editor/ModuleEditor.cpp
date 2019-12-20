@@ -58,10 +58,6 @@ namespace Engine
 		return true;
 	}
 
-	void Engine::ModuleEditor::OnEvent(MemoryBuffer& aData)
-	{
-	}
-
 	void ModuleEditor::OnGUI()
 	{	
 		ImGuiDockNodeFlags DockingFlags = ImGuiDockNodeFlags_None;
@@ -72,25 +68,26 @@ namespace Engine
 		ImGui::SetNextWindowViewport(viewport->ID);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 
-		IMGUI::BeginWindow("Renderer", &mOpen, IMGUI::GetMainWindowFlags());
+		ImGui::Begin("Renderer", &mOpen, IMGUI::GetMainWindowFlags());
 		
-			ImGui::PopStyleVar();
-			ImGui::PopStyleVar(2);
+		ImGui::PopStyleVar();
+		ImGui::PopStyleVar(2);
 
-			ImGuiIO& io = ImGui::GetIO();
-			if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-			{
-				ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-				ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), DockingFlags);
-			}
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+		{
+			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), DockingFlags);
+		}
 
-			for (auto& Element : mElements)
-			{
-				Element->Draw();
-			}
+		ImGui::End();
 
-		IMGUI::EndWindow();
+		for (auto& Element : mElements)
+		{
+			Element->Draw();
+		}
 	}
 }
