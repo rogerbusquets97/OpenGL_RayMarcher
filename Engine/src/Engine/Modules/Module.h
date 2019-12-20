@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include "../Core/Core.h"
-#include "../Core/Events/Event.h"
 
 namespace Engine
 {
@@ -24,7 +23,10 @@ namespace Engine
 		virtual bool PreUpdate() = 0;
 		virtual bool Update() = 0;
 		virtual bool PostUpdate() = 0;
-		virtual void OnEvent(MemoryBuffer& aData) = 0;
+
+		virtual void OnMouseEvent(int aButton, int aAction) {}
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
+
 		inline const std::string& GetName() const { return mName; }
 
 	protected:

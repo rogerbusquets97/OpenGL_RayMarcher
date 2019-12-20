@@ -21,6 +21,7 @@ namespace Engine
 		virtual void ClearDepth(float aDepth) override;
 		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& aArray) const override;
 		virtual void DrawArray(unsigned int aFirst, unsigned int aCount) const override;
+		virtual void Resize(unsigned int aWidth, unsigned int aHeight) override;
 	};
 }
 

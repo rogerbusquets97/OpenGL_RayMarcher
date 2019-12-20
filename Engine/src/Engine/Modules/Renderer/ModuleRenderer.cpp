@@ -104,9 +104,10 @@ namespace Engine
 	{
 		return true;
 	}
-	void ModuleRenderer::OnEvent(MemoryBuffer& aData)
+
+	void ModuleRenderer::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
-		//TODO: Handle window resize
+		Renderer::Resize(aWidth, aHeight);
 	}
 	void ModuleRenderer::NeedRepaint(bool aRepaint)
 	{

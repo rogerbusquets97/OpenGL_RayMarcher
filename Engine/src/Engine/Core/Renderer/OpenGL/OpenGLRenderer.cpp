@@ -58,4 +58,10 @@ namespace Engine
 	{
 		glDrawArrays(GL_TRIANGLE_STRIP, aFirst, aCount);
 	}
+
+	void OpenGLRenderer::Resize(unsigned int aWidth, unsigned int aHeight)
+	{
+		SetViewport(0U, 0U, aWidth, aHeight);
+	}
+
 }

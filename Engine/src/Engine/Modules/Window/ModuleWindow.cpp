@@ -1,6 +1,8 @@
 #include "ModuleWindow.h"
 #include <Application.h>
 #include <memory>
+#include <functional>
+#include "Events/Event.h"
 
 namespace Engine
 {
@@ -37,7 +39,10 @@ namespace Engine
 		mWindow = Window::Create();
 		if (mWindow != nullptr)
 		{
-			mWindow->SetEventCallback(EventHandler(std::bind(&Application::OnEvent, mApplication, std::placeholders::_1)));
+			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
+			(*WindowEvents.mMouseEvent) += std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			
 			ReturnValue = true;
 		}
 		return ReturnValue;
@@ -53,14 +58,11 @@ namespace Engine
 		return true;
 	}
 
-	void ModuleWindow::OnEvent(MemoryBuffer& aData)
+	void ModuleWindow::OnMouseEvent(int aButton, int aAction)
 	{
+
 	}
 
-	void ModuleWindow::SetEventCallback(const EventHandler & aCallback)
-	{
-		mWindow->SetEventCallback(aCallback);
-	}
 	uint32_t ModuleWindow::GetWidth()
 	{
 		uint32_t Return(0U);
@@ -87,4 +89,5 @@ namespace Engine
 	{
 		return mWindow->GetNativeWindow();
 	}
+
 }

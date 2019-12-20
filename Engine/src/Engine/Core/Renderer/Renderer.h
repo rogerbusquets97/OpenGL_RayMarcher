@@ -47,6 +47,11 @@ namespace Engine
 			mRenderAPI->DrawArray(aFirst, aCount);
 		}
 
+		inline static void Resize(unsigned int aWidth, unsigned int aHeight)
+		{
+			mRenderAPI->Resize(aWidth, aHeight);
+		}
+
 	private:
 		static std::unique_ptr<RenderAPI> mRenderAPI;
 	};
