@@ -23,6 +23,7 @@ namespace Engine
 		virtual bool PreUpdate() = 0;
 		virtual bool Update() = 0;
 		virtual bool PostUpdate() = 0;
+		virtual void OnGUI() {};
 
 		virtual void OnMouseEvent(int aButton, int aAction) {}
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}

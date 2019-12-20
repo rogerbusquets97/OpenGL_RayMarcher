@@ -1,18 +1,20 @@
 #include "Application.h"
 #include "Window/ModuleWindow.h"
 #include <Log/Log.h>
+#include <Editor/ModuleEditor.h>
 
 namespace Engine
 {
 	Application::Application() : mModules()
 	{
+		AddModule(new ModuleEditor(this));
 	}
 	
 	Application::~Application()
 	{
-		for (auto& Module : mModules)
+		for (std::vector<Module*>::reverse_iterator It = mModules.rbegin(); It != mModules.rend(); ++It)
 		{
-			delete Module;
+			delete (*It);
 		}
 	}
 
@@ -28,6 +30,11 @@ namespace Engine
 		for (auto& Module : mModules)
 		{
 			ReturnValue = Module->Update();
+		}
+
+		for (auto& Module : mModules)
+		{
+			Module->OnGUI();
 		}
 
 		for (auto& Module : mModules)

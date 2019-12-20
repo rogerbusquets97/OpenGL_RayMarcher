@@ -13,16 +13,21 @@ workspace "RayMarcher"
 	IncludeDir["GLFW"] = "Engine/ThirdParty/GLFW/include"
 	IncludeDir["GLAD"] = "Engine/ThirdParty/GLAD/include"
 	IncludeDir["GLM"] = "Engine/ThirdParty/glm/glm"
+	IncludeDir["IMGUI"] = "Engine/ThirdParty/IMGUI"
+
 
 	group "Dependencies"
 	include "Engine/ThirdParty/GLFW"
 	include "Engine/ThirdParty/GLAD"
+	include "Engine/ThirdParty/IMGUI"
 	group ""
 
 project "Engine"
 	location "Engine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -30,7 +35,9 @@ project "Engine"
 	files 
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/ThirdParty/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -40,45 +47,43 @@ project "Engine"
 		"%{prj.name}/src/Engine/Modules",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.GLM}"
+		"%{IncludeDir.GLM}",
+		"%{IncludeDir.IMGUI}"
 	}
 
 	links
 	{
 		"GLFW",
-		"GLAD"
+		"GLAD",
+		"ImGui"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
 
 		defines
 		{
 			"PLATFORM_WINDOWS",
-			"BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"GLFW_INCLUDE_NONE",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
-
-	postbuildcommands 
-	{
-		"copy %{cfg.buildtarget.directory}%{prj.name}.dll %{cfg.buildtarget.directory}..\\%{cfg.startproject}"
-	}
 
 	filter "configurations:Debug"
 		defines "DEBUG"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "RELEASE"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
+	staticruntime "on"
 
 	language "C++"
+	cppdialect "C++17"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -92,6 +97,7 @@ project "Sandbox"
 	{
 		"Engine/ThirdParty/spdlog/include",
 		"Engine/ThirdParty/glm/glm",
+		"Engine/ThirdParty/IMGUI",
 		"Engine/src",
 		"Engine/src/Engine/Core",
 		"Engine/src/Engine/Modules"
@@ -103,8 +109,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -114,8 +118,8 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "DEBUG"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "RELEASE"
-		optimize "On"
+		optimize "on"
