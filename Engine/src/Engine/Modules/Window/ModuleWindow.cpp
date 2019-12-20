@@ -24,8 +24,7 @@ namespace Engine
 
 	bool ModuleWindow::Update()
 	{
-		mWindow->Update();
-		return true;
+		return mWindow->Update();
 	}
 
 	bool ModuleWindow::CleanUp()

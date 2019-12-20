@@ -12,7 +12,7 @@ namespace Engine
 	public:
 		GLWindow(const WindowSettings& aSettings);
 		virtual ~GLWindow();
-		virtual void Update() override;
+		virtual bool Update() override;
 		virtual void SetVSync(const bool aEnabled) override;
 		virtual bool IsVSyncEnabled() const override;
 		virtual void* GetNativeWindow() const override;

@@ -20,16 +20,20 @@ namespace Engine
 
 	bool Application::Run()
 	{
-		bool ReturnValue(true);
-
 		for (auto& Module : mModules)
 		{
-			ReturnValue = Module->PreUpdate();
+			if (!Module->PreUpdate())
+			{
+				return false;
+			}
 		}
 
 		for (auto& Module : mModules)
 		{
-			ReturnValue = Module->Update();
+			if (!Module->Update())
+			{
+				return false;
+			}
 		}
 
 		for (auto& Module : mModules)
@@ -39,10 +43,13 @@ namespace Engine
 
 		for (auto& Module : mModules)
 		{
-			ReturnValue = Module->PostUpdate();
+			if (!Module->PostUpdate())
+			{
+				return false;
+			}
 		}
 
-		return ReturnValue;
+		return true;
 	}
 	bool Application::Init()
 	{

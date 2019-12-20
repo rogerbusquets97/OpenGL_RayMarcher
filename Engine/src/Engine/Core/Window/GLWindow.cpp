@@ -21,10 +21,18 @@ namespace Engine
 		CleanUp();
 	}
 
-	void GLWindow::Update()
+	bool GLWindow::Update()
 	{
-		glfwPollEvents();
-		mContext->SwapBuffers();
+		bool ReturnValue(false);
+
+		if (!glfwWindowShouldClose(mWindow))
+		{
+			glfwPollEvents();
+			mContext->SwapBuffers();
+			ReturnValue = true;
+		}
+
+		return ReturnValue;
 	}
 
 	void GLWindow::SetVSync(const bool aEnabled)
