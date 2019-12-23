@@ -37,7 +37,7 @@ namespace Engine
 
 	void GLWindow::SetVSync(const bool aEnabled)
 	{
-		if(aEnabled)
+		if (aEnabled)
 		{
 			glfwSwapInterval(1);
 		}
@@ -61,12 +61,7 @@ namespace Engine
 
 	void GLWindow::Init(const WindowSettings & aSettings)
 	{
-		GenerateKeyActionMapping();
-		GenerateKeyIdMapping();
-
-		mData.Width = aSettings.Width;
-		mData.Height = aSettings.Height;
-		mData.Title = aSettings.Title;
+		Window::Init(aSettings);
 
 		int success = glfwInit();
 		if (!success)
@@ -147,6 +142,7 @@ namespace Engine
 		WindowEventsContainer::KeyIdContainer Mapping;
 
 
+		//TODO add more keys...
 
 		mData.WindowEvents.SetKeyIdContainer(std::move(Mapping));
 	}
