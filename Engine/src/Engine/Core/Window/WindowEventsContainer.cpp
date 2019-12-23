@@ -9,4 +9,24 @@ namespace Engine
 	{
 
 	}
+
+	const WindowEventsContainer::KeyActionContainer& WindowEventsContainer::GetKeyActionContainer()
+	{
+		return mKeyActionContainer;
+	}
+
+	void WindowEventsContainer::SetKeyActionContainer(const WindowEventsContainer::KeyActionContainer& aKeyActionContainer)
+	{
+		mKeyActionContainer = aKeyActionContainer;
+	}
+
+	const WindowEventsContainer::KeyIdContainer& WindowEventsContainer::GetKeyIdContainer()
+	{
+		return mKeyIdContainer;
+	}
+
+	void WindowEventsContainer::SetKeyIdContainer(const WindowEventsContainer::KeyIdContainer& aKeyIdContainer)
+	{
+		mKeyIdContainer = aKeyIdContainer;
+	}
 }

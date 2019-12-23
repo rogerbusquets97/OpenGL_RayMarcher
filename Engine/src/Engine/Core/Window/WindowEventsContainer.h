@@ -2,6 +2,8 @@
 #define ENGINE_WINDOW_EVENTS_CONTAINER
 
 #include <Core.h>
+#include <unordered_map>
+#include "Keys.h"
 
 namespace Engine
 {
@@ -12,14 +14,29 @@ namespace Engine
 	{
 	public:
 
+		typedef std::unordered_map<int, KeyAction>			KeyActionContainer;
+		typedef std::unordered_map<int, KeyId>				KeyIdContainer;
+
+
 		WindowEventsContainer();
 		
 		~WindowEventsContainer() {}
 
+		const KeyActionContainer& GetKeyActionContainer();
+		void SetKeyActionContainer(const KeyActionContainer& aKeyActionContainer);
+		
+		const KeyIdContainer& GetKeyIdContainer();
+		void SetKeyIdContainer(const KeyIdContainer& aKeyIdContainer);
+
 
 		std::shared_ptr<Event<int, int>>						mMouseEvent;
 		std::shared_ptr<Event<unsigned int, unsigned int>>		mResizeWindowsEvent;
+		std::shared_ptr<Event<KeyAction, KeyId>>				mKeyEvent;
 
+	private:
+
+		KeyActionContainer										mKeyActionContainer;
+		KeyIdContainer											mKeyIdContainer;
 	};
 
 }

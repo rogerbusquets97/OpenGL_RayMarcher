@@ -20,6 +20,8 @@ namespace Engine
 	private:
 		virtual void Init(const WindowSettings& aSettings);
 		virtual void CleanUp();
+		virtual void GenerateKeyActionMapping() override;
+		virtual void GenerateKeyIdMapping() override;
 
 	private:
 		GLFWwindow* mWindow;

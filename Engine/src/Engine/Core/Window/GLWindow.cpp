@@ -61,6 +61,9 @@ namespace Engine
 
 	void GLWindow::Init(const WindowSettings & aSettings)
 	{
+		GenerateKeyActionMapping();
+		GenerateKeyIdMapping();
+
 		mData.Width = aSettings.Width;
 		mData.Height = aSettings.Height;
 		mData.Title = aSettings.Title;
@@ -94,21 +97,30 @@ namespace Engine
 				//Callbacks
 
 				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
-					{
-						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-						(*Data.WindowEvents.mMouseEvent)(aButton, aAction);
-					});
+					(*Data.WindowEvents.mMouseEvent)(aButton, aAction);
+				});
 
 				glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* aWindow, int aWidth, int aHeight)
-					{
-						WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 						
-						Data.Width = aWidth;
-						Data.Height	= aWidth;
+					Data.Width = aWidth;
+					Data.Height	= aWidth;
 						
-						(*Data.WindowEvents.mResizeWindowsEvent)(aWidth, aHeight);
-					});
+					(*Data.WindowEvents.mResizeWindowsEvent)(aWidth, aHeight);
+				});
+
+				glfwSetKeyCallback(mWindow, [](GLFWwindow* aWindow, int aKey, int aScancode, int aAction, int aMods)
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+
+					KeyAction Action = Data.WindowEvents.GetKeyActionContainer().at(aAction);
+					KeyId Id = Data.WindowEvents.GetKeyIdContainer().at(aKey);
+					(*Data.WindowEvents.mKeyEvent)(Action, Id);
+				});
 			}
 		}
 	}
@@ -119,8 +131,29 @@ namespace Engine
 		glfwTerminate();
 	}
 
+	void GLWindow::GenerateKeyActionMapping()
+	{
+		WindowEventsContainer::KeyActionContainer Mapping;
+
+		Mapping.emplace(GLFW_RELEASE, KeyAction::Released);
+		Mapping.emplace(GLFW_PRESS, KeyAction::Pressed);
+		Mapping.emplace(GLFW_REPEAT, KeyAction::Repeat);
+
+		mData.WindowEvents.SetKeyActionContainer(std::move(Mapping));
+	}
+
+	void GLWindow::GenerateKeyIdMapping()
+	{
+		WindowEventsContainer::KeyIdContainer Mapping;
+
+
+
+		mData.WindowEvents.SetKeyIdContainer(std::move(Mapping));
+	}
+
 	std::shared_ptr<Window> Window::Create(const WindowSettings& aSettings)
 	{
 		return std::make_shared<GLWindow>(aSettings);
 	}
+
 }

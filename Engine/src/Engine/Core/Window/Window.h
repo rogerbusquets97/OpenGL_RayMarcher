@@ -30,7 +30,10 @@ namespace Engine
 			WindowEventsContainer WindowEvents;
 		};
 
-		Window() : mData() {};
+		Window() : mData() 
+		{
+			
+		};
 
 		virtual ~Window() = default;
 
@@ -55,6 +58,11 @@ namespace Engine
 		virtual bool IsVSyncEnabled() const = 0;
 		virtual void* GetNativeWindow() const = 0;
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
+
+	protected:
+		virtual void GenerateKeyActionMapping() = 0;
+		virtual void GenerateKeyIdMapping() = 0;
+
 
 	protected:
 		WindowData mData;
