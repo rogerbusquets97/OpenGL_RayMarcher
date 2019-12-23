@@ -112,9 +112,9 @@ namespace Engine
 				{
 					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					KeyAction Action = Data.WindowEvents.GetKeyActionContainer().at(aAction);
-					KeyId Id = Data.WindowEvents.GetKeyIdContainer().at(aKey);
-					(*Data.WindowEvents.mKeyEvent)(Action, Id);
+					const KeyAction &Action = Data.WindowEvents.GetKeyAction(aAction);
+					const KeyId& Id = Data.WindowEvents.GetKeyId(aKey);
+					(*Data.WindowEvents.mKeyEvent)(Id, Action);
 				});
 			}
 		}
@@ -141,7 +141,8 @@ namespace Engine
 	{
 		WindowEventsContainer::KeyIdContainer Mapping;
 
-
+		Mapping.emplace(GLFW_KEY_A, KeyId::A);
+		Mapping.emplace(GLFW_KEY_ESCAPE, KeyId::Escape);
 		//TODO add more keys...
 
 		mData.WindowEvents.SetKeyIdContainer(std::move(Mapping));

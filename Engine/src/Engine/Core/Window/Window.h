@@ -41,14 +41,15 @@ namespace Engine
 		virtual bool Update() = 0;
 
 		unsigned int GetWidth() const;
-
 		unsigned int GetHeight() const;
 		
 		WindowEventsContainer& GetWindowEvents();
 
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
+
 		virtual void* GetNativeWindow() const = 0;
+
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
 
 	protected:
