@@ -2,6 +2,7 @@
 #include "Core.h"
 #include <vector>
 #include <Module.h>
+#include "Window/Keys.h"
 
 namespace Engine
 {
@@ -18,6 +19,7 @@ namespace Engine
 		
 		void OnMouseEvent(int aButton, int aAction);
 		void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
+		void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction);
 	
 	private:		
 		std::vector<Module*> mModules;

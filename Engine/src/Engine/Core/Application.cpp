@@ -102,4 +102,12 @@ namespace Engine
 			Module->OnResizeWindowEvent(aWidth, aHeight);
 		}
 	}
+	
+	void Application::OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnKeyWindowEvent(aKeyId, aKeyAction);
+		}
+	}
 }

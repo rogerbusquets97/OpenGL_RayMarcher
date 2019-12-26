@@ -19,6 +19,7 @@ namespace Engine
 		virtual bool PostUpdate() override;
 
 		virtual void OnMouseEvent(int aButton, int aAction) override;
+		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
 
 		static uint32_t GetWidth();
 		static uint32_t GetHeight();
@@ -26,6 +27,7 @@ namespace Engine
 
 	private:
 		static std::shared_ptr<Window> mWindow;
+		bool mMustClose;
 	};
 }
 

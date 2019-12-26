@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENGINE_WINDOW
+#define ENGINE_WINDOW
+
 #include <Core.h>
 #include <string>
 #include "WindowEventsContainer.h"
@@ -30,31 +32,30 @@ namespace Engine
 			WindowEventsContainer WindowEvents;
 		};
 
-		Window() : mData() {};
-
-		virtual ~Window() = default;
+		Window();
+		
+		virtual ~Window();
+		
+		virtual void Init(const WindowSettings& aSettings);
 
 		virtual bool Update() = 0;
 
-		unsigned int GetWidth() const
-		{
-			return mData.Width;
-		}
-
-		unsigned int GetHeight() const
-		{
-			return mData.Height;
-		}
+		unsigned int GetWidth() const;
+		unsigned int GetHeight() const;
 		
-		WindowEventsContainer& GetWindowEvents()
-		{
-			return mData.WindowEvents;
-		}
+		WindowEventsContainer& GetWindowEvents();
 
 		virtual void SetVSync(const bool aEnabled) = 0;
 		virtual bool IsVSyncEnabled() const = 0;
+
 		virtual void* GetNativeWindow() const = 0;
+
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
+
+	protected:
+		virtual void GenerateKeyActionMapping() = 0;
+		virtual void GenerateKeyIdMapping() = 0;
+
 
 	protected:
 		WindowData mData;
@@ -62,3 +63,4 @@ namespace Engine
 	};
 }
 
+#endif

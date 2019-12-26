@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-#include "../Core/Core.h"
+#include "Core.h"
+#include "Window/Keys.h"
 
 namespace Engine
 {
@@ -27,6 +28,7 @@ namespace Engine
 
 		virtual void OnMouseEvent(int aButton, int aAction) {}
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
+		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) {}
 
 		inline const std::string& GetName() const { return mName; }
 

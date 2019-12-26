@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENGINE_GL_WINDOW
+#define ENGINE_GL_WINDOW
+
 #include "Window.h"
 #include <Core.h>
 #include <Renderer/GraphicsContext.h>
@@ -18,8 +20,10 @@ namespace Engine
 		virtual void* GetNativeWindow() const override;
 
 	private:
-		virtual void Init(const WindowSettings& aSettings);
+		virtual void Init(const WindowSettings& aSettings) override;
 		virtual void CleanUp();
+		virtual void GenerateKeyActionMapping() override;
+		virtual void GenerateKeyIdMapping() override;
 
 	private:
 		GLFWwindow* mWindow;
@@ -27,3 +31,4 @@ namespace Engine
 	};
 }
 
+#endif

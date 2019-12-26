@@ -8,7 +8,7 @@ namespace Engine
 {
 	std::shared_ptr<Window> ModuleWindow::mWindow = nullptr;
 
-	ModuleWindow::ModuleWindow(Application* aApplication) : Module("Window", aApplication)
+	ModuleWindow::ModuleWindow(Application* aApplication) : Module("Window", aApplication), mMustClose(false)
 	{
 	}
 
@@ -24,7 +24,7 @@ namespace Engine
 
 	bool ModuleWindow::Update()
 	{
-		return mWindow->Update();
+		return !mMustClose && mWindow->Update();
 	}
 
 	bool ModuleWindow::CleanUp()
@@ -41,6 +41,7 @@ namespace Engine
 			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
 			(*WindowEvents.mMouseEvent) += std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mKeyEvent) += std::bind(&Application::OnKeyWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			
 			ReturnValue = true;
 		}
@@ -60,6 +61,14 @@ namespace Engine
 	void ModuleWindow::OnMouseEvent(int aButton, int aAction)
 	{
 
+	}
+
+	void ModuleWindow::OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction)
+	{
+		if (aKeyId == KeyId::Escape)
+		{
+			mMustClose = true;
+		}
 	}
 
 	uint32_t ModuleWindow::GetWidth()
