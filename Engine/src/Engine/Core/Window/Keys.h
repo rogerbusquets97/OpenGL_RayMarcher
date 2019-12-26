@@ -44,7 +44,6 @@ namespace Engine
 		L,
 		M,
 		N,
-		Ñ,
 		O,
 		P,
 		Q,

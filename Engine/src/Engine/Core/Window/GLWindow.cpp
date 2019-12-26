@@ -141,8 +141,48 @@ namespace Engine
 	{
 		WindowEventsContainer::KeyIdContainer Mapping;
 
-		Mapping.emplace(GLFW_KEY_A, KeyId::A);
+		Mapping.emplace(GLFW_KEY_SPACE, KeyId::Space);
+		Mapping.emplace(GLFW_KEY_COMMA, KeyId::Comma);
+		Mapping.emplace(GLFW_KEY_SEMICOLON, KeyId::Semicolon);
+		Mapping.emplace(GLFW_KEY_ENTER, KeyId::Enter);
 		Mapping.emplace(GLFW_KEY_ESCAPE, KeyId::Escape);
+		Mapping.emplace(GLFW_KEY_DELETE, KeyId::Delete);
+		Mapping.emplace(GLFW_KEY_0, KeyId::Num_0);
+		Mapping.emplace(GLFW_KEY_1, KeyId::Num_1);
+		Mapping.emplace(GLFW_KEY_2, KeyId::Num_2);
+		Mapping.emplace(GLFW_KEY_3, KeyId::Num_3);
+		Mapping.emplace(GLFW_KEY_4, KeyId::Num_4);
+		Mapping.emplace(GLFW_KEY_5, KeyId::Num_5);
+		Mapping.emplace(GLFW_KEY_6, KeyId::Num_6);
+		Mapping.emplace(GLFW_KEY_7, KeyId::Num_7);
+		Mapping.emplace(GLFW_KEY_8, KeyId::Num_8);
+		Mapping.emplace(GLFW_KEY_9, KeyId::Num_9);
+		Mapping.emplace(GLFW_KEY_A, KeyId::A);
+		Mapping.emplace(GLFW_KEY_B, KeyId::B);
+		Mapping.emplace(GLFW_KEY_C, KeyId::C);
+		Mapping.emplace(GLFW_KEY_D, KeyId::D);
+		Mapping.emplace(GLFW_KEY_E, KeyId::E);
+		Mapping.emplace(GLFW_KEY_F, KeyId::F);
+		Mapping.emplace(GLFW_KEY_G, KeyId::G);
+		Mapping.emplace(GLFW_KEY_H, KeyId::H);
+		Mapping.emplace(GLFW_KEY_I, KeyId::I);
+		Mapping.emplace(GLFW_KEY_J, KeyId::J);
+		Mapping.emplace(GLFW_KEY_K, KeyId::K);
+		Mapping.emplace(GLFW_KEY_L, KeyId::L);
+		Mapping.emplace(GLFW_KEY_M, KeyId::M);
+		Mapping.emplace(GLFW_KEY_N, KeyId::N);
+		Mapping.emplace(GLFW_KEY_O, KeyId::O);
+		Mapping.emplace(GLFW_KEY_P, KeyId::P);
+		Mapping.emplace(GLFW_KEY_Q, KeyId::Q);
+		Mapping.emplace(GLFW_KEY_R, KeyId::R);
+		Mapping.emplace(GLFW_KEY_S, KeyId::S);
+		Mapping.emplace(GLFW_KEY_T, KeyId::T);
+		Mapping.emplace(GLFW_KEY_U, KeyId::U);
+		Mapping.emplace(GLFW_KEY_V, KeyId::V);
+		Mapping.emplace(GLFW_KEY_W, KeyId::W);
+		Mapping.emplace(GLFW_KEY_X, KeyId::X);
+		Mapping.emplace(GLFW_KEY_Y, KeyId::Y);
+		Mapping.emplace(GLFW_KEY_Z, KeyId::Z);
 		//TODO add more keys...
 
 		mData.WindowEvents.SetKeyIdContainer(std::move(Mapping));

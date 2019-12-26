@@ -71,7 +71,6 @@ namespace Engine
 		}
 	}
 
-
 	uint32_t ModuleWindow::GetWidth()
 	{
 		uint32_t Return(0U);
