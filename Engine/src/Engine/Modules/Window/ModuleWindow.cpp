@@ -22,7 +22,7 @@ namespace Engine
 		return true;
 	}
 
-	bool ModuleWindow::Update()
+	bool ModuleWindow::Update(float aDeltaTime)
 	{
 		return !mMustClose && mWindow->Update();
 	}
@@ -48,12 +48,12 @@ namespace Engine
 		return ReturnValue;
 	}
 
-	bool ModuleWindow::PreUpdate()
+	bool ModuleWindow::PreUpdate(float aDeltaTime)
 	{
 		return true;
 	}
 
-	bool ModuleWindow::PostUpdate()
+	bool ModuleWindow::PostUpdate(float aDeltaTime)
 	{
 		return true;
 	}

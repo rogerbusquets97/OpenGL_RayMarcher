@@ -21,9 +21,9 @@ namespace Engine
 		virtual bool Awake() = 0;
 		virtual bool Init() = 0;
 		virtual bool CleanUp() = 0;
-		virtual bool PreUpdate() = 0;
-		virtual bool Update() = 0;
-		virtual bool PostUpdate() = 0;
+		virtual bool PreUpdate(float aDeltaTime) = 0;
+		virtual bool Update(float aDeltaTime) = 0;
+		virtual bool PostUpdate(float aDeltaTime) = 0;
 		virtual void OnGUI() {};
 
 		virtual void OnMouseEvent(int aButton, int aAction) {}

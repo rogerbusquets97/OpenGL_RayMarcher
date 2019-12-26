@@ -24,7 +24,7 @@ namespace Engine
 		return true;
 	}
 
-	bool Engine::ModuleEditor::Update()
+	bool Engine::ModuleEditor::Update(float aDeltaTime)
 	{
 		return true;
 	}
@@ -46,13 +46,13 @@ namespace Engine
 		return true;
 	}
 
-	bool Engine::ModuleEditor::PreUpdate()
+	bool Engine::ModuleEditor::PreUpdate(float aDeltaTime)
 	{
 		IMGUI::BeginFrame();
 		return true;
 	}
 
-	bool Engine::ModuleEditor::PostUpdate()
+	bool Engine::ModuleEditor::PostUpdate(float aDeltaTime)
 	{
 		IMGUI::EndFrame();
 		return true;

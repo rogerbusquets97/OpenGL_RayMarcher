@@ -12,11 +12,11 @@ namespace Engine
 		virtual ~ModuleWindow();
 
 		virtual bool Init() override;
-		virtual bool Update() override;
+		virtual bool Update(float aDeltaTime) override;
 		virtual bool CleanUp() override;
 		virtual bool Awake() override;
-		virtual bool PreUpdate() override;
-		virtual bool PostUpdate() override;
+		virtual bool PreUpdate(float aDeltaTime) override;
+		virtual bool PostUpdate(float aDeltaTime) override;
 
 		virtual void OnMouseEvent(int aButton, int aAction) override;
 		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;

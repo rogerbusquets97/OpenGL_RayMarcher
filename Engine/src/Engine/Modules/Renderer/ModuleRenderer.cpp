@@ -62,7 +62,7 @@ namespace Engine
 		return ReturnValue;
 	}
 
-	bool ModuleRenderer::Update()
+	bool ModuleRenderer::Update(float aDeltaTime)
 	{
 		bool ReturnValue(true);
 				
@@ -96,11 +96,11 @@ namespace Engine
 		mNeedRepaint = true;
 		return true;
 	}
-	bool ModuleRenderer::PreUpdate()
+	bool ModuleRenderer::PreUpdate(float aDeltaTime)
 	{
 		return true;
 	}
-	bool ModuleRenderer::PostUpdate()
+	bool ModuleRenderer::PostUpdate(float aDeltaTime)
 	{
 		return true;
 	}

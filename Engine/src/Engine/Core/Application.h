@@ -11,7 +11,7 @@ namespace Engine
 	public:
 		Application();
 		virtual ~Application();
-		bool Run();
+		bool Run(float aDeltaTime);
 		bool Init();
 		bool CleanUp();
 		void AddModule(Module* aModule);
