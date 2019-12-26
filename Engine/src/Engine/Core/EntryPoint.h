@@ -1,11 +1,13 @@
 #pragma once
 #include <Application.h>
+#include <chrono>
 
 #ifdef PLATFORM_WINDOWS
 extern Engine::Application* Engine::CreateApplication();
 
 int main(int argc, char** argv)
 {
+
 	Engine::Log::Init();
 	ENGINE_CORE_INFO("Engine Start");
 	auto App = Engine::CreateApplication();
@@ -14,9 +16,30 @@ int main(int argc, char** argv)
 	{
 		bool Exit(false);
 
+		unsigned int FPS = 60U; //TODO parameterize this
+		float IdealDeltaTime = 1.0f / static_cast<float>(FPS);
+
+		auto PreviousTime = std::chrono::high_resolution_clock::now();
+		std::chrono::high_resolution_clock::time_point CurrentTime;
+		float DeltaTime;
+		float LagTime = 0.0f;
+
 		while (!Exit)
 		{
-			Exit = !App->Run(0.0f);
+			CurrentTime = std::chrono::high_resolution_clock::now();
+			DeltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(CurrentTime - PreviousTime).count();
+			PreviousTime = CurrentTime;
+			LagTime += DeltaTime;
+
+			while (LagTime >= IdealDeltaTime)
+			{
+				std::cout << "UPDATE METHOD WITH"<< IdealDeltaTime << std::endl;
+
+				Exit |= !App->Run(IdealDeltaTime);
+				LagTime -= IdealDeltaTime;
+			}
+
+			//TODO special treatment for render module, should have just the update method and call it here LagTime/ IdealDeltaTime
 		}
 
 		App->CleanUp();
