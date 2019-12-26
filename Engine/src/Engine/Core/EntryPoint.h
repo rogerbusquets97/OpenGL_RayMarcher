@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 
 		while (!Exit)
 		{
-			Exit = !App->Run();
+			Exit = !App->Run(0.0f);
 		}
 
 		App->CleanUp();

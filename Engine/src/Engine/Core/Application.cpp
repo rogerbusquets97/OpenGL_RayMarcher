@@ -18,11 +18,11 @@ namespace Engine
 		}
 	}
 
-	bool Application::Run()
+	bool Application::Run(float aDeltaTime)
 	{
 		for (auto& Module : mModules)
 		{
-			if (!Module->PreUpdate())
+			if (!Module->PreUpdate(aDeltaTime))
 			{
 				return false;
 			}
@@ -30,7 +30,7 @@ namespace Engine
 
 		for (auto& Module : mModules)
 		{
-			if (!Module->Update())
+			if (!Module->Update(aDeltaTime))
 			{
 				return false;
 			}
@@ -43,7 +43,7 @@ namespace Engine
 
 		for (auto& Module : mModules)
 		{
-			if (!Module->PostUpdate())
+			if (!Module->PostUpdate(aDeltaTime))
 			{
 				return false;
 			}

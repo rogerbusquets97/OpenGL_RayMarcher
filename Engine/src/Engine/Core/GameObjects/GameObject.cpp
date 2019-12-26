@@ -28,10 +28,14 @@ void Engine::GameObject::AddComponent(Component* aComponent)
 	aComponent->Init();
 }
 
-bool Engine::GameObject::Update()
+bool Engine::GameObject::Update(float aDeltaTime)
 {
+	bool Result = true;
+
 	for (auto& Component : mComponents)
 	{
-		Component->Update();
+		Result &= Component->Update(aDeltaTime);
 	}
+
+	return Result;
 }

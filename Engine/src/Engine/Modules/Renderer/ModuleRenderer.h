@@ -17,11 +17,11 @@ namespace Engine
 		virtual ~ModuleRenderer();
 
 		virtual bool Init() override;
-		virtual bool Update() override;
+		virtual bool Update(float aDeltaTime) override;
 		virtual bool CleanUp() override;
 		virtual bool Awake() override;
-		virtual bool PreUpdate() override;
-		virtual bool PostUpdate() override;
+		virtual bool PreUpdate(float aDeltaTime) override;
+		virtual bool PostUpdate(float aDeltaTime) override;
 
 		static void NeedRepaint(bool aRepaint);
 

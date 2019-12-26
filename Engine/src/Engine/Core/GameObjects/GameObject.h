@@ -13,7 +13,7 @@ namespace Engine
 		~GameObject();
 		void AddChild(GameObject* aChild);
 		void AddComponent(Component* aComponent);
-		bool Update();
+		bool Update(float aDeltaTime);
 	private:
 		std::string mName;
 		std::vector<GameObject*> mChildren;
