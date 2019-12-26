@@ -33,8 +33,6 @@ int main(int argc, char** argv)
 
 			while (LagTime >= IdealDeltaTime)
 			{
-				std::cout << "UPDATE METHOD WITH"<< IdealDeltaTime << std::endl;
-
 				Exit |= !App->Run(IdealDeltaTime);
 				LagTime -= IdealDeltaTime;
 			}
