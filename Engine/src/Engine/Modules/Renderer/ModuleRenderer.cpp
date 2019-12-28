@@ -2,14 +2,20 @@
 #include <Application.h>
 #include <Log/Log.h>
 #include <filesystem>
-#include <Renderer/Renderer.h>
 #include <Window/ModuleWindow.h>
+#include <Camera/ModuleCamera.h>
+#include <Renderer/Renderer.h>
+#include <Renderer/ComputeShader.h>
+#include <Renderer/Shader.h>
+#include <Renderer/VertexArray.h>
+#include <Renderer/Texture.h>
+#include <Renderer/Material.h>
 
 namespace Engine
 {
 	bool ModuleRenderer::mNeedRepaint = true;
 
-	ModuleRenderer::ModuleRenderer(Application* aApplication) : Module("Renderer", aApplication), mQuadMaterial(nullptr), mComputeShader(nullptr), mQuadVA(nullptr), mQuadTexture(nullptr)
+	ModuleRenderer::ModuleRenderer(Application* aApplication) : Module("Renderer", aApplication), mQuadMaterial(nullptr), mShader(nullptr), mComputeShader(nullptr), mQuadVA(nullptr), mQuadTexture(nullptr)
 	{
 	}
 
@@ -46,19 +52,19 @@ namespace Engine
 		mQuadVA->AddVertexBuffer(QuadVBO);
 
 		//Quad Shader
-		std::shared_ptr<Shader> QuadShader = Shader::Create();
+		mShader = Shader::Create();
 		std::string CurrentDirectory = std::filesystem::current_path().string();
 		CurrentDirectory.substr(CurrentDirectory.find_last_of("\\/"));
 		std::string VertexPath = CurrentDirectory + "/Resources/StandardShader.vs";
 		std::string FragmentPath = CurrentDirectory + "/Resources/StandardShader.fs";
-		QuadShader->Load(VertexPath.c_str(), FragmentPath.c_str());
+		mShader->Load(VertexPath.c_str(), FragmentPath.c_str());
 
 		mComputeShader = ComputeShader::Create();
 		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";
 		mComputeShader->Load(ComputePath.c_str());
 
 		mQuadTexture = RenderTexture2D::Create(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
-		mQuadMaterial = Material::Create(QuadShader);
+		mQuadMaterial = Material::Create(mShader);
 		return ReturnValue;
 	}
 
@@ -66,6 +72,9 @@ namespace Engine
 	{
 		bool ReturnValue(true);
 				
+		mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera().GetViewMatrix());
+		mShader->SetMat4("projectionMatrix", ModuleCamera::GetCamera().GetProjectionMatrix());
+
 		Renderer::ClearColor(glm::vec4(0));
 		Renderer::ClearDepth(1.0f);
 		Renderer::Clear();

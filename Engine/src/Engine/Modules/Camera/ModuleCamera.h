@@ -23,8 +23,10 @@ namespace Engine
 		virtual void OnMouseEvent(int aButton, int aAction) override;
 		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
 
+		static const Camera& GetCamera();
+
 	private:
-		Camera			mCamera;
+		static Camera			mCamera;
 	};
 }
 

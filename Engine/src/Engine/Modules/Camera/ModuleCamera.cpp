@@ -2,9 +2,10 @@
 
 namespace Engine
 {
-	ModuleCamera::ModuleCamera(Application* aApplication) : 
-		Module("Camera", aApplication),
-		mCamera() //TODO read params from config file
+	Camera ModuleCamera::mCamera = Camera(); //TODO read params from config file
+
+	ModuleCamera::ModuleCamera(Application* aApplication) :
+		Module("Camera", aApplication)
 	{
 	}
 
@@ -50,6 +51,11 @@ namespace Engine
 	void ModuleCamera::OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction)
 	{
 		
+	}
+
+	const Camera& ModuleCamera::GetCamera()
+	{
+		return mCamera;
 	}
 
 }

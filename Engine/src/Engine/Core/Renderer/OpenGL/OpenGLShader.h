@@ -16,6 +16,7 @@ namespace Engine
 		virtual void SetInt(const std::string& aName, int aValue) const override;
 		virtual void SetFloat(const std::string& aName, float aValue) const override;
 		virtual void SetVec2(const std::string& aName, glm::vec2 aValue) const override;
+		virtual void SetMat4(const std::string& aName, const glm::mat4& aValue) const override;
 
 	private:
 		void Compile(const char* aVertex, const char* aFragment);
