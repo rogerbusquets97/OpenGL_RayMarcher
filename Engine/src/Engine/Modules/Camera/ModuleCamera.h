@@ -22,6 +22,7 @@ namespace Engine
 
 		virtual void OnMouseEvent(int aButton, int aAction) override;
 		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
 
 		static const Camera& GetCamera();
 

@@ -3,14 +3,20 @@
 
 namespace Engine
 {
-	Camera::Camera(const glm::vec3& aPosition, const glm::vec3& aVRP, const glm::vec3& aUp, float aNear, float aFar) :
+	Camera::Camera(const glm::vec3& aPosition, const glm::vec3& aUpDirection, float aNear, float aFar, float aFOV) :
 		mPosition(aPosition),
-		mVRP(aVRP),
-		mUp(aUp),
+		mViewDirection(),
+		mUpDirection(aUpDirection),
+		mRightDirection(),
 		mNear(aNear),
-		mFar(aFar)
+		mFar(aFar),
+		mFOV(aFOV),
+		mYaw(-90.f),
+		mPitch(0.f),
+		mWidth(),
+		mHeight()
 	{
-
+		RecalculateViewDirection();
 	}
 	
 	Camera::~Camera()
@@ -28,24 +34,24 @@ namespace Engine
 		mPosition = aPosition;
 	}
 
-	const glm::vec3& Camera::GetVRP() const
+	const glm::vec3& Camera::GetViewDirection() const
 	{
-		return mVRP;
+		return mViewDirection;
+	}
+	
+	const glm::vec3& Camera::GetRightDirection() const
+	{
+		return mRightDirection;
 	}
 
-	void Camera::SetVRP(const glm::vec3& aVRP)
+	const glm::vec3& Camera::GetUpDirection() const
 	{
-		mVRP = aVRP;
+		return mUpDirection;
 	}
 
-	const glm::vec3& Camera::GetUp() const
+	void Camera::SetUpDirection(const glm::vec3& aUpDirection)
 	{
-		return mUp;
-	}
-
-	void Camera::SetUp(const glm::vec3& aUp)
-	{
-		mUp = aUp;
+		mUpDirection = aUpDirection;
 	}
 
 	const float Camera::GetNear() const
@@ -68,14 +74,71 @@ namespace Engine
 		mFar = aFar;
 	}
 
+	const float Camera::GetFOV() const
+	{
+		return mFOV;
+	}
+
+	void Camera::SetFOV(float aFOV)
+	{
+		mFOV = aFOV;
+	}
+
+	const float Camera::GetYaw() const
+	{
+		return mYaw;
+	}
+
+	void Camera::SetYaw(float aYaw)
+	{
+		mYaw = aYaw;
+		RecalculateViewDirection();
+	}
+
+	const float Camera::GetPitch() const
+	{
+		return mPitch;
+	}
+
+	void Camera::SetPitch(float aPitch)
+	{
+		mPitch = aPitch;
+		RecalculateViewDirection();
+	}
+
+	void Camera::SetWidth(float aWidth)
+	{
+		mWidth = aWidth;
+	}
+
+	void Camera::SetHeight(float aHeight)
+	{
+		mHeight = aHeight;
+	}
+
 	const glm::mat4& Camera::GetViewMatrix() const
 	{
-		return glm::lookAt(mPosition, mVRP, mUp);
+		//TODO save to avoid calculation each frame?
+		std::cout << "Look at from popsition " << mPosition.x << " " << mPosition.y << " " << mPosition.z <<
+			" and direction " << mViewDirection.x << " " << mViewDirection.y << " " << mViewDirection.z << std::endl;
+		return glm::lookAt(mPosition, mPosition + mViewDirection, mUpDirection);
 	}
 
 	const glm::mat4& Camera::GetProjectionMatrix() const
 	{
-		//TODO
-		return glm::mat4();
+		//TODO save to avoid calculation each frame?
+
+		return glm::perspective(glm::radians(mFOV), mWidth / mHeight, mNear, mFar);
 	}
+
+	void Camera::RecalculateViewDirection()
+	{
+		mViewDirection.x = cos(glm::radians(mPitch)) * cos(glm::radians(mYaw));
+		mViewDirection.y = sin(glm::radians(mPitch));
+		mViewDirection.z = cos(glm::radians(mPitch)) * sin(glm::radians(mYaw));
+		mViewDirection = glm::normalize(mViewDirection);
+
+		mRightDirection = glm::normalize(glm::cross(mViewDirection, mUpDirection));
+	}
+
 }

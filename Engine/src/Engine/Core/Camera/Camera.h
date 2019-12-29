@@ -11,51 +11,66 @@ namespace ENGINE_API Engine
 	{
 	public:
 
-		Camera(const glm::vec3& aPosition = {0.f, 0.f, 0.f}, const glm::vec3& aVRP = {0.f, 0.f, 0.f}, const glm::vec3& aUp = { 0.f, 1.f, 0.f}, float aNear =  0.1f, float aFar = 50.f);
+		Camera(const glm::vec3& aPosition = {0.f, 0.f, 0.f}, const glm::vec3& aUpDirection = { 0.f, 1.f, 0.f}, float aNear =  0.1f, float aFar = 50.f, float aFOV = 45.0f);
 		~Camera();
 
 		const glm::vec3& GetPosition() const;
 		void SetPosition(const glm::vec3& aPosition);
 
-		const glm::vec3& GetVRP() const;
-		void SetVRP(const glm::vec3& aVRP);
+		const glm::vec3& GetViewDirection() const;
+		
+		const glm::vec3& GetRightDirection() const;
 
-		const glm::vec3& GetUp() const;
-		void SetUp(const glm::vec3& aUp);
+		const glm::vec3& GetUpDirection() const;
+		void SetUpDirection(const glm::vec3& aUpDirection);
 
 		const float GetNear() const;
 		void SetNear(float aNear);
 
 		const float GetFar() const;
 		void SetFar(float aFar);
+		
+		const float GetFOV() const;
+		void SetFOV(float aFOV);
+
+		const float GetYaw() const;
+		void SetYaw(float aYaw);
+
+		const float GetPitch() const;
+		void SetPitch(float aPitch);
+
+		void SetWidth(float aWidth);
+		void SetHeight(float aHeight);
 
 		const glm::mat4& GetViewMatrix() const;
 
 		const glm::mat4& GetProjectionMatrix() const;
 
 	private:
+		void RecalculateViewDirection();
+
+	private:
 		glm::vec3		mPosition;
-		glm::vec3		mVRP;
-		glm::vec3		mUp;
+
+		glm::vec3		mViewDirection;
+		glm::vec3		mUpDirection;
+		glm::vec3		mRightDirection;
+
 		float			mNear;
 		float			mFar;
+		float			mFOV;
 
+		float			mYaw;
+		float			mPitch;
+
+		float			mWidth;
+		float			mHeight;
 
 	/*private:
-		void UpdateVectors();
-		void OnKeyPressed(int aKey, int aAction);
-		void OnMouseMove(float aXoffset, float aYoffset, bool aConstrainPitch = true);
-		void OnMouseScroll(float aYoffset);
-	private:
-		glm::vec3 mPosition;
-		glm::vec3 mFront;
-		glm::vec3 mUp;
 		glm::vec3 mRight;
 		glm::vec3 mWorldUp;
 
-		float mYaw;
-		float mPitch;
-
+	
 		float mSpeed;
 		float mSensitivity;
 		float mZoom;*/
