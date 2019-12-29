@@ -7,11 +7,11 @@
 
 namespace ENGINE_API Engine
 {
-	class Camera
+	class ENGINE_API Camera
 	{
 	public:
 
-		Camera(const glm::vec3& aPosition = {0.f, 0.f, 0.f}, const glm::vec3& aUpDirection = { 0.f, 1.f, 0.f}, float aNear =  0.1f, float aFar = 50.f, float aFOV = 45.0f);
+		Camera(const glm::vec3& aPosition = {0.f, 0.f, 0.f}, const glm::vec3& aUpDirection = { 0.f, 1.f, 0.f}, float aNear =  0.1f, float aFar = 50.f);
 		~Camera();
 
 		const glm::vec3& GetPosition() const;
@@ -29,9 +29,6 @@ namespace ENGINE_API Engine
 
 		const float GetFar() const;
 		void SetFar(float aFar);
-		
-		const float GetFOV() const;
-		void SetFOV(float aFOV);
 
 		const float GetYaw() const;
 		void SetYaw(float aYaw);
@@ -45,10 +42,21 @@ namespace ENGINE_API Engine
 
 		const glm::mat4& GetProjectionMatrix() const;
 
+	protected:
+		virtual void RecalculateProjectionMatrix() = 0;
+
 	private:
 		void RecalculateViewDirection();
 		void RecalculateViewMatrix();
-		void RecalculateProjectionMatrix();
+
+	protected:
+		float			mNear;
+		float			mFar;
+
+		float			mWidth;
+		float			mHeight;
+
+		glm::mat4		mProjectionMatrix;
 
 	private:
 		glm::vec3		mPosition;
@@ -57,18 +65,10 @@ namespace ENGINE_API Engine
 		glm::vec3		mUpDirection;
 		glm::vec3		mRightDirection;
 
-		float			mNear;
-		float			mFar;
-		float			mFOV;
-
 		float			mYaw;
 		float			mPitch;
 
-		float			mWidth;
-		float			mHeight;
-
 		glm::mat4		mViewMatrix;
-		glm::mat4		mProjectionMatrix;
 	};
 }
 

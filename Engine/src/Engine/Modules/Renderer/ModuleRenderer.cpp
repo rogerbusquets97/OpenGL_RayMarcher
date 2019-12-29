@@ -10,6 +10,7 @@
 #include <Renderer/VertexArray.h>
 #include <Renderer/Texture.h>
 #include <Renderer/Material.h>
+#include "Camera/PerspectiveCamera.h"
 
 namespace Engine
 {
@@ -72,8 +73,8 @@ namespace Engine
 	{
 		bool ReturnValue(true);
 				
-		mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera().GetViewMatrix());
-		mShader->SetMat4("projectionMatrix", ModuleCamera::GetCamera().GetProjectionMatrix());
+		mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera()->GetViewMatrix());
+		mShader->SetMat4("projectionMatrix", ModuleCamera::GetCamera()->GetProjectionMatrix());
 		mShader->Bind();
 
 		Renderer::ClearColor(glm::vec4(0));

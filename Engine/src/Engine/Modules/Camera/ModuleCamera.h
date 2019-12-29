@@ -3,10 +3,11 @@
 
 #include <Core.h>
 #include "Module.h"
-#include "Camera/Camera.h"
 
 namespace Engine
 {
+	class Camera;
+
 	class ENGINE_API ModuleCamera : public Module
 	{
 	public:
@@ -24,10 +25,10 @@ namespace Engine
 		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
 
-		static const Camera& GetCamera();
+		static const std::shared_ptr<Camera> GetCamera();
 
 	private:
-		static Camera			mCamera;
+		static std::shared_ptr<Camera>			mCamera;
 	};
 }
 

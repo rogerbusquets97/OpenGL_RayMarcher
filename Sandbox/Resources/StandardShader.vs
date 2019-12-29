@@ -14,5 +14,4 @@ void main()
 {
 	vs_out.FragCoords = aTexCoords;
 	gl_Position = projectionMatrix * viewMatrix * vec4(aPos, 1.0f);
-	//gl_Position = vec4(aPos, 1.0);
 }

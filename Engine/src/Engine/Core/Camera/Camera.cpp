@@ -3,14 +3,13 @@
 
 namespace Engine
 {
-	Camera::Camera(const glm::vec3& aPosition, const glm::vec3& aUpDirection, float aNear, float aFar, float aFOV) :
+	Camera::Camera(const glm::vec3& aPosition, const glm::vec3& aUpDirection, float aNear, float aFar) :
 		mPosition(aPosition),
 		mViewDirection(),
 		mUpDirection(aUpDirection),
 		mRightDirection(),
 		mNear(aNear),
 		mFar(aFar),
-		mFOV(aFOV),
 		mYaw(-90.f),
 		mPitch(0.f),
 		mWidth(),
@@ -78,17 +77,6 @@ namespace Engine
 		RecalculateProjectionMatrix();
 	}
 
-	const float Camera::GetFOV() const
-	{
-		return mFOV;
-	}
-
-	void Camera::SetFOV(float aFOV)
-	{
-		mFOV = aFOV;
-		RecalculateProjectionMatrix();
-	}
-
 	const float Camera::GetYaw() const
 	{
 		return mYaw;
@@ -143,12 +131,6 @@ namespace Engine
 	void Camera::RecalculateViewMatrix()
 	{
 		mViewMatrix = glm::lookAt(mPosition, mPosition + mViewDirection, mUpDirection);
-	}
-
-	void Camera::RecalculateProjectionMatrix()
-	{
-		mProjectionMatrix = glm::perspective(glm::radians(mFOV), mWidth / mHeight, mNear, mFar);
-
 	}
 
 }
