@@ -74,6 +74,7 @@ namespace Engine
 				
 		mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera().GetViewMatrix());
 		mShader->SetMat4("projectionMatrix", ModuleCamera::GetCamera().GetProjectionMatrix());
+		mShader->Bind();
 
 		Renderer::ClearColor(glm::vec4(0));
 		Renderer::ClearDepth(1.0f);

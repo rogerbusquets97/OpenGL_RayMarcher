@@ -39,8 +39,7 @@ namespace ENGINE_API Engine
 		const float GetPitch() const;
 		void SetPitch(float aPitch);
 
-		void SetWidth(float aWidth);
-		void SetHeight(float aHeight);
+		void SetSize(float aWidth, float aHeight);
 
 		const glm::mat4& GetViewMatrix() const;
 
@@ -48,6 +47,8 @@ namespace ENGINE_API Engine
 
 	private:
 		void RecalculateViewDirection();
+		void RecalculateViewMatrix();
+		void RecalculateProjectionMatrix();
 
 	private:
 		glm::vec3		mPosition;
@@ -66,14 +67,8 @@ namespace ENGINE_API Engine
 		float			mWidth;
 		float			mHeight;
 
-	/*private:
-		glm::vec3 mRight;
-		glm::vec3 mWorldUp;
-
-	
-		float mSpeed;
-		float mSensitivity;
-		float mZoom;*/
+		glm::mat4		mViewMatrix;
+		glm::mat4		mProjectionMatrix;
 	};
 }
 

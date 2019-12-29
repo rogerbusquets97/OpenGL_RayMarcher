@@ -18,8 +18,8 @@ namespace Engine
 
 	bool ModuleCamera::Init()
 	{
-		mCamera.SetWidth(ModuleWindow::GetWidth());
-		mCamera.SetHeight(ModuleWindow::GetHeight());
+		mCamera.SetSize(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
+		mCamera.SetPosition({0.f, 0.f, 2.f});
 		return true;
 	}
 
@@ -87,8 +87,7 @@ namespace Engine
 
 	void ModuleCamera::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
-		mCamera.SetWidth(ModuleWindow::GetWidth());
-		mCamera.SetHeight(ModuleWindow::GetHeight());
+		mCamera.SetSize(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
 	}
 
 	const Camera& ModuleCamera::GetCamera()

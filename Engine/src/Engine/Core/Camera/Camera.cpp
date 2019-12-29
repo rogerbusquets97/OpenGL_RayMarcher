@@ -32,6 +32,7 @@ namespace Engine
 	void Camera::SetPosition(const glm::vec3& aPosition)
 	{
 		mPosition = aPosition;
+		RecalculateViewMatrix();
 	}
 
 	const glm::vec3& Camera::GetViewDirection() const
@@ -52,6 +53,7 @@ namespace Engine
 	void Camera::SetUpDirection(const glm::vec3& aUpDirection)
 	{
 		mUpDirection = aUpDirection;
+		RecalculateViewMatrix();
 	}
 
 	const float Camera::GetNear() const
@@ -62,6 +64,7 @@ namespace Engine
 	void Camera::SetNear(float aNear)
 	{
 		mNear = aNear;
+		RecalculateProjectionMatrix();
 	}
 
 	const float Camera::GetFar() const
@@ -72,6 +75,7 @@ namespace Engine
 	void Camera::SetFar(float aFar)
 	{
 		mFar = aFar;
+		RecalculateProjectionMatrix();
 	}
 
 	const float Camera::GetFOV() const
@@ -82,6 +86,7 @@ namespace Engine
 	void Camera::SetFOV(float aFOV)
 	{
 		mFOV = aFOV;
+		RecalculateProjectionMatrix();
 	}
 
 	const float Camera::GetYaw() const
@@ -106,29 +111,21 @@ namespace Engine
 		RecalculateViewDirection();
 	}
 
-	void Camera::SetWidth(float aWidth)
+	void Camera::SetSize(float aWidth, float aHeight)
 	{
 		mWidth = aWidth;
-	}
-
-	void Camera::SetHeight(float aHeight)
-	{
 		mHeight = aHeight;
+		RecalculateProjectionMatrix();
 	}
 
 	const glm::mat4& Camera::GetViewMatrix() const
 	{
-		//TODO save to avoid calculation each frame?
-		std::cout << "Look at from popsition " << mPosition.x << " " << mPosition.y << " " << mPosition.z <<
-			" and direction " << mViewDirection.x << " " << mViewDirection.y << " " << mViewDirection.z << std::endl;
-		return glm::lookAt(mPosition, mPosition + mViewDirection, mUpDirection);
+		return mViewMatrix;
 	}
 
 	const glm::mat4& Camera::GetProjectionMatrix() const
 	{
-		//TODO save to avoid calculation each frame?
-
-		return glm::perspective(glm::radians(mFOV), mWidth / mHeight, mNear, mFar);
+		return mProjectionMatrix;
 	}
 
 	void Camera::RecalculateViewDirection()
@@ -139,6 +136,19 @@ namespace Engine
 		mViewDirection = glm::normalize(mViewDirection);
 
 		mRightDirection = glm::normalize(glm::cross(mViewDirection, mUpDirection));
+
+		RecalculateViewMatrix();
+	}
+
+	void Camera::RecalculateViewMatrix()
+	{
+		mViewMatrix = glm::lookAt(mPosition, mPosition + mViewDirection, mUpDirection);
+	}
+
+	void Camera::RecalculateProjectionMatrix()
+	{
+		mProjectionMatrix = glm::perspective(glm::radians(mFOV), mWidth / mHeight, mNear, mFar);
+
 	}
 
 }
