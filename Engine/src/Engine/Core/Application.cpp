@@ -87,11 +87,19 @@ namespace Engine
 		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
 	
-	void Application::OnMouseEvent(int aButton, int aAction)
+	void Application::OnCursorMovedEvent(float aXPos, float aYPos)
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnMouseEvent(aButton, aAction);
+			Module->OnCursorMovedEvent(aXPos, aYPos);
+		}
+	}
+
+	void Application::OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnMouseButtonEvent(aMouseButton, aInputAction);
 		}
 	}
 	
@@ -103,11 +111,11 @@ namespace Engine
 		}
 	}
 	
-	void Application::OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction)
+	void Application::OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction)
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnKeyWindowEvent(aKeyId, aKeyAction);
+			Module->OnKeyWindowEvent(aKeyId, aInputAction);
 		}
 	}
 }

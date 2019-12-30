@@ -2,7 +2,7 @@
 #include "Core.h"
 #include <vector>
 #include <Module.h>
-#include "Window/Keys.h"
+#include "Window/Inputs.h"
 
 namespace Engine
 {
@@ -17,9 +17,10 @@ namespace Engine
 		void AddModule(Module* aModule);
 		void RemoveModule(Module* aModule);
 		
-		void OnMouseEvent(int aButton, int aAction);
+		void OnCursorMovedEvent(float aXPos, float aYPos);
+		void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction);
 		void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
-		void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction);
+		void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction);
 	
 	private:		
 		std::vector<Module*> mModules;

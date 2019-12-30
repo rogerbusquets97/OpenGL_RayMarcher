@@ -21,14 +21,19 @@ namespace Engine
 		virtual bool PreUpdate(float aDeltaTime) override;
 		virtual bool PostUpdate(float aDeltaTime) override;
 
-		virtual void OnMouseEvent(int aButton, int aAction) override;
-		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
+		virtual void OnCursorMovedEvent(float aXPos, float aYPos) override;
+		virtual void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction) override;
+		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) override;
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
 
 		static const std::shared_ptr<Camera> GetCamera();
 
 	private:
 		static std::shared_ptr<Camera>			mCamera;
+
+		bool									mRotateCamera;
+		float									mPreviousCursorX;
+		float									mPreviousCursorY;
 	};
 }
 

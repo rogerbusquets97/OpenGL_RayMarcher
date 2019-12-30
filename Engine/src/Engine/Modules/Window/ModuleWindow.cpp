@@ -39,7 +39,8 @@ namespace Engine
 		if (mWindow != nullptr)
 		{
 			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
-			(*WindowEvents.mMouseEvent) += std::bind(&Application::OnMouseEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mCursorMovedEvent) += std::bind(&Application::OnCursorMovedEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mMouseButtonEvent) += std::bind(&Application::OnMouseButtonEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			(*WindowEvents.mKeyEvent) += std::bind(&Application::OnKeyWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			
@@ -58,12 +59,7 @@ namespace Engine
 		return true;
 	}
 
-	void ModuleWindow::OnMouseEvent(int aButton, int aAction)
-	{
-
-	}
-
-	void ModuleWindow::OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction)
+	void ModuleWindow::OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction)
 	{
 		if (aKeyId == KeyId::Escape)
 		{

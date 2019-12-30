@@ -53,7 +53,8 @@ namespace Engine
 		static std::shared_ptr<Window> Create(const WindowSettings& aData = WindowSettings());
 
 	protected:
-		virtual void GenerateKeyActionMapping() = 0;
+		virtual void GenerateMouseButtonMapping() = 0;
+		virtual void GenerateInputActionMapping() = 0;
 		virtual void GenerateKeyIdMapping() = 0;
 
 

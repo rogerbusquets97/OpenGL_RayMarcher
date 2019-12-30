@@ -91,11 +91,20 @@ namespace Engine
 
 				//Callbacks
 
-				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
+				glfwSetCursorPosCallback(mWindow, [](GLFWwindow* aWindow, double xPos, double yPos)
 				{
 					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					(*Data.WindowEvents.mMouseEvent)(aButton, aAction);
+					(*Data.WindowEvents.mCursorMovedEvent)(static_cast<float>(xPos), static_cast<float>(yPos));
+				});
+				
+				glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* aWindow, int aButton, int aAction, int aMods)
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+					const MouseButton& MouseButton = Data.WindowEvents.GetMouseButton(aButton);
+					const InputAction& Action = Data.WindowEvents.GetInputAction(aAction);
+
+					(*Data.WindowEvents.mMouseButtonEvent)(MouseButton, Action);
 				});
 
 				glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* aWindow, int aWidth, int aHeight)
@@ -112,7 +121,7 @@ namespace Engine
 				{
 					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
 
-					const KeyAction &Action = Data.WindowEvents.GetKeyAction(aAction);
+					const InputAction &Action = Data.WindowEvents.GetInputAction(aAction);
 					const KeyId& Id = Data.WindowEvents.GetKeyId(aKey);
 					(*Data.WindowEvents.mKeyEvent)(Id, Action);
 				});
@@ -126,15 +135,27 @@ namespace Engine
 		glfwTerminate();
 	}
 
-	void GLWindow::GenerateKeyActionMapping()
+	void GLWindow::GenerateMouseButtonMapping()
 	{
-		WindowEventsContainer::KeyActionContainer Mapping;
+		WindowEventsContainer::MouseButtonContainer Mapping;
 
-		Mapping.emplace(GLFW_RELEASE, KeyAction::Released);
-		Mapping.emplace(GLFW_PRESS, KeyAction::Pressed);
-		Mapping.emplace(GLFW_REPEAT, KeyAction::Repeat);
+		Mapping.emplace(GLFW_MOUSE_BUTTON_LAST, MouseButton::Last);
+		Mapping.emplace(GLFW_MOUSE_BUTTON_LEFT, MouseButton::Left);
+		Mapping.emplace(GLFW_MOUSE_BUTTON_RIGHT, MouseButton::Right);
+		Mapping.emplace(GLFW_MOUSE_BUTTON_MIDDLE, MouseButton::Middle);
+		
+		mData.WindowEvents.SetMouseButtonContainer(Mapping);
+	}
 
-		mData.WindowEvents.SetKeyActionContainer(std::move(Mapping));
+	void GLWindow::GenerateInputActionMapping()
+	{
+		WindowEventsContainer::InputActionContainer Mapping;
+
+		Mapping.emplace(GLFW_RELEASE, InputAction::Released);
+		Mapping.emplace(GLFW_PRESS, InputAction::Pressed);
+		Mapping.emplace(GLFW_REPEAT, InputAction::Repeat);
+
+		mData.WindowEvents.SetInputActionContainer(Mapping);
 	}
 
 	void GLWindow::GenerateKeyIdMapping()
@@ -185,7 +206,7 @@ namespace Engine
 		Mapping.emplace(GLFW_KEY_Z, KeyId::Z);
 		//TODO add more keys...
 
-		mData.WindowEvents.SetKeyIdContainer(std::move(Mapping));
+		mData.WindowEvents.SetKeyIdContainer(Mapping);
 	}
 
 	std::shared_ptr<Window> Window::Create(const WindowSettings& aSettings)

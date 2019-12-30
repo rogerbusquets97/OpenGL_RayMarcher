@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Core.h"
-#include "Window/Keys.h"
+#include "Window/Inputs.h"
 
 namespace Engine
 {
@@ -26,9 +26,10 @@ namespace Engine
 		virtual bool PostUpdate(float aDeltaTime) = 0;
 		virtual void OnGUI() {};
 
-		virtual void OnMouseEvent(int aButton, int aAction) {}
+		virtual void OnCursorMovedEvent(float aXPos, float aYPos) {}
+		virtual void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction) {}
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
-		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) {}
+		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) {}
 
 		inline const std::string& GetName() const { return mName; }
 

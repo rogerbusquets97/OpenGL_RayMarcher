@@ -3,7 +3,7 @@
 
 #include <Core.h>
 #include <unordered_map>
-#include "Keys.h"
+#include "Inputs.h"
 
 namespace Engine
 {
@@ -14,7 +14,8 @@ namespace Engine
 	{
 	public:
 
-		typedef std::unordered_map<int, KeyAction>			KeyActionContainer;
+		typedef std::unordered_map<int, MouseButton>		MouseButtonContainer;
+		typedef std::unordered_map<int, InputAction>		InputActionContainer;
 		typedef std::unordered_map<int, KeyId>				KeyIdContainer;
 
 
@@ -22,22 +23,28 @@ namespace Engine
 		
 		~WindowEventsContainer() {}
 
-		const KeyActionContainer& GetKeyActionContainer();
-		const KeyAction& GetKeyAction(int aKeyAction);
-		void SetKeyActionContainer(const KeyActionContainer& aKeyActionContainer);
+		const MouseButtonContainer& GetMouseButtonContainer();
+		const MouseButton& GetMouseButton(int aMouseButton);
+		void SetMouseButtonContainer(const MouseButtonContainer& aMouseButton);
+		
+		const InputActionContainer& GetInputActionContainer();
+		const InputAction& GetInputAction(int aInputAction);
+		void SetInputActionContainer(const InputActionContainer& aInputActionContainer);
 		
 		const KeyIdContainer& GetKeyIdContainer();
 		const KeyId& GetKeyId(int aKeyId);
 		void SetKeyIdContainer(const KeyIdContainer& aKeyIdContainer);
 
 
-		std::shared_ptr<Event<int, int>>						mMouseEvent;
+		std::shared_ptr<Event<float, float>>					mCursorMovedEvent;
+		std::shared_ptr<Event<MouseButton, InputAction>>		mMouseButtonEvent;
 		std::shared_ptr<Event<unsigned int, unsigned int>>		mResizeWindowsEvent;
-		std::shared_ptr<Event<KeyId, KeyAction>>				mKeyEvent;
+		std::shared_ptr<Event<KeyId, InputAction>>				mKeyEvent;
 
 	private:
 
-		KeyActionContainer										mKeyActionContainer;
+		MouseButtonContainer									mMouseButtonContainer;
+		InputActionContainer									mInputActionContainer;
 		KeyIdContainer											mKeyIdContainer;
 	};
 
