@@ -18,8 +18,7 @@ namespace Engine
 		virtual bool PreUpdate(float aDeltaTime) override;
 		virtual bool PostUpdate(float aDeltaTime) override;
 
-		virtual void OnMouseEvent(int aButton, int aAction) override;
-		virtual void OnKeyWindowEvent(KeyId aKeyId, KeyAction aKeyAction) override;
+		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) override;
 
 		static uint32_t GetWidth();
 		static uint32_t GetHeight();

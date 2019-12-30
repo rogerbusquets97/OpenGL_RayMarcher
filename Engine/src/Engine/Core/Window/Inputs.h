@@ -1,10 +1,17 @@
-#ifndef ENGINE_WINDOW_KEYS
-#define ENGINE_WINDOW_KEYS
+#ifndef ENGINE_WINDOW_INPUTS
+#define ENGINE_WINDOW_INPUTS
 
 namespace Engine
 {
+	enum class MouseButton
+	{
+		Left,
+		Middle,
+		Right,
+		Last
+	};
 
-	enum class KeyAction
+	enum class InputAction
 	{
 		Pressed,
 		Released,

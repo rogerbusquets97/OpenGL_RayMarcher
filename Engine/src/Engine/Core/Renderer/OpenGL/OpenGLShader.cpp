@@ -91,6 +91,11 @@ namespace Engine
 		glUniform2fv(glGetUniformLocation(mID, aName.c_str()), 1, &aValue[0]);
 	}
 
+	void OpenGLShader::SetMat4(const std::string& aName, const glm::mat4& aValue) const
+	{
+		glUniformMatrix4fv(glGetUniformLocation(mID, aName.c_str()), 1, GL_FALSE, &aValue[0][0]);
+	}
+
 	void OpenGLShader::Compile(const char* aVertex, const char* aFragment)
 	{
 		unsigned int vertex, fragment;

@@ -2,14 +2,15 @@
 #include <Module.h>
 #include <Core.h>
 #include <Renderer/RenderAPI.h>
-#include <Renderer/Shader.h>
-#include <Renderer/ComputeShader.h>
-#include <Renderer/VertexArray.h>
-#include <Renderer/Texture.h>
-#include <Renderer/Material.h>
 
 namespace Engine
 {
+	class Material;
+	class Shader;
+	class ComputeShader;
+	class VertexArray;
+	class RenderTexture2D;
+
 	class ENGINE_API ModuleRenderer : public Module
 	{
 	public:
@@ -29,6 +30,7 @@ namespace Engine
 
 	private:
 		std::shared_ptr<Material> mQuadMaterial;
+		std::shared_ptr<Shader> mShader;
 		std::shared_ptr<ComputeShader> mComputeShader;
 		std::shared_ptr<VertexArray> mQuadVA;
 		std::shared_ptr<RenderTexture2D> mQuadTexture;

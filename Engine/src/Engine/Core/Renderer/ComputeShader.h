@@ -19,6 +19,7 @@ namespace Engine
 		virtual void SetVec2(const std::string& aName, glm::vec2 aValue) const = 0;
 		virtual void SetiVec2(const std::string& aName, glm::ivec2 aValue) const = 0;
 		//... TODO: Add glm math library, so you can implement vec2, vec3, matrices ... 
+		//TODO 2 unify with shader class to create common base class for same setAttributes functions
 
 		static std::shared_ptr<ComputeShader> Create();
 	};

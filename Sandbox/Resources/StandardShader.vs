@@ -2,6 +2,9 @@
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTexCoords;
 
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
+
 out Data
 {
 	vec2 FragCoords;
@@ -10,5 +13,5 @@ out Data
 void main()
 {
 	vs_out.FragCoords = aTexCoords;
-	gl_Position = vec4(aPos, 1.0);
+	gl_Position = projectionMatrix * viewMatrix * vec4(aPos, 1.0f);
 }

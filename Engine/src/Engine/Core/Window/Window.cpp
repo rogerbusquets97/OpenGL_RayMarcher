@@ -14,7 +14,8 @@ namespace Engine
 
 	void Window::Init(const WindowSettings& aSettings)
 	{
-		GenerateKeyActionMapping();
+		GenerateInputActionMapping();
+		GenerateMouseButtonMapping();
 		GenerateKeyIdMapping();
 
 		mData.Width = aSettings.Width;
