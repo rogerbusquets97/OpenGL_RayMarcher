@@ -7,9 +7,12 @@ namespace Engine
 {
 	namespace ECS
 	{
-		class ENGINE_API Entity
-		{
 
+		struct ENGINE_API Entity
+		{
+			typedef unsigned int tEntityId;
+			
+			tEntityId	mId;
 		};
 	}
 }
