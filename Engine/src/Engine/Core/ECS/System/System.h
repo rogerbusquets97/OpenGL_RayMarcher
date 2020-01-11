@@ -29,7 +29,7 @@ namespace Engine
 			void RemoveEntity(Entity& aEntity);
 
 		private:
-			typedef std::vector<Entity::tEntityId>	tEntitiesContainer;
+			typedef std::vector<Entity>	tEntitiesContainer;
 			tEntitiesContainer		mEntities;
 		};
 	}

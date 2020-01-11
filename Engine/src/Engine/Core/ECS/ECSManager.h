@@ -14,7 +14,7 @@ namespace Engine
 		class Entity;
 		class Component;
 
-		class ENGINE_API Handler
+		class ENGINE_API ECSManager
 		{
 		public:
 
@@ -30,7 +30,8 @@ namespace Engine
 			void AddSystem(ISystem* apSystem);
 			void RemoveSystem(ISystem* apSystem); //really necessary?
 
-			void GetEntityComponentManagers(Entity* apEntity, tComponentManagerContainer& aComponentManagers);
+			template<typename ...TComponentType>
+			void GetEntityComponentManagers(Entity* apEntity, TComponentType&... aComponentManagers);
 
 		private:
 			typedef std::vector<std::unique_ptr<ISystem>>				tSystemContainer;
