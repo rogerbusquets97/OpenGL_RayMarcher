@@ -30,12 +30,15 @@ namespace Engine
 			void AddSystem(ISystem* apSystem);
 			void RemoveSystem(ISystem* apSystem); //really necessary?
 
-			template<typename ...TComponentType>
-			void GetEntityComponentManagers(Entity* apEntity, TComponentType&... aComponentManagers);
+			template<typename TComponentType, typename ...TComponentTypeArgs>
+			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager, TComponentTypeArgs&... aComponentManagers);
 
 		private:
 			typedef std::vector<std::unique_ptr<ISystem>>				tSystemContainer;
 			typedef std::vector< std::unique_ptr<Entity>>				tEntityContainer;
+
+			template<typename TComponentType>
+			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager);
 
 			tSystemContainer				mSystems;
 			tComponentManagerContainer		mComponentManagers;

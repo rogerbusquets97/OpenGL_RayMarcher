@@ -14,6 +14,16 @@ namespace Engine
 		{
 		};
 
+		struct ComponentFamilyIdGenerator
+		{
+			static unsigned int GenerateNewId()
+			{
+				return mFamilyId++;
+			}
+			static unsigned int mFamilyId;
+		};
+		unsigned int ComponentFamilyIdGenerator::mFamilyId = 0U;
+
 		template<typename TComponentType>
 		struct sComponentsContainer
 		{
@@ -35,6 +45,10 @@ namespace Engine
 		class ENGINE_API ComponentManager : public IComponentManager
 		{
 		public:
+			ComponentManager()
+			{
+				mFamilyId = ComponentFamilyIdGenerator::GenerateNewId();
+			}
 
 			TComponentType& GetEntityComponent(const Entity& aEntity) {
 			}//Maybe this is no longer needed
@@ -60,10 +74,15 @@ namespace Engine
 				ComponentMovedEntity->SetComponent(mFamilyId, &LastComponent);
 			}
 
+			static unsigned int GetFamilyId()
+			{
+				return mFamilyId;
+			}
+
 		private:
 			sComponentsContainer<TComponentType>		mComponentsContainer;
 			sEntitiesLookUp								mEntitiesLookUp;
-			unsigned int								mFamilyId;//TODO maybe this shouldn't be here
+			static unsigned int							mFamilyId;
 		};
 	}
 }
