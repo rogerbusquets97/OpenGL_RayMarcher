@@ -15,6 +15,7 @@ namespace Engine
 			typedef unsigned int tEntityId;
 
 			Entity(tEntityId aId);
+			~Entity();
 
 			template <typename TComponent>
 			TComponent& GetComponent(unsigned int aComponentFamilyId) const;

@@ -12,6 +12,9 @@ namespace Engine
 	{
 		class ENGINE_API IComponentManager
 		{
+		public:
+			IComponentManager() {};
+			virtual ~IComponentManager() {};
 		};
 
 		struct ComponentFamilyIdGenerator
@@ -45,10 +48,13 @@ namespace Engine
 		class ENGINE_API ComponentManager : public IComponentManager
 		{
 		public:
-			ComponentManager()
+			ComponentManager() :
+				IComponentManager()
 			{
 				mFamilyId = ComponentFamilyIdGenerator::GenerateNewId();
 			}
+
+			virtual ~ComponentManager() {};
 
 			TComponentType& GetEntityComponent(const Entity& aEntity) {
 			}//Maybe this is no longer needed

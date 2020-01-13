@@ -2,27 +2,23 @@
 #define ENGINE_ECS_SYSTEM
 
 #include "Core.h"
-#include "ECS/Entity/Entity.h"
 #include <vector>
 
 namespace Engine
 {
 	namespace ECS
 	{
-		class ENGINE_API ISystem
-		{
+		class Entity;
 
-		};
-
-		template<typename ...tComponents>
-		class ENGINE_API System : public ISystem
+		class ENGINE_API System
 		{
 		public:
 
+			System();
+			virtual ~System();
+
 			virtual void PreUpdate(float aDeltaTime) = 0;
-			
 			virtual void Update(float aDeltaTime) = 0;
-			
 			virtual void PostUpdate(float aDeltaTime) = 0;
 
 			void AddEntity(Entity& aEntity);
@@ -31,6 +27,7 @@ namespace Engine
 		private:
 			typedef std::vector<Entity*>	tEntitiesContainer;
 			tEntitiesContainer		mEntities;
+			//TODO  system components
 		};
 	}
 }

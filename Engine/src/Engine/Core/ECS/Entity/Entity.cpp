@@ -10,6 +10,13 @@ namespace Engine
 		{
 		}
 
+		
+		Entity::~Entity()
+		{
+
+		}
+
+
 		template <typename TComponent>
 		TComponent& Entity::GetComponent(unsigned int aComponentFamilyId) const
 		{

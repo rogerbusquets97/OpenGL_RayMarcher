@@ -9,7 +9,7 @@ namespace Engine
 {
 	namespace ECS
 	{
-		class ISystem;
+		class System;
 		class IComponentManager;
 		class Entity;
 		class Component;
@@ -18,8 +18,14 @@ namespace Engine
 		{
 		public:
 
+			ECSManager();
+			~ECSManager();
+
 			typedef std::vector< std::unique_ptr<IComponentManager>>	tComponentManagerContainer;
 
+			void PreUpdate(float aDeltaTime);
+			void Update(float aDeltaTime);
+			void PostUpdate(float aDeltaTime);
 
 			Entity* CreateEntity();
 			void RemoveEntity(Entity* apEntity);
@@ -27,22 +33,22 @@ namespace Engine
 			void AddComponent(Component* aComponent);
 			void RemoveComponent(Component* aComponent);
 
-			void AddSystem(ISystem* apSystem);
-			void RemoveSystem(ISystem* apSystem); //really necessary?
+			void AddSystem(System* apSystem);
+			void RemoveSystem(System* apSystem); //really necessary?
 
 			template<typename TComponentType, typename ...TComponentTypeArgs>
 			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager, TComponentTypeArgs&... aComponentManagers);
 
 		private:
-			typedef std::vector<std::unique_ptr<ISystem>>				tSystemContainer;
+			typedef std::vector<std::unique_ptr<System>>				tSystemContainer;
 			typedef std::vector< std::unique_ptr<Entity>>				tEntityContainer;
 
 			template<typename TComponentType>
 			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager);
 
-			tSystemContainer				mSystems;
-			tComponentManagerContainer		mComponentManagers;
-			tEntityContainer				mEntities;
+			tSystemContainer				mpSystems;
+			tComponentManagerContainer		mpComponentManagers;
+			tEntityContainer				mpEntities;
 		};
 	}
 }
