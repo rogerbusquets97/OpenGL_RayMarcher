@@ -25,13 +25,15 @@ namespace Engine
 			template <typename TComponent>
 			void SetComponent(unsigned int aComponentFamilyId, TComponent* apComponent);
 
+
 			tEntityId			mId;
 
 		private:
 
 			typedef std::map<tEntityId, void*> tComponentsLookUp;
 
-			tComponentsLookUp	mComponentsLookUp; //!< Map of to obtain a component from its family id.
+
+			tComponentsLookUp	mComponentsLookUp; //!< Map to obtain a component pointer from its family id.
 		};
 	}
 }

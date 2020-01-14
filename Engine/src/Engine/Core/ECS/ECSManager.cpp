@@ -12,7 +12,8 @@ namespace Engine
 			mpComponentManagers(),
 			mpEntities()
 		{
-
+			ComponentManager<int> compManager;
+			compManager.AddComponent(&Entity(0), 2U);
 		}
 
 		ECSManager::~ECSManager()

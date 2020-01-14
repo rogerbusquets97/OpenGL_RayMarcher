@@ -30,13 +30,39 @@ namespace Engine
 		template<typename TComponentType>
 		struct sComponentsContainer
 		{
+		public:
 			unsigned int mSize = 0U;
 			std::array<TComponentType, 1024> mComponents;//TODO use custom dynamic allocators? this allocators should be multiple of cache line size somehow to really benefit from ECS
 		};
 
 		struct sEntitiesLookUp
 		{
+		public:
 			typedef unsigned int tComponentPosition;
+
+			Entity* GetEntity(tComponentPosition aComponentPosition) const
+			{
+				return mComponentsToEntities.at(aComponentPosition);
+			}
+
+			tComponentPosition GetComponentPosition(Entity* apEntity) const
+			{
+				return mEntitiesToComponents.at(apEntity);
+			}
+
+			void Remove(tComponentPosition aComponentPosition, Entity* const apEntity)
+			{
+				mComponentsToEntities.erase(aComponentPosition);
+				mEntitiesToComponents.erase(apEntity);
+			}
+
+			void Refresh(tComponentPosition aComponentPosition, Entity* const apEntity)
+			{
+				mComponentsToEntities.at(aComponentPosition) = apEntity;
+				mEntitiesToComponents.at(apEntity) = aComponentPosition;
+			}
+
+		private:
 			typedef std::unordered_map<Entity*, tComponentPosition>		tEntitiesToComponents;
 			typedef std::unordered_map<tComponentPosition, Entity*>		tComponentsToEntities;
 
@@ -56,28 +82,25 @@ namespace Engine
 
 			virtual ~ComponentManager() {};
 
-			TComponentType& GetEntityComponent(const Entity& aEntity) {
-			}//Maybe this is no longer needed
-
-			void AddComponent(const Entity& aEntity, TComponentType aComponent)
+			void AddComponent(Entity* apEntity, const TComponentType& aComponent)
 			{
-
+				mEntitiesLookUp.Refresh(mComponentsContainer.mSize, apEntity);
+				mComponentsContainer.mComponents.at(mComponentsContainer.mSize++) = aComponent;
 			}
 			
-			void RemoveComponent(const Entity& aEntity)
+			void RemoveComponent(Entity* apEntity)
 			{
-				unsigned int ComponentToRemovePosition = mEntitiesLookUp.mEntitiesToComponents[aEntity.mId];
+				unsigned int ComponentToRemovePosition = mEntitiesLookUp.GetComponentPosition(apEntity);
 				unsigned int LastComponentPosition = mComponentsContainer.mSize - 1U;
-				TComponentType LastComponent = mComponentsContainer.mComponents.at(LastComponentPosition);
-				mComponentsContainer.mComponents[ComponentToRemovePosition] = LastComponent;
+				mComponentsContainer.mComponents.at(ComponentToRemovePosition) = mComponentsContainer.mComponents.at(LastComponentPosition);
 				mComponentsContainer.mSize--;
 
-				//TODO update mEntitiesLookUp
+				Entity* ComponentMovedEntity = mEntitiesLookUp.GetEntity(LastComponentPosition);
+				mEntitiesLookUp.Remove(ComponentToRemovePosition, &aEntity);
+				mEntitiesLookUp.Refresh(ComponentToRemovePosition, ComponentMovedEntity);
 
 				aEntity.RemoveComponent(mFamilyId);
-
-				Entity* ComponentMovedEntity = mEntitiesLookUp.mComponentsToEntities.at(LastComponentPosition);
-				ComponentMovedEntity->SetComponent(mFamilyId, &LastComponent);
+				ComponentMovedEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents[ComponentToRemovePosition]);
 			}
 
 			static unsigned int GetFamilyId()
