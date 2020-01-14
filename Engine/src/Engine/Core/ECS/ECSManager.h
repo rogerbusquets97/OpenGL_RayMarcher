@@ -30,11 +30,12 @@ namespace Engine
 			Entity* CreateEntity();
 			void RemoveEntity(Entity* apEntity);
 
-			void AddComponent(Component* aComponent);
-			void RemoveComponent(Component* aComponent);
+			void AddComponentManager(std::unique_ptr<IComponentManager> apComponentManager);
 
-			void AddSystem(System* apSystem);
-			void RemoveSystem(System* apSystem); //really necessary?
+			template <typename TComponentType>
+			void RemoveComponent(Entity* apEntity);
+
+			void AddSystem(std::unique_ptr<System> apSystem);
 
 			template<typename TComponentType, typename ...TComponentTypeArgs>
 			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager, TComponentTypeArgs&... aComponentManagers);
@@ -46,9 +47,9 @@ namespace Engine
 			template<typename TComponentType>
 			void GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager);
 
-			tSystemContainer				mpSystems;
-			tComponentManagerContainer		mpComponentManagers;
-			tEntityContainer				mpEntities;
+			tSystemContainer				mSystems;
+			tComponentManagerContainer		mComponentManagers;
+			tEntityContainer				mEntities;
 		};
 	}
 }

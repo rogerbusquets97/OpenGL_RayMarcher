@@ -8,6 +8,7 @@ namespace Engine
 {
 	namespace ECS
 	{
+		class ECSManager;
 		class Entity;
 
 		class ENGINE_API System
@@ -26,7 +27,9 @@ namespace Engine
 
 		private:
 			typedef std::vector<Entity*>	tEntitiesContainer;
+
 			tEntitiesContainer		mEntities;
+			ECSManager*				mECSManager;
 			//TODO  system components
 		};
 	}

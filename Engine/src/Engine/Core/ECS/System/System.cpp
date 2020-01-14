@@ -4,7 +4,9 @@ namespace Engine
 {
 	namespace ECS
 	{
-		System::System()
+		System::System() :
+			mEntities(),
+			mECSManager(nullptr)
 		{
 
 		}

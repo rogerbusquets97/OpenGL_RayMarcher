@@ -15,6 +15,8 @@ namespace Engine
 		public:
 			IComponentManager() {};
 			virtual ~IComponentManager() {};
+			IComponentManager(const IComponentManager&) = default;
+			IComponentManager& operator=(const IComponentManager&) = default;
 		};
 
 		struct ComponentFamilyIdGenerator
@@ -96,10 +98,10 @@ namespace Engine
 				mComponentsContainer.mSize--;
 
 				Entity* ComponentMovedEntity = mEntitiesLookUp.GetEntity(LastComponentPosition);
-				mEntitiesLookUp.Remove(ComponentToRemovePosition, &aEntity);
+				mEntitiesLookUp.Remove(ComponentToRemovePosition, apEntity);
 				mEntitiesLookUp.Refresh(ComponentToRemovePosition, ComponentMovedEntity);
 
-				aEntity.RemoveComponent(mFamilyId);
+				apEntity->RemoveComponent(mFamilyId);
 				ComponentMovedEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents[ComponentToRemovePosition]);
 			}
 

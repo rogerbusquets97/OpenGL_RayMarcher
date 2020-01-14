@@ -8,12 +8,15 @@ namespace Engine
 	namespace ECS
 	{
 		ECSManager::ECSManager():
-			mpSystems(),
-			mpComponentManagers(),
-			mpEntities()
+			mSystems(),
+			mComponentManagers(),
+			mEntities()
 		{
+			//TODO remove this, just checks. Should implement some unit test system
 			ComponentManager<int> compManager;
-			compManager.AddComponent(&Entity(0), 2U);
+			Entity* ent = CreateEntity();
+			compManager.AddComponent(ent, 2U);
+			RemoveComponent<int>(ent);
 		}
 
 		ECSManager::~ECSManager()
@@ -24,7 +27,7 @@ namespace Engine
 
 		void ECSManager::PreUpdate(float aDeltaTime)
 		{
-			for (auto& pSystem : mpSystems)
+			for (auto& pSystem : mSystems)
 			{
 				pSystem->PreUpdate(aDeltaTime);
 			}
@@ -32,7 +35,7 @@ namespace Engine
 
 		void ECSManager::Update(float aDeltaTime)
 		{
-			for (auto& pSystem : mpSystems)
+			for (auto& pSystem : mSystems)
 			{
 				pSystem->Update(aDeltaTime);
 			}
@@ -40,10 +43,38 @@ namespace Engine
 
 		void ECSManager::PostUpdate(float aDeltaTime)
 		{
-			for (auto& pSystem : mpSystems)
+			for (auto& pSystem : mSystems)
 			{
 				pSystem->PostUpdate(aDeltaTime);
 			}
+		}
+
+		Entity* ECSManager::CreateEntity()
+		{
+			return new Entity(0U);//TODO
+		}
+
+		void ECSManager::RemoveEntity(Entity* apEntity)
+		{
+
+		}
+
+		void ECSManager::AddComponentManager(std::unique_ptr<IComponentManager> apComponentManager)
+		{
+			mComponentManagers.push_back(std::move(apComponentManager));
+		}
+
+		template <typename TComponentType>
+		void ECSManager::RemoveComponent(Entity* apEntity)
+		{
+			unsigned int FamilyID = ComponentManager<TComponentType>::GetFamilyId();
+			auto pComponentManager = static_cast<ComponentManager<TComponentType>*>(mComponentManagers.at(FamilyID).get());
+			pComponentManager->RemoveComponent(apEntity);
+		}
+
+		void ECSManager::AddSystem(std::unique_ptr<System> apSystem)
+		{
+			mSystems.push_back(std::move(apSystem));
 		}
 
 		template<typename TComponentType, typename ...TComponentTypeArgs>
