@@ -5,6 +5,7 @@
 #include <array>
 #include <unordered_map>
 #include "ECS/Entity/Entity.h"
+#include "ECS/ECSCommon.h"
 
 namespace Engine
 {
@@ -21,13 +22,13 @@ namespace Engine
 
 		struct ComponentFamilyIdGenerator
 		{
-			static unsigned int GenerateNewId()
+			static tComponentFamilyId GenerateNewId()
 			{
 				return mFamilyId++;
 			}
-			static unsigned int mFamilyId;
+			static tComponentFamilyId mFamilyId;
 		};
-		unsigned int ComponentFamilyIdGenerator::mFamilyId = 0U;
+		tComponentFamilyId ComponentFamilyIdGenerator::mFamilyId = 0U;
 
 		template<typename TComponentType>
 		struct sComponentsContainer
@@ -105,7 +106,7 @@ namespace Engine
 				ComponentMovedEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents[ComponentToRemovePosition]);
 			}
 
-			static unsigned int GetFamilyId()
+			static tComponentFamilyId GetFamilyId()
 			{
 				return mFamilyId;
 			}
@@ -113,7 +114,7 @@ namespace Engine
 		private:
 			sComponentsContainer<TComponentType>		mComponentsContainer;
 			sEntitiesLookUp								mEntitiesLookUp;
-			static unsigned int							mFamilyId;
+			static tComponentFamilyId					mFamilyId;
 		};
 	}
 }

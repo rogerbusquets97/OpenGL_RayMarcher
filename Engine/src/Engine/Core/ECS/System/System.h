@@ -3,6 +3,8 @@
 
 #include "Core.h"
 #include <vector>
+#include "Utilities/BitMask.h"
+#include "ECS/ECSCommon.h"
 
 namespace Engine
 {
@@ -22,15 +24,20 @@ namespace Engine
 			virtual void Update(float aDeltaTime) = 0;
 			virtual void PostUpdate(float aDeltaTime) = 0;
 
-			void AddEntity(Entity& aEntity);
-			void RemoveEntity(Entity& aEntity);
+			void AddEntity(Entity* apEntity);
+			void RemoveEntity(Entity* apEntity);
 
-		private:
+			void SetComponentsMask(BitMask aComponentsMask);
+			bool ComponentFits(tComponentFamilyId aComponentFamilyId) const;
+
+		protected:
 			typedef std::vector<Entity*>	tEntitiesContainer;
 
-			tEntitiesContainer		mEntities;
-			ECSManager*				mECSManager;
-			//TODO  system components
+			tEntitiesContainer		mEntities;			//!< Contains the entities the system must interact with.
+			ECSManager*				mECSManager;		//!< Pointer to the manager.
+
+		private:
+			BitMask					mComponentsMask;	//!< Contains the components family this system cares about.
 		};
 	}
 }
