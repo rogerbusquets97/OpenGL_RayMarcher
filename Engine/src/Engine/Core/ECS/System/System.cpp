@@ -16,12 +16,12 @@ namespace Engine
 
 		}
 
-		void System::AddEntity(Entity* apEntity)
+		void System::AddEntity(std::shared_ptr<Entity> apEntity)
 		{
 			mEntities.push_back(apEntity);
 		}
 
-		void System::RemoveEntity(Entity* apEntity)
+		void System::RemoveEntity(std::shared_ptr<Entity> apEntity)
 		{
 			for (auto EntityIterator = mEntities.begin(); EntityIterator != mEntities.end(); ++EntityIterator)
 			{

@@ -10,20 +10,20 @@ namespace Engine
 		ECSManager::ECSManager():
 			mSystems(),
 			mComponentManagers(),
-			mEntities()
+			mEntityManager()
 		{
 			//TODO remove this, just checks. Should implement some unit test system
-			ComponentManager<int> compManager;
-			Entity* ent = CreateEntity();
-			compManager.AddComponent(ent, 2U);
-			RemoveComponent<int>(ent);
+			AddComponentManager<int>();
+			std::shared_ptr<Entity> ent = CreateEntity();
+			AddComponent(ent, 2U);
+			//RemoveComponent<int>(ent);
+			RemoveEntity(ent);
 		}
 
 		ECSManager::~ECSManager()
 		{
 
 		}
-
 
 		void ECSManager::PreUpdate(float aDeltaTime)
 		{
@@ -49,27 +49,45 @@ namespace Engine
 			}
 		}
 
-		Entity* ECSManager::CreateEntity()
+		std::shared_ptr<Entity> ECSManager::CreateEntity()
 		{
-			return new Entity(0U);//TODO
+			return mEntityManager.CreateEntity();
 		}
 
-		void ECSManager::RemoveEntity(Entity* apEntity)
+		void ECSManager::RemoveEntity(std::shared_ptr<Entity> apEntity)
 		{
+			tComponentFamilyIds ComponentsFamilies;
+			apEntity->ObtainComponentFamilies(ComponentsFamilies);
+			for (tComponentFamilyId ComponentFamilyId : ComponentsFamilies)
+			{
+				mComponentManagers.at(ComponentFamilyId)->RemoveComponent(apEntity.get());
+			}
 
-		}
-
-		void ECSManager::AddComponentManager(std::unique_ptr<IComponentManager> apComponentManager)
-		{
-			mComponentManagers.push_back(std::move(apComponentManager));
+			//TODO Notify systems
 		}
 
 		template <typename TComponentType>
-		void ECSManager::RemoveComponent(Entity* apEntity)
+		void ECSManager::AddComponentManager()
 		{
-			unsigned int FamilyID = ComponentManager<TComponentType>::GetFamilyId();
-			auto pComponentManager = static_cast<ComponentManager<TComponentType>*>(mComponentManagers.at(FamilyID).get());
-			pComponentManager->RemoveComponent(apEntity);
+			mComponentManagers.push_back(std::make_unique<ComponentManager< TComponentType>>());
+		}
+
+		template <typename TComponentType>
+		void ECSManager::AddComponent(std::shared_ptr<Entity> apEntity, TComponentType&& aComponent)
+		{
+			ComponentManager<TComponentType>* pComponentManager = GetComponentManager<TComponentType>();
+			pComponentManager->AddComponent(apEntity.get(), aComponent);
+
+			//TODO Notify systems
+		}
+
+		template <typename TComponentType>
+		void ECSManager::RemoveComponent(std::shared_ptr<Entity> apEntity)
+		{
+			ComponentManager<TComponentType>* pComponentManager = GetComponentManager<TComponentType>();
+			pComponentManager->RemoveComponent(apEntity.get());
+
+			//TODO Notify systems
 		}
 
 		void ECSManager::AddSystem(std::unique_ptr<System> apSystem)
@@ -78,18 +96,25 @@ namespace Engine
 		}
 
 		template<typename TComponentType, typename ...TComponentTypeArgs>
-		void ECSManager::GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager, TComponentTypeArgs&... aComponentManagers)
+		void ECSManager::GetEntityComponents(std::shared_ptr<Entity>, TComponentType& aComponent, TComponentTypeArgs&... aComponents)
 		{
 			unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
-			aComponentManager = apEntity->GetComponent<TComponentType>(ComponentFamily);
-			GetEntityComponentManagers<TComponentTypeArgs...>(apEntity, aComponentManager...);
+			aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
+			GetEntityComponentManagers<TComponentTypeArgs...>(apEntity, aComponents...);
 		}
 	
 		template<typename TComponentType>
-		void ECSManager::GetEntityComponentManagers(Entity* apEntity, TComponentType& aComponentManager)
+		void ECSManager::GetEntityComponent(std::shared_ptr<Entity>, TComponentType& aComponent)
 		{
 			unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
-			aComponentManager = apEntity->GetComponent<TComponentType>(ComponentFamily);
+			aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
+		}
+
+		template<typename TComponentType>
+		ComponentManager<TComponentType>* ECSManager::GetComponentManager()
+		{
+			unsigned int FamilyID = ComponentManager<TComponentType>::GetFamilyId();
+			return static_cast<ComponentManager<TComponentType>*>(mComponentManagers.at(FamilyID).get());
 		}
 	}
 }

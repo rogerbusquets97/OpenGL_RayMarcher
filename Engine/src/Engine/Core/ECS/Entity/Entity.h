@@ -3,6 +3,7 @@
 
 #include "Core.h"
 #include <map>
+#include "ECS/ECSCommon.h"
 
 namespace Engine
 {
@@ -18,19 +19,23 @@ namespace Engine
 			~Entity();
 
 			template <typename TComponent>
-			TComponent& GetComponent(unsigned int aComponentFamilyId) const;
+			TComponent& GetComponent(tComponentFamilyId aComponentFamilyId) const;
 
-			void RemoveComponent(unsigned int aComponentFamilyId);
+			void RemoveComponent(tComponentFamilyId aComponentFamilyId);
 			
 			template <typename TComponent>
-			void SetComponent(unsigned int aComponentFamilyId, TComponent* apComponent);
+			void SetComponent(tComponentFamilyId aComponentFamilyId, TComponent* apComponent)
+			{
+				mComponentsLookUp[aComponentFamilyId] = static_cast<void*>(apComponent);
+			}
 
+			void ObtainComponentFamilies(tComponentFamilyIds& aComponentFamilies) const;
 
 			tEntityId			mId;
 
 		private:
 
-			typedef std::map<tEntityId, void*> tComponentsLookUp;
+			typedef std::map<tComponentFamilyId, void*> tComponentsLookUp;
 
 
 			tComponentsLookUp	mComponentsLookUp; //!< Map to obtain a component pointer from its family id.

@@ -18,22 +18,24 @@ namespace Engine
 
 
 		template <typename TComponent>
-		TComponent& Entity::GetComponent(unsigned int aComponentFamilyId) const
+		TComponent& Entity::GetComponent(tComponentFamilyId aComponentFamilyId) const
 		{
 			tComponentsLookUp::iterator ComponentIterator = mComponentsLookUp.find(aComponentFamilyId);
 			assert(ComponentIterator->second != mComponentsLookUp.end(), "Entity with id %d does not have any component from family %d", mId, aComponentFamilyId);
 			return *static_cast<TComponent*>(ComponentIterator->second);
 		}
 
-		void Entity::RemoveComponent(unsigned int aComponentFamilyId)
+		void Entity::RemoveComponent(tComponentFamilyId aComponentFamilyId)
 		{
 			mComponentsLookUp.erase(aComponentFamilyId);
 		}
 
-		template <typename TComponent>
-		void Entity::SetComponent(unsigned int aComponentFamilyId, TComponent* apComponent)
+		void Entity::ObtainComponentFamilies(tComponentFamilyIds& aComponentFamilies) const
 		{
-			mComponentsLookUp[aComponentFamilyId] = static_cast<void*>(apComponent);
+			for (const auto& ComponentsIterator : mComponentsLookUp)
+			{
+				aComponentFamilies.push_back(ComponentsIterator.first);
+			}
 		}
 	}
 }

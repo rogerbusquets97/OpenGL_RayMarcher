@@ -18,6 +18,8 @@ namespace Engine
 			virtual ~IComponentManager() {};
 			IComponentManager(const IComponentManager&) = default;
 			IComponentManager& operator=(const IComponentManager&) = default;
+
+			virtual void RemoveComponent(Entity* apEntity) {}
 		};
 
 		struct ComponentFamilyIdGenerator
@@ -41,6 +43,13 @@ namespace Engine
 		struct sEntitiesLookUp
 		{
 		public:
+			sEntitiesLookUp() :
+				mEntitiesToComponents(),
+				mComponentsToEntities()
+			{
+
+			}
+
 			typedef unsigned int tComponentPosition;
 
 			Entity* GetEntity(tComponentPosition aComponentPosition) const
@@ -61,8 +70,8 @@ namespace Engine
 
 			void Refresh(tComponentPosition aComponentPosition, Entity* const apEntity)
 			{
-				mComponentsToEntities.at(aComponentPosition) = apEntity;
-				mEntitiesToComponents.at(apEntity) = aComponentPosition;
+				mComponentsToEntities[aComponentPosition] = apEntity;
+				mEntitiesToComponents[apEntity] = aComponentPosition;
 			}
 
 		private:
@@ -87,11 +96,13 @@ namespace Engine
 
 			void AddComponent(Entity* apEntity, const TComponentType& aComponent)
 			{
+				apEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents.at(mComponentsContainer.mSize));
+
 				mEntitiesLookUp.Refresh(mComponentsContainer.mSize, apEntity);
 				mComponentsContainer.mComponents.at(mComponentsContainer.mSize++) = aComponent;
 			}
 			
-			void RemoveComponent(Entity* apEntity)
+			virtual void RemoveComponent(Entity* apEntity) override
 			{
 				unsigned int ComponentToRemovePosition = mEntitiesLookUp.GetComponentPosition(apEntity);
 				unsigned int LastComponentPosition = mComponentsContainer.mSize - 1U;
@@ -100,10 +111,13 @@ namespace Engine
 
 				Entity* ComponentMovedEntity = mEntitiesLookUp.GetEntity(LastComponentPosition);
 				mEntitiesLookUp.Remove(ComponentToRemovePosition, apEntity);
-				mEntitiesLookUp.Refresh(ComponentToRemovePosition, ComponentMovedEntity);
-
 				apEntity->RemoveComponent(mFamilyId);
-				ComponentMovedEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents[ComponentToRemovePosition]);
+
+				if (mComponentsContainer.mSize > 0U)
+				{
+					mEntitiesLookUp.Refresh(ComponentToRemovePosition, ComponentMovedEntity);
+					ComponentMovedEntity->SetComponent(mFamilyId, &mComponentsContainer.mComponents.at(ComponentToRemovePosition));
+				}
 			}
 
 			static tComponentFamilyId GetFamilyId()
@@ -116,6 +130,10 @@ namespace Engine
 			sEntitiesLookUp								mEntitiesLookUp;
 			static tComponentFamilyId					mFamilyId;
 		};
+
+		template<typename TComponentType>
+		tComponentFamilyId ComponentManager<TComponentType>::mFamilyId = 0U;
+
 	}
 }
 
