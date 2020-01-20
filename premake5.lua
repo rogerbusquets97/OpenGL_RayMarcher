@@ -77,6 +77,40 @@ project "Engine"
 		defines "RELEASE"
 		optimize "on"
 
+
+function useEngineLib()
+	includedirs 
+	{
+		"Engine/ThirdParty/spdlog/include",
+		"Engine/ThirdParty/glm/glm",
+		"Engine/ThirdParty/IMGUI",
+		"Engine/src",
+		"Engine/src/Engine/Core",
+		"Engine/src/Engine/Modules",
+	}
+	
+	links 
+	{
+		"Engine"
+	}
+
+	filter "system:windows"
+	systemversion "latest"
+
+	defines
+	{
+		"PLATFORM_WINDOWS"
+	}
+
+	filter "configurations:Debug"
+		defines "DEBUG"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "RELEASE"
+		optimize "on"
+end
+
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
@@ -93,33 +127,29 @@ project "Sandbox"
 		"%{prj.name}/src/**.cpp"
 	}
 
+	useEngineLib()
+
+	
+project "Test"
+	location "Test"
+	kind "ConsoleApp"
+	staticruntime "on"
+
+	language "C++"
+	cppdialect "C++17"
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files 
+	{
+		"Test/googletest/googletest/src/gtest-all.cc",
+		"%{prj.name}/Tests/**.h",
+		"%{prj.name}/Tests/**.cpp"
+	}
+
 	includedirs
 	{
-		"Engine/ThirdParty/spdlog/include",
-		"Engine/ThirdParty/glm/glm",
-		"Engine/ThirdParty/IMGUI",
-		"Engine/src",
-		"Engine/src/Engine/Core",
-		"Engine/src/Engine/Modules"
+		"Test/googletest/googletest/include", "Test/googletest/googletest"
 	}
 
-	links
-	{
-		"Engine"
-	}
-
-	filter "system:windows"
-		systemversion "latest"
-
-		defines
-		{
-			"PLATFORM_WINDOWS"
-		}
-
-	filter "configurations:Debug"
-		defines "DEBUG"
-		symbols "on"
-
-	filter "configurations:Release"
-		defines "RELEASE"
-		optimize "on"
+	useEngineLib()

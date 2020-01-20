@@ -13,3 +13,6 @@
 [submodule "Engine/ThirdParty/IMGUI"]
 	path = Engine/ThirdParty/IMGUI
 	url = https://github.com/TheCherno/imgui
+[submodule "Test/googletest"]
+	path = Test/googletest
+	url = https://github.com/google/googletest.git
