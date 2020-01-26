@@ -3,6 +3,7 @@
 
 #include "Core.h"
 #include <memory>
+#include "Utilities/BitMask.h"
 
 namespace Engine
 {

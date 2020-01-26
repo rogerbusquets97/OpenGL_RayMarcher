@@ -34,7 +34,7 @@ namespace Engine
 		protected:
 			typedef std::vector<std::shared_ptr<Entity>>	tEntitiesContainer;
 
-			tEntitiesContainer		mEntities;			//!< Contains the entities the system must interact with.
+			tEntitiesContainer		mEntities;			//!< Contains the entities the system must interact with. TODO make this a map?
 			ECSManager*				mECSManager;		//!< Pointer to the manager.
 
 		private:

@@ -2,6 +2,7 @@
 #define ENGINE_BIT_MASK
 
 #include "Core.h"
+#include <vector>
 
 namespace Engine
 {
@@ -16,10 +17,15 @@ namespace Engine
 
 		bool GetPosition(unsigned int aPosition) const;
 
+		bool IsSubset(const BitMask& aBitMask) const;
+
 		bool operator==(const BitMask& aBitMask) const;
 
 	private:
-		unsigned int mMask;
+		typedef unsigned int	tMaskChunk;
+
+		static const size_t			mMaskChunkSize = sizeof(tMaskChunk)*8U;
+		std::vector<tMaskChunk>		mMask;
 	};
 }
 
