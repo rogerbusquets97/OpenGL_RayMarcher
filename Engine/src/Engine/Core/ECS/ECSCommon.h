@@ -8,7 +8,7 @@ namespace Engine
 	namespace ECS
 	{
 		typedef unsigned int tComponentFamilyId;
-		typedef std::vector< tComponentFamilyId> tComponentFamilyIds;
+		typedef std::vector<tComponentFamilyId> tComponentFamilyIds;
 	}
 }
 

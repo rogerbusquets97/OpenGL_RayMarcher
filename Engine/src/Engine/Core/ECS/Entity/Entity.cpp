@@ -16,6 +16,10 @@ namespace Engine
 
 		}
 
+		Entity::tEntityId Entity::GetId() const
+		{
+			return mId;
+		}
 
 		template <typename TComponent>
 		TComponent& Entity::GetComponent(tComponentFamilyId aComponentFamilyId) const

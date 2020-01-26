@@ -19,5 +19,21 @@ namespace Engine
 		{
 
 		}
+
+		void EntityManager::GetEntityComponentsMask(const Entity& aEntity, BitMask& aComponentsMask) const
+		{
+			tComponentFamilyIds EntityComponentFamilies;
+			aEntity.ObtainComponentFamilies(EntityComponentFamilies);
+			GetEntityComponentsMask(EntityComponentFamilies, aComponentsMask);
+		}
+
+		void EntityManager::GetEntityComponentsMask(const tComponentFamilyIds& aEntityComponentFamilies, BitMask& aComponentsMask) const
+		{
+			for (tComponentFamilyId ComponentId : aEntityComponentFamilies)
+			{
+				aComponentsMask.SetBit(ComponentId);
+			}
+		}
+
 	}
 }

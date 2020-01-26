@@ -18,6 +18,8 @@ namespace Engine
 			Entity(tEntityId aId);
 			~Entity();
 
+			tEntityId GetId() const;
+
 			template <typename TComponent>
 			TComponent& GetComponent(tComponentFamilyId aComponentFamilyId) const;
 

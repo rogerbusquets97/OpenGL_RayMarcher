@@ -25,6 +25,7 @@ namespace Engine
 		bool IsSubset(const BitMask& aBitMask) const;
 
 		bool operator==(const BitMask& aBitMask) const;
+		bool operator!=(const BitMask& aBitMask) const;
 
 	private:
 		typedef unsigned int	tMaskChunk;

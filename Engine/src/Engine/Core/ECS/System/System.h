@@ -28,7 +28,8 @@ namespace Engine
 			void AddEntity(std::shared_ptr<Entity> apEntity);
 			void RemoveEntity(std::shared_ptr<Entity> apEntity);
 
-			void SetComponentsMask(BitMask aComponentsMask);
+			void SetComponentsMask(const BitMask& aComponentsMask);
+			const BitMask& GetComponentsMask() const;
 			bool ComponentFits(tComponentFamilyId aComponentFamilyId) const;
 
 		protected:

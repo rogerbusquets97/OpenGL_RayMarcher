@@ -8,13 +8,13 @@ TEST(BitMask, GetSet)
     BitMask BitMask1;
     BitMask BitMask2;
 
-    BitMask1.SetPosition(30, true);
+    BitMask1.SetBit(30);
 
-    EXPECT_TRUE(BitMask1.GetPosition(30));
-    EXPECT_FALSE(BitMask1.GetPosition(29));
+    EXPECT_TRUE(BitMask1.IsBitSetted(30));
+    EXPECT_FALSE(BitMask1.IsBitSetted(29));
 
-    BitMask1.SetPosition(30, false);
-    EXPECT_FALSE(BitMask1.GetPosition(30));
+    BitMask1.ClearBit(30);
+    EXPECT_FALSE(BitMask1.IsBitSetted(30));
 
 }
 
@@ -26,8 +26,8 @@ TEST(BitMask, Equal)
     {
         if (Bit % 2)
         {
-            BitMask1.SetPosition(Bit, true);
-            BitMask2.SetPosition(Bit, true);
+            BitMask1.SetBit(Bit);
+            BitMask2.SetBit(Bit);
         }
     }
 
@@ -42,11 +42,11 @@ TEST(BitMask, NoEqual)
     {
         if (Bit % 2)
         {
-            BitMask1.SetPosition(Bit, true);
+            BitMask1.SetBit(Bit);
         }
         else
         {
-            BitMask2.SetPosition(Bit, true);
+            BitMask2.SetBit(Bit);
         }
     }
 
@@ -58,13 +58,27 @@ TEST(BitMask, GetSetMoreThanOneChunk)
     BitMask BitMask1;
     BitMask BitMask2;
   
-    BitMask1.SetPosition(100, true);
+    BitMask1.SetBit(100);
 
-    EXPECT_TRUE(BitMask1.GetPosition(100));
-    EXPECT_FALSE(BitMask1.GetPosition(99));
+    EXPECT_TRUE(BitMask1.IsBitSetted(100));
+    EXPECT_FALSE(BitMask1.IsBitSetted(99));
 
-    BitMask1.SetPosition(100, false);
-    EXPECT_FALSE(BitMask1.GetPosition(100));
+    BitMask1.ClearBit(100);
+    EXPECT_FALSE(BitMask1.IsBitSetted(100));
+}
+
+TEST(BitMask, GetSetMoreThanOneChunkWithoutResizing)
+{
+    BitMask BitMask1(100U);
+    BitMask BitMask2(100U);
+  
+    BitMask1.SetBit(100);
+
+    EXPECT_TRUE(BitMask1.IsBitSetted(100));
+    EXPECT_FALSE(BitMask1.IsBitSetted(99));
+
+    BitMask1.ClearBit(100);
+    EXPECT_FALSE(BitMask1.IsBitSetted(100));
 }
 
 TEST(BitMask, GetNotCurrentChunk)
@@ -72,30 +86,60 @@ TEST(BitMask, GetNotCurrentChunk)
     BitMask BitMask1;
     BitMask BitMask2;
 
-    EXPECT_FALSE(BitMask1.GetPosition(100));
+    EXPECT_FALSE(BitMask1.IsBitSetted(100));
 }
+
+TEST(BitMask, ClearAll)
+{
+    BitMask BitMask1;
+    size_t BitChecks = 40U;
+    for (size_t Bit = 0U; Bit <= BitChecks; ++Bit)
+    {
+        BitMask1.SetBit(Bit);
+    }
+
+    BitMask1.ClearAll();
+
+    for (size_t Bit = 0U; Bit <= BitChecks; ++Bit)
+    {
+        EXPECT_FALSE(BitMask1.IsBitSetted(Bit));
+    }
+}
+
+TEST(BitMask, SetAll)
+{
+    size_t BitChecks = 40U;
+    BitMask BitMask1(BitChecks);
+
+    BitMask1.SetAll();
+
+    for (size_t Bit = 0U; Bit <= BitChecks; ++Bit)
+    {
+        EXPECT_TRUE(BitMask1.IsBitSetted(Bit));
+    }
+}
+
 
 TEST(BitMask, IsSubset)
 {
     BitMask BitMask1;
-    BitMask1.SetPosition(20, true);
-    BitMask1.SetPosition(40, true);
-    BitMask1.SetPosition(60, true);
+    BitMask1.SetBit(20);
+    BitMask1.SetBit(40);
+    BitMask1.SetBit(60);
 
     BitMask BitMask2;
-    BitMask2.SetPosition(20, true);
+    BitMask2.SetBit(20);
 
     EXPECT_TRUE(BitMask2.IsSubset(BitMask1));
     EXPECT_FALSE(BitMask1.IsSubset(BitMask2));
 
+    BitMask1.ClearAll();
+    BitMask1.SetBit(20);
+    BitMask1.SetBit(40);
+    BitMask1.SetBit(60);
 
-    BitMask BitMask3;
-    BitMask3.SetPosition(20, true);
-    BitMask3.SetPosition(40, true);
-    BitMask3.SetPosition(60, true);
-
-    BitMask BitMask4;
-    BitMask4.SetPosition(30, true);
+    BitMask2.ClearAll();
+    BitMask2.SetBit(30);
     
-    EXPECT_FALSE(BitMask4.IsSubset(BitMask3));
+    EXPECT_FALSE(BitMask2.IsSubset(BitMask1));
 }

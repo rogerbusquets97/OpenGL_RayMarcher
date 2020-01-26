@@ -8,6 +8,8 @@
 
 namespace Engine
 {
+	class BitMask;
+
 	namespace ECS
 	{
 		class System;
@@ -59,6 +61,7 @@ namespace Engine
 			template<typename TComponentType>
 			ComponentManager<TComponentType>* GetComponentManager();
 
+			void RefreshSystemsEntity(std::shared_ptr<Entity> apEntity, const BitMask& aOldComponentsMask, const BitMask& aNewComponentsMask);
 
 			tSystemContainer				mSystems;
 			tComponentManagerContainer		mComponentManagers;

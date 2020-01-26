@@ -4,6 +4,7 @@
 #include "Core.h"
 #include <memory>
 #include "Utilities/BitMask.h"
+#include "ECS/ECSCommon.h"
 
 namespace Engine
 {
@@ -19,6 +20,9 @@ namespace Engine
 			std::shared_ptr<Entity> CreateEntity();
 
 			void RemoveEntity();
+
+			void GetEntityComponentsMask(const Entity& aEntity, BitMask& aComponentsMask) const;
+			void GetEntityComponentsMask(const tComponentFamilyIds& aEntityComponentFamilies, BitMask& aComponentsMask) const;
 
 		private:
 			unsigned int mNextEntityId;

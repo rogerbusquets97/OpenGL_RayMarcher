@@ -87,5 +87,9 @@ namespace Engine
 	{
 		return mMask == aBitMask.mMask;
 	}
-
+	
+	bool BitMask::operator!=(const BitMask& aBitMask) const
+	{
+		return mMask != aBitMask.mMask;
+	}
 }
