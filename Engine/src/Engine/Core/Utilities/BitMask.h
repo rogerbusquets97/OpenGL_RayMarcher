@@ -12,10 +12,15 @@ namespace Engine
 	public:
 
 		BitMask();
+		BitMask(unsigned int aSize);
 
-		void SetPosition(unsigned int aPosition, bool aValue);
+		void SetBit(unsigned int aPosition);
+		void SetAll();
 
-		bool GetPosition(unsigned int aPosition) const;
+		void ClearBit(unsigned int aPosition);
+		void ClearAll();
+
+		bool IsBitSetted(unsigned int aPosition) const;
 
 		bool IsSubset(const BitMask& aBitMask) const;
 

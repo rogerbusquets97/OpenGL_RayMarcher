@@ -8,7 +8,13 @@ namespace Engine
 
 	}
 
-	void BitMask::SetPosition(unsigned int aPosition, bool aValue)
+	BitMask::BitMask(unsigned int aSize) :
+		mMask((aSize / mMaskChunkSize) + 1U, 0U)
+	{
+
+	}
+
+	void BitMask::SetBit(unsigned int aPosition)
 	{
 		unsigned int Chunk = aPosition / mMaskChunkSize;
 		unsigned int PositionInChunk = aPosition % mMaskChunkSize;
@@ -22,17 +28,37 @@ namespace Engine
 			}
 		}
 
-		if (aValue)
+		mMask.at(Chunk) |= 1U << PositionInChunk;
+	}
+
+	void BitMask::SetAll()
+	{
+		for (tMaskChunk& CurrentChunk : mMask)
 		{
-			mMask.at(Chunk) |= 1U << PositionInChunk;
+			CurrentChunk = std::numeric_limits<tMaskChunk>::max();
 		}
-		else
-		{
+	}
+	
+	void BitMask::ClearBit(unsigned int aPosition)
+	{
+		unsigned int Chunk = aPosition / mMaskChunkSize;
+
+		if (mMask.size() > Chunk)
+		{	
+			unsigned int PositionInChunk = aPosition % mMaskChunkSize;
 			mMask.at(Chunk) &= ~(1U << PositionInChunk);
 		}
 	}
 
-	bool BitMask::GetPosition(unsigned int aPosition) const
+	void BitMask::ClearAll()
+	{
+		for (tMaskChunk& CurrentChunk : mMask)
+		{
+			CurrentChunk = 0;
+		}
+	}
+
+	bool BitMask::IsBitSetted(unsigned int aPosition) const
 	{
 		unsigned int Chunk = aPosition / mMaskChunkSize;
 		unsigned int PositionInChunk = aPosition % mMaskChunkSize;

@@ -40,7 +40,7 @@ namespace Engine
 
 		bool System::ComponentFits(tComponentFamilyId aComponentFamilyId) const
 		{
-			return mComponentsMask.GetPosition(aComponentFamilyId);
+			return mComponentsMask.IsBitSetted(aComponentFamilyId);
 		}
 	}
 }
