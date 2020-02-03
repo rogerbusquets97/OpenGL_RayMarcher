@@ -2,85 +2,15 @@
 #define ENGINE_ECS_COMPONENT_MANAGER
 
 #include "Core.h"
-#include <array>
-#include <unordered_map>
 #include "ECS/Entity/Entity.h"
 #include "ECS/ECSCommon.h"
+#include "ECS/Component/IComponentManager.h"
+#include "ECS/Component/ComponentManagerHelper.h"
 
 namespace Engine
 {
 	namespace ECS
 	{
-		class ENGINE_API IComponentManager
-		{
-		public:
-			IComponentManager() {};
-			virtual ~IComponentManager() {};
-			IComponentManager(const IComponentManager&) = default;
-			IComponentManager& operator=(const IComponentManager&) = default;
-
-			virtual void RemoveComponent(Entity* apEntity) {}
-		};
-
-		struct ComponentFamilyIdGenerator
-		{
-			static tComponentFamilyId GenerateNewId()
-			{
-				return mFamilyId++;
-			}
-			static tComponentFamilyId mFamilyId;
-		};
-		tComponentFamilyId ComponentFamilyIdGenerator::mFamilyId = 0U;
-
-		template<typename TComponentType>
-		struct sComponentsContainer
-		{
-		public:
-			unsigned int mSize = 0U;
-			std::array<TComponentType, 1024> mComponents;//TODO use custom dynamic allocators? this allocators should be multiple of cache line size somehow to really benefit from ECS
-		};
-
-		struct sEntitiesLookUp
-		{
-		public:
-			sEntitiesLookUp() :
-				mEntitiesToComponents(),
-				mComponentsToEntities()
-			{
-
-			}
-
-			typedef unsigned int tComponentPosition;
-
-			Entity* GetEntity(tComponentPosition aComponentPosition) const
-			{
-				return mComponentsToEntities.at(aComponentPosition);
-			}
-
-			tComponentPosition GetComponentPosition(Entity* apEntity) const
-			{
-				return mEntitiesToComponents.at(apEntity);
-			}
-
-			void Remove(tComponentPosition aComponentPosition, Entity* const apEntity)
-			{
-				mComponentsToEntities.erase(aComponentPosition);
-				mEntitiesToComponents.erase(apEntity);
-			}
-
-			void Refresh(tComponentPosition aComponentPosition, Entity* const apEntity)
-			{
-				mComponentsToEntities[aComponentPosition] = apEntity;
-				mEntitiesToComponents[apEntity] = aComponentPosition;
-			}
-
-		private:
-			typedef std::unordered_map<Entity*, tComponentPosition>		tEntitiesToComponents;
-			typedef std::unordered_map<tComponentPosition, Entity*>		tComponentsToEntities;
-
-			tEntitiesToComponents mEntitiesToComponents;
-			tComponentsToEntities mComponentsToEntities;
-		};
 
 		template<typename TComponentType>
 		class ENGINE_API ComponentManager : public IComponentManager

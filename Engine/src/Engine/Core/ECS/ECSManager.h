@@ -1,26 +1,23 @@
-#ifndef ENGINE_ECS_HANDLER
-#define ENGINE_ECS_HANDLER
+#ifndef ENGINE_ECS_MANAGER
+#define ENGINE_ECS_MANAGER
 
-#include "Core.h"
 #include <vector>
 #include <memory>
-#include "Entity/EntityManager.h"
+
+#include "Core.h"
+#include "Utilities/BitMask.h"
+
+#include "ECS/Entity/EntityManager.h"
+#include "ECS/Component/ComponentManager.h"
+#include "ECS/Entity/Entity.h"
 
 namespace Engine
 {
-	class BitMask;
-
 	namespace ECS
 	{
 		class System;
-		class IComponentManager;
 
-		template <typename TComponentType>
-		class ComponentManager;
-
-		class IComponentManager;
 		class Entity;
-		class Component;
 
 		class ENGINE_API ECSManager
 		{
@@ -28,8 +25,6 @@ namespace Engine
 
 			ECSManager();
 			~ECSManager();
-
-			typedef std::vector<std::unique_ptr<IComponentManager>>	tComponentManagerContainer;
 
 			void PreUpdate(float aDeltaTime);
 			void Update(float aDeltaTime);
@@ -39,27 +34,69 @@ namespace Engine
 			void RemoveEntity(std::shared_ptr<Entity> apEntity);
 
 			template <typename TComponentType>
-			void AddComponentManager();
+			void AddComponentManager()
+			{
+				mComponentManagers.push_back(std::make_unique<ComponentManager<TComponentType>>());
+			}
 
 			template <typename TComponentType>
-			void AddComponent(std::shared_ptr<Entity> apEntity, TComponentType&& aComponent);
+			void AddComponent(std::shared_ptr<Entity> apEntity, TComponentType&& aComponent)
+			{
+				BitMask OldComponentsMask;
+				mEntityManager.GetEntityComponentsMask(*apEntity.get(), OldComponentsMask);
+
+				ComponentManager<TComponentType>* pComponentManager = GetComponentManager<TComponentType>();
+				pComponentManager->AddComponent(apEntity.get(), aComponent);
+
+				BitMask NewComponentsMask = OldComponentsMask;
+				NewComponentsMask.SetBit(pComponentManager->GetFamilyId());
+
+				//TODO improvement: Another function to do this when all components added to a entity when initializing it. This way we avoid calls to system
+				RefreshSystemsEntity(apEntity, OldComponentsMask, NewComponentsMask);
+			}
 			
 			template <typename TComponentType>
-			void RemoveComponent(std::shared_ptr<Entity> apEntity);
+			void RemoveComponent(std::shared_ptr<Entity> apEntity)
+			{
+				BitMask OldComponentsMask;
+				mEntityManager.GetEntityComponentsMask(*apEntity.get(), OldComponentsMask);
+
+				ComponentManager<TComponentType>* pComponentManager = GetComponentManager<TComponentType>();
+				pComponentManager->RemoveComponent(apEntity.get());
+
+				BitMask NewComponentsMask = OldComponentsMask;
+				NewComponentsMask.ClearBit(pComponentManager->GetFamilyId());
+
+				RefreshSystemsEntity(apEntity, OldComponentsMask, NewComponentsMask);
+			}
 
 			void AddSystem(std::unique_ptr<System> apSystem);
 
 			template<typename TComponentType, typename ...TComponentTypeArgs>
-			void GetEntityComponents(std::shared_ptr<Entity> apEntity, TComponentType& aComponent, TComponentTypeArgs&... aComponents);
+			void GetEntityComponents(std::shared_ptr<Entity> apEntity, TComponentType& aComponent, TComponentTypeArgs&... aComponents)
+			{
+				unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
+				aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
+				GetEntityComponentManagers<TComponentTypeArgs...>(apEntity, aComponents...);
+			}
 
 		private:
 			typedef std::vector<std::unique_ptr<System>>				tSystemContainer;
+			typedef std::vector<std::unique_ptr<IComponentManager>>		tComponentManagerContainer;
 
 			template<typename TComponentType>
-			void GetEntityComponent(std::shared_ptr<Entity> apEntity, TComponentType& aComponent);
+			void GetEntityComponent(std::shared_ptr<Entity> apEntity, TComponentType& aComponent)
+			{
+				unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
+				aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
+			}
 
 			template<typename TComponentType>
-			ComponentManager<TComponentType>* GetComponentManager();
+			ComponentManager<TComponentType>* GetComponentManager()
+			{
+				unsigned int FamilyID = ComponentManager<TComponentType>::GetFamilyId();
+				return static_cast<ComponentManager<TComponentType>*>(mComponentManagers.at(FamilyID).get());
+			}
 
 			void RefreshSystemsEntity(std::shared_ptr<Entity> apEntity, const BitMask& aOldComponentsMask, const BitMask& aNewComponentsMask);
 

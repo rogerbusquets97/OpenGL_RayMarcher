@@ -18,7 +18,7 @@ namespace Engine
 		{
 		public:
 
-			System();
+			System(ECSManager& aECSManager);
 			virtual ~System();
 
 			virtual void PreUpdate(float aDeltaTime) = 0;
@@ -30,13 +30,12 @@ namespace Engine
 
 			void SetComponentsMask(const BitMask& aComponentsMask);
 			const BitMask& GetComponentsMask() const;
-			bool ComponentFits(tComponentFamilyId aComponentFamilyId) const;
 
 		protected:
 			typedef std::vector<std::shared_ptr<Entity>>	tEntitiesContainer;
 
 			tEntitiesContainer		mEntities;			//!< Contains the entities the system must interact with. TODO make this a map?
-			ECSManager*				mECSManager;		//!< Pointer to the manager.
+			ECSManager&				mECSManager;		//!< Pointer to the manager.
 
 		private:
 			BitMask					mComponentsMask;	//!< Contains the components family this system cares about.

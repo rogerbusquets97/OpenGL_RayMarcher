@@ -5,9 +5,9 @@ namespace Engine
 {
 	namespace ECS
 	{
-		System::System() :
+		System::System(ECSManager& aECSManager) :
 			mEntities(),
-			mECSManager(nullptr)
+			mECSManager(aECSManager)
 		{
 
 		}
@@ -42,11 +42,6 @@ namespace Engine
 		const BitMask& System::GetComponentsMask() const
 		{
 			return mComponentsMask;
-		}
-
-		bool System::ComponentFits(tComponentFamilyId aComponentFamilyId) const
-		{
-			return mComponentsMask.IsBitSetted(aComponentFamilyId);
 		}
 	}
 }
