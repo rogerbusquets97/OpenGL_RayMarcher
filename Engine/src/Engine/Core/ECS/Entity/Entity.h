@@ -23,8 +23,8 @@ namespace Engine
 			template <typename TComponent>
 			TComponent& GetComponent(tComponentFamilyId aComponentFamilyId) const
 			{
-				tComponentsLookUp::iterator ComponentIterator = mComponentsLookUp.find(aComponentFamilyId);
-				assert(ComponentIterator->second != mComponentsLookUp.end(), "Entity with id %d does not have any component from family %d", mId, aComponentFamilyId);
+				tComponentsLookUp::const_iterator ComponentIterator = mComponentsLookUp.find(aComponentFamilyId);
+				assert(ComponentIterator != mComponentsLookUp.end(), "Entity with id %d does not have any component from family %d", mId, aComponentFamilyId);
 				return *static_cast<TComponent*>(ComponentIterator->second);
 			}
 

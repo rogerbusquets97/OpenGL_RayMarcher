@@ -15,7 +15,6 @@ namespace Engine
 
 		}
 
-
 		Entity* sEntitiesLookUp::GetEntity(tComponentPosition aComponentPosition) const
 		{
 			return mComponentsToEntities.at(aComponentPosition);

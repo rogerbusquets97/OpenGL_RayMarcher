@@ -77,19 +77,18 @@ namespace Engine
 			{
 				unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
 				aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
-				GetEntityComponentManagers<TComponentTypeArgs...>(apEntity, aComponents...);
+				GetEntityComponents<TComponentTypeArgs...>(apEntity, aComponents...);
+			}
+			template<typename TComponentType>
+			void GetEntityComponents(std::shared_ptr<Entity> apEntity, TComponentType& aComponent)
+			{
+				unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
+				aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
 			}
 
 		private:
 			typedef std::vector<std::unique_ptr<System>>				tSystemContainer;
 			typedef std::vector<std::unique_ptr<IComponentManager>>		tComponentManagerContainer;
-
-			template<typename TComponentType>
-			void GetEntityComponent(std::shared_ptr<Entity> apEntity, TComponentType& aComponent)
-			{
-				unsigned int ComponentFamily = ComponentManager<TComponentType>::GetFamilyId();
-				aComponent = apEntity->GetComponent<TComponentType>(ComponentFamily);
-			}
 
 			template<typename TComponentType>
 			ComponentManager<TComponentType>* GetComponentManager()

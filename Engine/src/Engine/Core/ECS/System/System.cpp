@@ -33,11 +33,6 @@ namespace Engine
 				}
 			}
 		}
-
-		void System::SetComponentsMask(const BitMask& aComponentsMask)
-		{
-			mComponentsMask = aComponentsMask;
-		}
 		
 		const BitMask& System::GetComponentsMask() const
 		{

@@ -28,16 +28,29 @@ namespace Engine
 			void AddEntity(std::shared_ptr<Entity> apEntity);
 			void RemoveEntity(std::shared_ptr<Entity> apEntity);
 
-			void SetComponentsMask(const BitMask& aComponentsMask);
+			template<typename TCurrentComponentType, typename TNextComponentType, typename ...TComponentTypeArgs>
+			void GenerateComponentsMask()
+			{
+				mComponentsMask.SetBit(ComponentManager<TCurrentComponentType>::GetFamilyId());
+				GenerateComponentsMask<TNextComponentType, TComponentTypeArgs...>();
+			}
+			template<typename TCurrentComponentType>
+			void GenerateComponentsMask()
+			{
+				mComponentsMask.SetBit(ComponentManager<TCurrentComponentType>::GetFamilyId());
+			}
+
 			const BitMask& GetComponentsMask() const;
 
 		protected:
+
 			typedef std::vector<std::shared_ptr<Entity>>	tEntitiesContainer;
 
 			tEntitiesContainer		mEntities;			//!< Contains the entities the system must interact with. TODO make this a map?
 			ECSManager&				mECSManager;		//!< Pointer to the manager.
 
 		private:
+
 			BitMask					mComponentsMask;	//!< Contains the components family this system cares about.
 		};
 	}
