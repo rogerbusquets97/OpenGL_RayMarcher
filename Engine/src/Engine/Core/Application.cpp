@@ -2,12 +2,14 @@
 #include "Window/ModuleWindow.h"
 #include <Log/Log.h>
 #include <Editor/ModuleEditor.h>
+#include <Resources/ResourceManager.h>
 
 namespace Engine
 {
 	Application::Application() : mModules()
 	{
 		AddModule(new ModuleEditor(this));
+		AddModule(new ResourceManager(this));
 	}
 	
 	Application::~Application()
