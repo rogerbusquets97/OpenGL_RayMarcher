@@ -28,5 +28,6 @@ namespace Engine
 	private:
 		static std::shared_ptr<ImGuiPlatformHandler> mHandler;
 		static int mWindowFlags;
+		static bool mFrameClosed;
 	};
 }
