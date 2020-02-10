@@ -125,6 +125,15 @@ namespace Engine
 					const KeyId& Id = Data.WindowEvents.GetKeyId(aKey);
 					(*Data.WindowEvents.mKeyEvent)(Id, Action);
 				});
+
+				glfwSetDropCallback(mWindow, [](GLFWwindow* aWindow, int aCount, const char** aPaths)
+				{
+					WindowData& Data = *(WindowData*)glfwGetWindowUserPointer(aWindow);
+					for (int i = 0; i < aCount; ++i)
+					{
+						(*Data.WindowEvents.mDroppedFileEvent)(aPaths[i]);
+					}
+				});
 			}
 		}
 	}

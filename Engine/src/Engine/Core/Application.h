@@ -21,6 +21,7 @@ namespace Engine
 		void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction);
 		void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
 		void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction);
+		void OnFileDropped(const std::string& aPath);
 	
 	private:		
 		std::vector<Module*> mModules;

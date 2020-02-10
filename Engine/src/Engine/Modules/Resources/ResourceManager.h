@@ -37,6 +37,8 @@ namespace Engine
 
 		void AddResource(Resource* aResource);
 
+		virtual void OnFileDropped(const std::string& aPath) override;
+
 	private:
 		void OnFileNotify(const std::string& aPath, eFileStatus aFileStatus);
 	private:

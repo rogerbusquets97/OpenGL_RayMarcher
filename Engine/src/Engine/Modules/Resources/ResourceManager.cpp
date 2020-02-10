@@ -51,6 +51,12 @@ namespace Engine
 	{
 	}
 
+	void ResourceManager::OnFileDropped(const std::string& aPath)
+	{
+		ENGINE_CORE_ERROR("File Dropped: ");
+		ENGINE_CORE_ERROR(aPath.c_str());
+	}
+
 	void ResourceManager::OnFileNotify(const std::string& aPath, eFileStatus aFileStatus)
 	{
 		auto Message = "File Notified: " + aPath;

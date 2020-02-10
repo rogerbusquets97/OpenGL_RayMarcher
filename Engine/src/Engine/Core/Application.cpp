@@ -120,4 +120,11 @@ namespace Engine
 			Module->OnKeyWindowEvent(aKeyId, aInputAction);
 		}
 	}
+	void Application::OnFileDropped(const std::string& aPath)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnFileDropped(aPath);
+		}
+	}
 }
