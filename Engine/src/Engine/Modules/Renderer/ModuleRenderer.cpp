@@ -56,9 +56,8 @@ namespace Engine
 		mShader = Shader::Create();
 		std::string CurrentDirectory = std::filesystem::current_path().string();
 		CurrentDirectory.substr(CurrentDirectory.find_last_of("\\/"));
-		std::string VertexPath = CurrentDirectory + "/Resources/StandardShader.vs";
-		std::string FragmentPath = CurrentDirectory + "/Resources/StandardShader.fs";
-		mShader->Load(VertexPath.c_str(), FragmentPath.c_str());
+		std::string ShaderPath = CurrentDirectory + "/Resources/StandardShader.shader";
+		mShader->Load(ShaderPath);
 
 		mComputeShader = ComputeShader::Create();
 		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";

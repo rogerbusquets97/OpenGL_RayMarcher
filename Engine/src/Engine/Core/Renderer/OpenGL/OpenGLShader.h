@@ -9,7 +9,7 @@ namespace Engine
 	public:
 		OpenGLShader();
 		virtual ~OpenGLShader();
-		virtual void Load(const char* aVertex, const char* aFragment) override;
+		virtual void Load(const std::string& aPath) override;
 		virtual void Bind() override;
 		virtual void Unbind() override;
 		virtual void SetBool(const std::string& aName, bool aValue) const override;

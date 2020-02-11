@@ -20,31 +20,26 @@ namespace Engine
 		glDeleteProgram(mID);
 	}
 
-	void Engine::OpenGLShader::Load(const char * aVertex, const char * aFragment)
+	void Engine::OpenGLShader::Load(const std::string& aPath)
 	{
 		std::string VertexCode;
 		std::string FragmentCode;
 
-		std::ifstream vShaderFile;
-		std::ifstream fShaderFile;
+		std::ifstream ShaderFile;
 
-		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		ShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
 		try
 		{
-			vShaderFile.open(aVertex);
-			fShaderFile.open(aFragment);
-			std::stringstream vShaderStream, fShaderStream;
+			ShaderFile.open(aPath.c_str());
+			std::stringstream ShaderStream;
 
-			vShaderStream << vShaderFile.rdbuf();
-			fShaderStream << fShaderFile.rdbuf();
+			ShaderStream << ShaderFile.rdbuf();
 
-			vShaderFile.close();
-			fShaderFile.close();
+			ShaderFile.close();
 
-			VertexCode = vShaderStream.str();
-			FragmentCode = fShaderStream.str();
+			VertexCode = "#version 440 core\n#define COMPILING_VERTEX\n" + ShaderStream.str();
+			FragmentCode = "#version 440 core\n#define COMPILING_FRAGMENT\n" + ShaderStream.str();
 		}
 		catch (std::ifstream::failure e)
 		{
@@ -129,6 +124,7 @@ namespace Engine
 		if (!Success)
 		{
 			glGetShaderInfoLog(aShader, 1024, NULL, Logs);
+			ENGINE_CORE_ERROR("Shader error: ");
 			ENGINE_CORE_ERROR(Logs);
 		}
 	}

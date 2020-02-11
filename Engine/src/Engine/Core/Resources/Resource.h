@@ -12,17 +12,23 @@ namespace Engine
 	class Resource
 	{
 	public:
-		Resource(const std::string& aPath, const std::string& aName, eResourceType aType) : mType(aType), mPath(aPath), mName(aName){}
+		Resource(const std::string& aPath, eResourceType aType) : mType(aType), mPath(aPath), mName(), mReferenceCount(0U), mLoaded(false){}
 		virtual ~Resource() = default;
 
 		virtual void LoadResource() = 0;
 		virtual void UnloadResource() = 0;
 
-		std::string GetPath() const { return mPath; }
+		inline const std::string& GetPath() const { return mPath; }
+		inline const std::string& GetName() const { return mName; }
+		inline eResourceType GetType() const { return mType; }
+		inline void Grab() { ++mReferenceCount; if (mReferenceCount && !mLoaded) LoadResource(); }
+		inline void Drop() { --mReferenceCount; if (!mReferenceCount) UnloadResource();}
 
 	protected:
 		eResourceType mType;
 		std::string mPath;
 		std::string mName;
+		unsigned int mReferenceCount;
+		bool mLoaded;
 	};
 }
