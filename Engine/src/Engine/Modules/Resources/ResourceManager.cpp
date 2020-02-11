@@ -23,6 +23,14 @@ namespace Engine
 	{
 		mFileWatcher.Stop();
 		mFileWatcherThread.join();
+
+		for (auto& ResourceMap : mResources)
+		{
+			for (auto& Resource : ResourceMap.second)
+			{
+				delete Resource.second;
+			}
+		}
 		return true;
 	}
 
