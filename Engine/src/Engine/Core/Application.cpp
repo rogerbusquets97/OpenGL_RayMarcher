@@ -9,7 +9,8 @@ namespace Engine
 	Application::Application() : mModules()
 	{
 		AddModule(new ModuleEditor(this));
-		AddModule(new ResourceManager(this));
+		mResourceManager = new ResourceManager(this);
+		AddModule(mResourceManager);
 	}
 	
 	Application::~Application()
@@ -126,5 +127,9 @@ namespace Engine
 		{
 			Module->OnFileDropped(aPath);
 		}
+	}
+	ResourceManager* Application::GetResourceManager()
+	{
+		return mResourceManager;
 	}
 }

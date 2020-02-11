@@ -6,6 +6,7 @@
 #include <Application.h>
 #include <FileSystem/FileWatcher.h>
 #include <thread>
+#include <Resources/ShaderResource.h>
 
 namespace Engine
 {
@@ -25,22 +26,41 @@ namespace Engine
 		virtual bool PostUpdate(float aDeltaTime) override;
 
 		template <typename T>
-		const std::unique_ptr<T>& GetResource(const std::string& aName, eResourceType aType)
+		T* GetResource(const std::string& aName, eResourceType aType)
 		{
-			static_assert(mResources.find(aType), "Invalid Resource Type");
-			static_assert(mResources.at(aType).find(aName), "Wrong resource name");
-
-			std::unique_ptr<T> ReturnValue = dynamic_cast<std::unique_ptr<T>>(mResources.at(aType).at(aName));
-			static_assert(ReturnValue == nullptr, "Cannot convert to the asked type. Are you sure it is derived from Resource?");
-			return ReturnValue;
+			if (mResources.find(aType) != std::end(mResources))
+			{
+				if (mResources.at(aType).find(aName) != std::end(mResources.at(aType)))
+				{
+					T* ReturnValue = dynamic_cast<T*>(mResources.at(aType).at(aName));
+					if (ReturnValue != nullptr)
+					{
+						static_cast<Resource*>(ReturnValue)->Grab();
+						return ReturnValue;
+					}
+					else
+					{
+						return nullptr;
+					}
+				}
+				else
+				{
+					return nullptr;
+				}
+			}
+			else
+			{
+				return nullptr;
+			}
 		}
 
-		void AddResource(Resource* aResource);
-
+		void CreateResource(const std::string& aPath);
 		virtual void OnFileDropped(const std::string& aPath) override;
 
 	private:
 		void OnFileNotify(const std::string& aPath, eFileStatus aFileStatus);
+		eResourceType GetResourceType(const std::string& aExtension);
+		void AddResource(Resource* aResource);
 	private:
 
 		ResourcesMap mResources;

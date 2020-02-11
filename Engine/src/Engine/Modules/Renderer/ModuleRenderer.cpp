@@ -11,6 +11,7 @@
 #include <Renderer/Texture.h>
 #include <Renderer/Material.h>
 #include "Camera/PerspectiveCamera.h"
+#include <Resources/ResourceManager.h>
 
 namespace Engine
 {
@@ -53,11 +54,11 @@ namespace Engine
 		mQuadVA->AddVertexBuffer(QuadVBO);
 
 		//Quad Shader
-		mShader = Shader::Create();
 		std::string CurrentDirectory = std::filesystem::current_path().string();
 		CurrentDirectory.substr(CurrentDirectory.find_last_of("\\/"));
-		std::string ShaderPath = CurrentDirectory + "/Resources/StandardShader.shader";
-		mShader->Load(ShaderPath);
+
+		ShaderResource* pShaderResource = mApplication->GetResourceManager()->GetResource<ShaderResource>("StandardShader.shader", eResourceType::SHADER);
+		mShader = pShaderResource->GetShader();
 
 		mComputeShader = ComputeShader::Create();
 		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";

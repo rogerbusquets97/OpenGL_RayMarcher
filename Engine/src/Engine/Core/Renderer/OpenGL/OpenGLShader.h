@@ -10,6 +10,7 @@ namespace Engine
 		OpenGLShader();
 		virtual ~OpenGLShader();
 		virtual void Load(const std::string& aPath) override;
+		virtual void Unload() override;
 		virtual void Bind() override;
 		virtual void Unbind() override;
 		virtual void SetBool(const std::string& aName, bool aValue) const override;
@@ -24,6 +25,7 @@ namespace Engine
 
 	private:
 		unsigned int mID;
+		bool mLoaded;
 	};
 }
 

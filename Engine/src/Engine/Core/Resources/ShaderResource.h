@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-	class ShaderResource : Resource
+	class ShaderResource : public Resource
 	{
 	public: 
 		ShaderResource(const std::string& aPath);

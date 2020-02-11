@@ -12,7 +12,11 @@ namespace Engine
 	class Resource
 	{
 	public:
-		Resource(const std::string& aPath, eResourceType aType) : mType(aType), mPath(aPath), mName(), mReferenceCount(0U), mLoaded(false){}
+		Resource(const std::string& aPath, eResourceType aType) : mType(aType), mPath(aPath), mName(), mReferenceCount(0U), mLoaded(false)
+		{
+			mName = aPath;
+			mName.erase(0U, mName.find_last_of("\\") + 1U);
+		}
 		virtual ~Resource() = default;
 
 		virtual void LoadResource() = 0;
