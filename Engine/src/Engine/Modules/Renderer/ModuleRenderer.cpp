@@ -57,8 +57,8 @@ namespace Engine
 		std::string CurrentDirectory = std::filesystem::current_path().string();
 		CurrentDirectory.substr(CurrentDirectory.find_last_of("\\/"));
 
-		ShaderResource* pShaderResource = mApplication->GetResourceManager()->GetResource<ShaderResource>("StandardShader.shader", eResourceType::SHADER);
-		mShader = pShaderResource->GetShader();
+		mpShaderResource = mApplication->GetResourceManager()->GetResource<ShaderResource>("StandardShader.shader", eResourceType::SHADER);
+		mShader = mpShaderResource->GetShader();
 
 		mComputeShader = ComputeShader::Create();
 		std::string ComputePath = CurrentDirectory + "/Resources/ComputeShader.compute";
@@ -99,6 +99,7 @@ namespace Engine
 
 	bool ModuleRenderer::CleanUp()
 	{
+		mpShaderResource->Drop();
 		bool ReturnValue = Renderer::CleanUp();
 		return ReturnValue;
 	}
