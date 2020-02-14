@@ -17,7 +17,7 @@ namespace Engine
 			IComponentManager(const IComponentManager&) = default;
 			IComponentManager& operator=(const IComponentManager&) = default;
 
-			virtual void RemoveComponent(Entity* apEntity) {}
+			virtual void RemoveComponent(Entity* apEntity) = 0;
 		};
 	}
 }

@@ -11,18 +11,25 @@ TEST(ECSManager, AddRemoveEntity)
 	ECSManager Manager;
 	Manager.AddComponentManager<int>();
 	std::shared_ptr<Entity> ent = Manager.CreateEntity();
-	Manager.AddComponent(ent, 2U);
+	Manager.AddComponent<int>(ent, 2);
 	Manager.RemoveEntity(ent);
+}
+
+TEST(ECSManager, AddSameTypeComponents)
+{
+	ComponentFamilyIdGenerator::mFamilyId = 0U;
+	ECSManager Manager;
+	//EXPECT_EXIT(Manager.AddComponentManager<int>(), ::testing::ExitedWithCode(EXIT_FAILURE), ""); //Added same type from previous test
 }
 
 TEST(ECSManager, AddRemoveComponent)
 {
 	ComponentFamilyIdGenerator::mFamilyId = 0U;
 	ECSManager Manager;
-	Manager.AddComponentManager<int>();
+	Manager.AddComponentManager<float>();
 	std::shared_ptr<Entity> ent = Manager.CreateEntity();
-	Manager.AddComponent(ent, 2U);
-	Manager.RemoveComponent<int>(ent);
+	Manager.AddComponent<float>(ent, 2);
+	Manager.RemoveComponent<float>(ent);
 }
 
 TEST(ECSManager, AddSystem)
@@ -49,7 +56,7 @@ TEST(ECSManager, GetEntityComponents)
 {
 	ComponentFamilyIdGenerator::mFamilyId = 0U;
 	ECSManager Manager;
-	Manager.AddComponentManager<int>();
+	Manager.AddComponentManager<unsigned int>();
 	Manager.AddComponentManager<double>();
 	Manager.AddComponentManager<std::string>();
 	std::shared_ptr<Entity> ent = Manager.CreateEntity();
@@ -77,6 +84,6 @@ TEST(ECSManager, GetEntityComponents)
 	Manager.GetEntityComponents(ent, Comp6);
 	EXPECT_EQ(Comp6, "nani");
 
-	/*std::vector<int> Comp7;
-	ASSERT_ANY_THROW(Manager.GetEntityComponents(ent, Comp7));*/
+	std::vector<int> Comp7;
+	//EXPECT_ANY_THROW(Manager.GetEntityComponents(ent, Comp7));
 }

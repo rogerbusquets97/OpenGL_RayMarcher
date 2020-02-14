@@ -19,6 +19,8 @@ namespace Engine
 			ComponentManager() :
 				IComponentManager()
 			{
+				assert(mFamilyId == UNASIGNED_COMPONENT_FAMILY_ID, "Tried to add same component manager type %s twice", typeid(TComponentType));
+
 				mFamilyId = ComponentFamilyIdGenerator::GenerateNewId();
 			}
 
@@ -52,6 +54,7 @@ namespace Engine
 
 			static tComponentFamilyId GetFamilyId()
 			{
+				assert(mFamilyId != UNASIGNED_COMPONENT_FAMILY_ID, "Tried to use a component manager with type %s not added to the system", typeid(TComponentType));
 				return mFamilyId;
 			}
 
@@ -62,7 +65,7 @@ namespace Engine
 		};
 
 		template<typename TComponentType>
-		tComponentFamilyId ComponentManager<TComponentType>::mFamilyId = 0U;
+		tComponentFamilyId ComponentManager<TComponentType>::mFamilyId = UNASIGNED_COMPONENT_FAMILY_ID;
 
 	}
 }
