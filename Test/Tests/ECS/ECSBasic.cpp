@@ -5,6 +5,7 @@
 using namespace Engine;
 using namespace Engine::ECS;
 
+
 TEST(ECSManager, AddRemoveEntity)
 {
 	ComponentFamilyIdGenerator::mFamilyId = 0U;
@@ -19,7 +20,7 @@ TEST(ECSManager, AddSameTypeComponents)
 {
 	ComponentFamilyIdGenerator::mFamilyId = 0U;
 	ECSManager Manager;
-	//EXPECT_EXIT(Manager.AddComponentManager<int>(), ::testing::ExitedWithCode(EXIT_FAILURE), ""); //Added same type from previous test
+	//EXPECT_DEATH(Manager.AddComponentManager<int>(), ""); //Added same type from previous test. This test doesn't work because assert is done on constructor
 }
 
 TEST(ECSManager, AddRemoveComponent)
@@ -85,5 +86,5 @@ TEST(ECSManager, GetEntityComponents)
 	EXPECT_EQ(Comp6, "nani");
 
 	std::vector<int> Comp7;
-	//EXPECT_ANY_THROW(Manager.GetEntityComponents(ent, Comp7));
+	EXPECT_DEATH(Manager.GetEntityComponents(ent, Comp7), "");
 }
