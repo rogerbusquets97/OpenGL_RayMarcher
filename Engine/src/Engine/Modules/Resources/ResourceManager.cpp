@@ -71,6 +71,7 @@ namespace Engine
 	{
 		ENGINE_CORE_ERROR("File Dropped: ");
 		ENGINE_CORE_ERROR(aPath.c_str());
+		CreateResource(aPath);
 	}
 
 	void ResourceManager::OnFileNotify(const std::string& aPath, eFileStatus aFileStatus)
