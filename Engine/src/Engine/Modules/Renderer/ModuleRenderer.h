@@ -10,6 +10,7 @@ namespace Engine
 	class ComputeShader;
 	class VertexArray;
 	class RenderTexture2D;
+	class ShaderResource;
 
 	class ENGINE_API ModuleRenderer : public Module
 	{
@@ -34,6 +35,7 @@ namespace Engine
 		std::shared_ptr<ComputeShader> mComputeShader;
 		std::shared_ptr<VertexArray> mQuadVA;
 		std::shared_ptr<RenderTexture2D> mQuadTexture;
+		ShaderResource* mpShaderResource;
 		static bool mNeedRepaint;
 	};
 }
