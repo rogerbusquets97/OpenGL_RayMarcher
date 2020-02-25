@@ -31,12 +31,12 @@ namespace Engine
 
 	bool Engine::ModuleEditor::CleanUp()
 	{
-		IMGUI::CleanUp();
-
 		for (auto& Element : mElements)
 		{
 			Element->CleanUp();
 		}
+
+		IMGUI::CleanUp();
 
 		return true;
 	}
@@ -71,7 +71,10 @@ namespace Engine
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 
-		ImGui::Begin("Renderer", &mOpen, IMGUI::GetMainWindowFlags());
+		if (!ImGui::Begin("Renderer", &mOpen, IMGUI::GetMainWindowFlags()))
+		{
+			ImGui::End();
+		}
 		
 		ImGui::PopStyleVar();
 		ImGui::PopStyleVar(2);

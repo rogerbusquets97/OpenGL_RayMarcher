@@ -6,6 +6,7 @@ namespace Engine
 {
 	std::shared_ptr<ImGuiPlatformHandler> IMGUI::mHandler = nullptr;
 	int IMGUI::mWindowFlags = 0;
+	bool IMGUI::mFrameClosed = true;
 
 	void Engine::IMGUI::Init()
 	{
@@ -21,17 +22,27 @@ namespace Engine
 
 	void Engine::IMGUI::CleanUp()
 	{
+		if (!mFrameClosed)
+		{
+			EndFrame();
+		}
+
 		mHandler->CleanUp();
 	}
 
 	void Engine::IMGUI::BeginFrame()
 	{
-		mHandler->BeginFrame();
+		if (mFrameClosed)
+		{
+			mHandler->BeginFrame();
+			mFrameClosed = false;
+		}
 	}
 
 	void Engine::IMGUI::EndFrame()
 	{
 		mHandler->EndFrame();
+		mFrameClosed = true;
 	}
 	bool IMGUI::BeginWindow(const char* aName, bool* aOpen, int aFlags)
 	{

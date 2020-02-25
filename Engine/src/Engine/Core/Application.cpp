@@ -2,12 +2,15 @@
 #include "Window/ModuleWindow.h"
 #include <Log/Log.h>
 #include <Editor/ModuleEditor.h>
+#include <Resources/ResourceManager.h>
 
 namespace Engine
 {
 	Application::Application() : mModules()
 	{
 		AddModule(new ModuleEditor(this));
+		mResourceManager = new ResourceManager(this);
+		AddModule(mResourceManager);
 	}
 	
 	Application::~Application()
@@ -117,5 +120,16 @@ namespace Engine
 		{
 			Module->OnKeyWindowEvent(aKeyId, aInputAction);
 		}
+	}
+	void Application::OnFileDropped(const std::string& aPath)
+	{
+		for (auto& Module : mModules)
+		{
+			Module->OnFileDropped(aPath);
+		}
+	}
+	ResourceManager* Application::GetResourceManager()
+	{
+		return mResourceManager;
 	}
 }

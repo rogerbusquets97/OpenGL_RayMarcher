@@ -8,7 +8,8 @@ namespace Engine
 		mCursorMovedEvent(std::make_shared<Event<float, float>>()),
 		mMouseButtonEvent(std::make_shared<Event<MouseButton, InputAction>>()),
 		mResizeWindowsEvent(std::make_shared<Event<unsigned int, unsigned int>>()),
-		mKeyEvent(std::make_shared<Event<KeyId, InputAction>>())
+		mKeyEvent(std::make_shared<Event<KeyId, InputAction>>()),
+		mDroppedFileEvent(std::make_shared<Event<const std::string&>>())
 	{
 
 	}

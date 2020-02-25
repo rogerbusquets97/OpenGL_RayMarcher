@@ -2,6 +2,7 @@
 #include <string>
 #include "Core.h"
 #include "Window/Inputs.h"
+#include <vector>
 
 namespace Engine
 {
@@ -30,6 +31,7 @@ namespace Engine
 		virtual void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction) {}
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
 		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) {}
+		virtual void OnFileDropped(const std::string& aPath) {}
 
 		inline const std::string& GetName() const { return mName; }
 

@@ -10,7 +10,8 @@ namespace Engine
 	public:
 		Shader() {};
 		virtual ~Shader() {};
-		virtual void Load(const char* aVertex, const char* aFragment) = 0;
+		virtual void Load(const std::string& aPath) = 0;
+		virtual void Unload() = 0;
 		virtual void Bind() = 0;
 		virtual void Unbind() = 0;
 		virtual void SetBool(const std::string& aName, bool aValue) const = 0;
