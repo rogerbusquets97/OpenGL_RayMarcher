@@ -101,9 +101,12 @@ namespace Engine
 
 	void Camera::SetSize(float aWidth, float aHeight)
 	{
-		mWidth = aWidth;
-		mHeight = aHeight;
-		RecalculateProjectionMatrix();
+		if (aWidth != 0 || aHeight != 0)
+		{
+			mWidth = aWidth;
+			mHeight = aHeight;
+			RecalculateProjectionMatrix();
+		}
 	}
 
 	const glm::mat4& Camera::GetViewMatrix() const

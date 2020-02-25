@@ -40,6 +40,7 @@ namespace Engine
 		std::shared_ptr<Event<MouseButton, InputAction>>		mMouseButtonEvent;
 		std::shared_ptr<Event<unsigned int, unsigned int>>		mResizeWindowsEvent;
 		std::shared_ptr<Event<KeyId, InputAction>>				mKeyEvent;
+		std::shared_ptr<Event<const std::string&>>				mDroppedFileEvent;
 
 	private:
 

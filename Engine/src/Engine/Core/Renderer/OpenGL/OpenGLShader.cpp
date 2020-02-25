@@ -11,47 +11,55 @@
 namespace Engine
 {
 
-	OpenGLShader::OpenGLShader() : mID(0)
+	OpenGLShader::OpenGLShader() : mID(0), mLoaded(false)
 	{
 	}
 	
 	OpenGLShader::~OpenGLShader()
 	{
-		glDeleteProgram(mID);
+		Unload();
 	}
 
-	void Engine::OpenGLShader::Load(const char * aVertex, const char * aFragment)
+	void Engine::OpenGLShader::Load(const std::string& aPath)
 	{
-		std::string VertexCode;
-		std::string FragmentCode;
-
-		std::ifstream vShaderFile;
-		std::ifstream fShaderFile;
-
-		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-		try
+		if (!mLoaded)
 		{
-			vShaderFile.open(aVertex);
-			fShaderFile.open(aFragment);
-			std::stringstream vShaderStream, fShaderStream;
+			std::string VertexCode;
+			std::string FragmentCode;
 
-			vShaderStream << vShaderFile.rdbuf();
-			fShaderStream << fShaderFile.rdbuf();
+			std::ifstream ShaderFile;
 
-			vShaderFile.close();
-			fShaderFile.close();
+			ShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-			VertexCode = vShaderStream.str();
-			FragmentCode = fShaderStream.str();
+			try
+			{
+				ShaderFile.open(aPath.c_str());
+				std::stringstream ShaderStream;
+
+				ShaderStream << ShaderFile.rdbuf();
+
+				ShaderFile.close();
+
+				VertexCode = "#version 440 core\n#define COMPILING_VERTEX\n" + ShaderStream.str();
+				FragmentCode = "#version 440 core\n#define COMPILING_FRAGMENT\n" + ShaderStream.str();
+			}
+			catch (std::ifstream::failure e)
+			{
+				ENGINE_CORE_ERROR(e.what());
+			}
+
+			Compile(VertexCode.c_str(), FragmentCode.c_str());
+			mLoaded = true;
 		}
-		catch (std::ifstream::failure e)
+	}
+
+	void OpenGLShader::Unload()
+	{
+		if (mLoaded)
 		{
-			ENGINE_CORE_ERROR(e.what());
+			glDeleteProgram(mID);
+			mLoaded = false;
 		}
-
-		Compile(VertexCode.c_str(), FragmentCode.c_str());
 	}
 
 	void Engine::OpenGLShader::Bind()
@@ -129,6 +137,7 @@ namespace Engine
 		if (!Success)
 		{
 			glGetShaderInfoLog(aShader, 1024, NULL, Logs);
+			ENGINE_CORE_ERROR("Shader error: ");
 			ENGINE_CORE_ERROR(Logs);
 		}
 	}
