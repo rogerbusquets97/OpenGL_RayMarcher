@@ -41,8 +41,8 @@ namespace rubEngine
 		if (mWindow != nullptr)
 		{
 			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
-			//(*WindowEvents.mCursorMovedEvent) += std::bind(&Application::OnCursorMovedEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
-			//(*WindowEvents.mMouseButtonEvent) += std::bind(&Application::OnMouseButtonEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mCursorMovedEvent) += std::bind(&CInput::OnEventMouseMove, pInput.get(), std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mMouseButtonEvent) += std::bind(&CInput::OnEventMouseButton, pInput.get(), std::placeholders::_1, std::placeholders::_2);
 			//(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
 			(*WindowEvents.mKeyEvent) += std::bind(&CInput::OnKeyEvent, pInput.get(), std::placeholders::_1, std::placeholders::_2);
 			//(*WindowEvents.mDroppedFileEvent) += std::bind(&Application::OnFileDropped, mApplication, std::placeholders::_1);

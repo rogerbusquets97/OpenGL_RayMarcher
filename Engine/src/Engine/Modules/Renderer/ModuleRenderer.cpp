@@ -103,7 +103,7 @@ namespace rubEngine
 
 		if (CInput::GetInstance()->GetKeyState(KeyId::A) == InputAction::Pressed)
 		{
-			ENGINE_CORE_ERROR("A pressed");
+			ENGINE_CORE_ERROR("Mouse X {0}", CInput::GetInstance()->GetMouseX());
 		}
 
 		return ReturnValue;

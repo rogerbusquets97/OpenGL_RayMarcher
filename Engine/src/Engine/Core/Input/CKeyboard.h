@@ -2,7 +2,6 @@
 #define C_KEYBOARD_H
 
 #include "Inputs.h"
-#include <bitset>
 #include <array>
 
 namespace rubEngine

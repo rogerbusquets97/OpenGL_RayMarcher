@@ -5,6 +5,8 @@
 
 namespace rubEngine
 {
+	class CInput;
+
 	class ENGINE_API ModuleWindow : public Module
 	{
 	public:
