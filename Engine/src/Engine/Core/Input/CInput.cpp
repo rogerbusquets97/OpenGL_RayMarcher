@@ -1,8 +1,8 @@
 #include "CInput.h"
 
-std::unique_ptr<Engine::CInput> Engine::CSingleton<Engine::CInput>::mInstance = nullptr;
+std::unique_ptr<rubEngine::CInput> rubEngine::CSingleton<rubEngine::CInput>::mInstance = nullptr;
 
-namespace Engine
+namespace rubEngine
 {
 	CInput::CInput() : mKeyboard(std::make_unique<CKeyboard>())
 	{

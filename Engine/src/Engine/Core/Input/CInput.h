@@ -5,7 +5,7 @@
 #include "CKeyboard.h"
 #include "Inputs.h"
 
-namespace Engine
+namespace rubEngine
 {
 	class CInput : public CSingleton<CInput>
 	{

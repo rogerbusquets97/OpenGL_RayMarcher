@@ -1,8 +1,8 @@
 #include "CKeyboard.h"
 
-std::array<Engine::InputAction, (size_t)Engine::KeyId::NUM_KEYS> Engine::CKeyboard::mKeys = { Engine::InputAction::Released };
+std::array<rubEngine::InputAction, (size_t)rubEngine::KeyId::NUM_KEYS> rubEngine::CKeyboard::mKeys = { rubEngine::InputAction::Released };
 
-namespace Engine
+namespace rubEngine
 {
 	CKeyboard::CKeyboard()
 	{

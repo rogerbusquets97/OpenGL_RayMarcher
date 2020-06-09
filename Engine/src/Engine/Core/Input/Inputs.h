@@ -1,7 +1,7 @@
 #ifndef ENGINE_WINDOW_INPUTS
 #define ENGINE_WINDOW_INPUTS
 
-namespace Engine
+namespace rubEngine
 {
 	enum class MouseButton
 	{

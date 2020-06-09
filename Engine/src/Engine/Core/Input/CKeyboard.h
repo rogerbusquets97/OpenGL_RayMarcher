@@ -5,7 +5,7 @@
 #include <bitset>
 #include <array>
 
-namespace Engine
+namespace rubEngine
 {
 	class CKeyboard
 	{
