@@ -4,7 +4,7 @@
 #include <memory>
 #include "spdlog/spdlog.h"
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API Log
 	{
@@ -19,15 +19,15 @@ namespace Engine
 	};
 }
 
-#define ENGINE_CORE_ERROR(...)	::Engine::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define ENGINE_CORE_WARN(...)	::Engine::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define ENGINE_CORE_INFO(...)	::Engine::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define ENGINE_CORE_TRACE(...)	::Engine::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define ENGINE_CORE_ERROR(...)	::rubEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define ENGINE_CORE_WARN(...)	::rubEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define ENGINE_CORE_INFO(...)	::rubEngine::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define ENGINE_CORE_TRACE(...)	::rubEngine::Log::GetCoreLogger()->trace(__VA_ARGS__)
 
-#define CLIENT_CORE_ERROR(...)	::Engine::Log::GetClientLogger()->error(__VA_ARGS__)
-#define CLIENT_CORE_WARN(...)	::Engine::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define CLIENT_CORE_INFO(...)	::Engine::Log::GetClientLogger()->info(__VA_ARGS__)
-#define CLIENT_CORE_TRACE(...)	::Engine::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define CLIENT_CORE_ERROR(...)	::rubEngine::Log::GetClientLogger()->error(__VA_ARGS__)
+#define CLIENT_CORE_WARN(...)	::rubEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define CLIENT_CORE_INFO(...)	::rubEngine::Log::GetClientLogger()->info(__VA_ARGS__)
+#define CLIENT_CORE_TRACE(...)	::rubEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
 
 
 

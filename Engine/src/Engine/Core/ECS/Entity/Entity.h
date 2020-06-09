@@ -5,7 +5,7 @@
 #include <map>
 #include "ECS/ECSCommon.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

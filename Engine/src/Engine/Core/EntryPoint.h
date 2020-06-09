@@ -3,14 +3,14 @@
 #include <chrono>
 
 #ifdef PLATFORM_WINDOWS
-extern const std::unique_ptr<Engine::Application>& Engine::CreateApplication();
+extern const std::unique_ptr<rubEngine::Application>& rubEngine::CreateApplication();
 
 int main(int argc, char** argv)
 {
 
-	Engine::Log::Init();
-	ENGINE_CORE_INFO("Engine Start");
-	const std::unique_ptr<Engine::Application>& App = Engine::CreateApplication();
+	rubEngine::Log::Init();
+	ENGINE_CORE_INFO("rubEngine Start");
+	const std::unique_ptr<rubEngine::Application>& App = rubEngine::CreateApplication();
 
 	if (App->Init())
 	{

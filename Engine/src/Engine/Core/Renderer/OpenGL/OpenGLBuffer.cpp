@@ -1,9 +1,9 @@
 #include "OpenGLBuffer.h"
 #include <glad/glad.h>
 
-namespace Engine
+namespace rubEngine
 {
-	Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(float * aVertices, uint32_t aSize) : mRendererID(0), mAttributeArray()
+	rubEngine::OpenGLVertexBuffer::OpenGLVertexBuffer(float * aVertices, uint32_t aSize) : mRendererID(0), mAttributeArray()
 	{
 		glCreateBuffers(1, &mRendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, mRendererID);

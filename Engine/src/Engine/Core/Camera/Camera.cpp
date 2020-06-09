@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include <gtc/matrix_transform.hpp>
 
-namespace Engine
+namespace rubEngine
 {
 	Camera::Camera(const glm::vec3& aPosition, const glm::vec3& aUpDirection, float aNear, float aFar) :
 		mPosition(aPosition),

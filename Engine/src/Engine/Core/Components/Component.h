@@ -1,7 +1,7 @@
 #ifndef ENGINE_COMPONENT
 #define ENGINE_COMPONENT
 
-namespace Engine
+namespace rubEngine
 {
 	class GameObject;
 

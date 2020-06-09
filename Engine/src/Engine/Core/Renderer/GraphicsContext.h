@@ -2,7 +2,7 @@
 #include <Core.h>
 #include <Window/Window.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API GraphicsContext
 	{

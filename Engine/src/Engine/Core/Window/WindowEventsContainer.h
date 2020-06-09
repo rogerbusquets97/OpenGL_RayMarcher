@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include "Inputs.h"
 
-namespace Engine
+namespace rubEngine
 {
 	template<typename ...Args>
 	class Event;

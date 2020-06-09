@@ -3,7 +3,7 @@
 #include <Window/Window.h>
 #include <Module.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API ModuleWindow : public Module
 	{

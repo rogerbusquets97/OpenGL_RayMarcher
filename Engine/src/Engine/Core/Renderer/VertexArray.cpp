@@ -2,9 +2,9 @@
 #include <Renderer/RenderAPI.h>
 #include <Renderer/OpenGL/OpenGLVertexArray.h>
 
-namespace Engine
+namespace rubEngine
 {
-	std::shared_ptr<VertexArray> Engine::VertexArray::Create()
+	std::shared_ptr<VertexArray> rubEngine::VertexArray::Create()
 	{
 		switch (RenderAPI::GetAPI())
 		{

@@ -2,7 +2,7 @@
 #include "Events/Event.h"
 #include <assert.h>
 
-namespace Engine
+namespace rubEngine
 {
 	WindowEventsContainer::WindowEventsContainer() :
 		mCursorMovedEvent(std::make_shared<Event<float, float>>()),

@@ -1,9 +1,9 @@
 #include "ResourceManager.h"
 #include <Log/Log.h>
 
-namespace Engine
+namespace rubEngine
 {
-	Engine::ResourceManager::ResourceManager() : Module(), mResources(), mFileWatcher(std::filesystem::current_path().string() + "/Assets", std::chrono::milliseconds(5000)), mFileWatcherThread()
+	rubEngine::ResourceManager::ResourceManager() : Module(), mResources(), mFileWatcher(std::filesystem::current_path().string() + "/Assets", std::chrono::milliseconds(5000)), mFileWatcherThread()
 	{
 	}
 

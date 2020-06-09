@@ -3,7 +3,7 @@
 
 #include <vector>
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

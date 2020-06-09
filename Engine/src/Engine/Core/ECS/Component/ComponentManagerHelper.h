@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <array>
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

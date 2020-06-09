@@ -3,7 +3,7 @@
 
 #include "Core.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

@@ -2,7 +2,7 @@
 #include <Log/Log.h>
 #include <GLFW/glfw3.h>
 
-namespace Engine
+namespace rubEngine
 {
 	OpenGLContext::OpenGLContext(GLFWwindow* aWindow) : mWindowHandle(aWindow)
 	{

@@ -3,7 +3,7 @@
 #include <vec2.hpp>
 #include <mat4x4.hpp>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API Shader
 	{

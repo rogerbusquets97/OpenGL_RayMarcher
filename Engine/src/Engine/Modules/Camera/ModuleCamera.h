@@ -4,7 +4,7 @@
 #include <Core.h>
 #include "Module.h"
 
-namespace Engine
+namespace rubEngine
 {
 	class Camera;
 

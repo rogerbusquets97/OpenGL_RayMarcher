@@ -1,9 +1,9 @@
 #include "FileWatcher.h"
 #include <thread>
 
-namespace Engine
+namespace rubEngine
 {
-	Engine::FileWatcher::FileWatcher(const std::string& aPath, std::chrono::duration<int, std::milli> aDelay) : mPathToWatch(aPath), mDelay(aDelay), mPaths(), mIsRunning(false)
+	rubEngine::FileWatcher::FileWatcher(const std::string& aPath, std::chrono::duration<int, std::milli> aDelay) : mPathToWatch(aPath), mDelay(aDelay), mPaths(), mIsRunning(false)
 	{
 	}
 

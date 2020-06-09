@@ -4,7 +4,7 @@
 #include <Log/Log.h>
 #include <Window/GLWindow.h>
 
-namespace Engine
+namespace rubEngine
 {
 	std::shared_ptr<GraphicsContext> GraphicsContext::Create(void* aWindow)
 	{

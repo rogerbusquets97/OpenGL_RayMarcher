@@ -2,13 +2,13 @@
 #include <Renderer/RenderAPI.h>
 #include <Window/ModuleWindow.h>
 
-namespace Engine
+namespace rubEngine
 {
 	std::shared_ptr<ImGuiPlatformHandler> IMGUI::mHandler = nullptr;
 	int IMGUI::mWindowFlags = 0;
 	bool IMGUI::mFrameClosed = true;
 
-	void Engine::IMGUI::Init()
+	void rubEngine::IMGUI::Init()
 	{
 		mHandler = ImGuiPlatformHandler::Create();
 		mHandler->Init();
@@ -20,7 +20,7 @@ namespace Engine
 		mWindowFlags |= ImGuiWindowFlags_NoBackground;
 	}
 
-	void Engine::IMGUI::CleanUp()
+	void rubEngine::IMGUI::CleanUp()
 	{
 		if (!mFrameClosed)
 		{
@@ -30,7 +30,7 @@ namespace Engine
 		mHandler->CleanUp();
 	}
 
-	void Engine::IMGUI::BeginFrame()
+	void rubEngine::IMGUI::BeginFrame()
 	{
 		if (mFrameClosed)
 		{
@@ -39,7 +39,7 @@ namespace Engine
 		}
 	}
 
-	void Engine::IMGUI::EndFrame()
+	void rubEngine::IMGUI::EndFrame()
 	{
 		mHandler->EndFrame();
 		mFrameClosed = true;

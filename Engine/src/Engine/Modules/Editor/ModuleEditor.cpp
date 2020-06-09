@@ -3,13 +3,13 @@
 #include <Editor/MainMenuBar.h>
 #include <Window/ModuleWindow.h>
 
-namespace Engine
+namespace rubEngine
 {
-	Engine::ModuleEditor::ModuleEditor() : Module(), mElements(), mOpen(true)
+	rubEngine::ModuleEditor::ModuleEditor() : Module(), mElements(), mOpen(true)
 	{
 	}
 
-	Engine::ModuleEditor::~ModuleEditor()
+	rubEngine::ModuleEditor::~ModuleEditor()
 	{
 		for (auto& Element : mElements)
 		{
@@ -17,19 +17,19 @@ namespace Engine
 		}
 	}
 
-	bool Engine::ModuleEditor::Init()
+	bool rubEngine::ModuleEditor::Init()
 	{
 		IMGUI::Init();
 		mElements.push_back(new MainMenuBar());
 		return true;
 	}
 
-	bool Engine::ModuleEditor::Update(float aDeltaTime)
+	bool rubEngine::ModuleEditor::Update(float aDeltaTime)
 	{
 		return true;
 	}
 
-	bool Engine::ModuleEditor::CleanUp()
+	bool rubEngine::ModuleEditor::CleanUp()
 	{
 		for (auto& Element : mElements)
 		{
@@ -41,18 +41,18 @@ namespace Engine
 		return true;
 	}
 
-	bool Engine::ModuleEditor::Awake()
+	bool rubEngine::ModuleEditor::Awake()
 	{
 		return true;
 	}
 
-	bool Engine::ModuleEditor::PreUpdate(float aDeltaTime)
+	bool rubEngine::ModuleEditor::PreUpdate(float aDeltaTime)
 	{
 		IMGUI::BeginFrame();
 		return true;
 	}
 
-	bool Engine::ModuleEditor::PostUpdate(float aDeltaTime)
+	bool rubEngine::ModuleEditor::PostUpdate(float aDeltaTime)
 	{
 		IMGUI::EndFrame();
 		return true;

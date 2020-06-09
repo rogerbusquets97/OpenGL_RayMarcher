@@ -5,7 +5,7 @@
 #include <string>
 #include "WindowEventsContainer.h"
 
-namespace Engine
+namespace rubEngine
 {
 	struct WindowSettings
 	{

@@ -2,7 +2,7 @@
 #include <Core.h>
 #include <Renderer/RenderAPI.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API Renderer
 	{

@@ -1,7 +1,7 @@
 #include "PerspectiveCamera.h"
 #include <gtc/matrix_transform.hpp>
 
-namespace Engine
+namespace rubEngine
 {
 	PerspectiveCamera::PerspectiveCamera(float aFOV) :
 		Camera(),

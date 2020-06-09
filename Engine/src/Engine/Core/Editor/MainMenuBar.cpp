@@ -1,17 +1,17 @@
 #include "MainMenuBar.h"
 #include <IMGUI/IMGUI.h>
 #include <imgui.h>
-namespace Engine
+namespace rubEngine
 {
-	void Engine::MainMenuBar::Init()
+	void rubEngine::MainMenuBar::Init()
 	{
 	}
 
-	void Engine::MainMenuBar::CleanUp()
+	void rubEngine::MainMenuBar::CleanUp()
 	{
 	}
 
-	void Engine::MainMenuBar::Draw()
+	void rubEngine::MainMenuBar::Draw()
 	{
 		if (IMGUI::BeginMainMenuBar())
 		{

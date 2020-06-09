@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 
-namespace Engine
+namespace rubEngine
 {
 	class ImGuiPlatformHandler
 	{

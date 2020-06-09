@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-namespace Engine
+namespace rubEngine
 {
 	std::unique_ptr<RenderAPI> Renderer::mRenderAPI = RenderAPI::Create();
 }

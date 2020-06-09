@@ -1,6 +1,6 @@
 #include "Window.h"
 
-namespace Engine
+namespace rubEngine
 {
 	Window::Window() : mData()
 	{

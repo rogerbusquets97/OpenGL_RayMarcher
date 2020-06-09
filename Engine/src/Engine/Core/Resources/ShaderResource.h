@@ -2,7 +2,7 @@
 #include <Resources/Resource.h>
 #include <Renderer/Shader.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ShaderResource : public Resource
 	{

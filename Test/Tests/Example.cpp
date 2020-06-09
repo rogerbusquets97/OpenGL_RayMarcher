@@ -7,7 +7,7 @@ TEST(SillyTest, IsFourPositive)
     EXPECT_GT(4, 0);
 }
 
-using namespace Engine;
+using namespace rubEngine;
 
 TEST(Camera, GetPosition)
 {

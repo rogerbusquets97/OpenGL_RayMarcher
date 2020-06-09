@@ -1,7 +1,7 @@
 #pragma once
 #include <Renderer/Buffer.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class OpenGLVertexBuffer : public VertexBuffer
 	{

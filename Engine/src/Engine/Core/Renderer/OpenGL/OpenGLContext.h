@@ -3,7 +3,7 @@
 #include "../GraphicsContext.h"
 #include <Window/GLWindow.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API OpenGLContext : public GraphicsContext
 	{

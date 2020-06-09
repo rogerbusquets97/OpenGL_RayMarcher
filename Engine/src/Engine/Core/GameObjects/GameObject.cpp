@@ -1,10 +1,10 @@
 #include "GameObject.h"
 
-Engine::GameObject::GameObject(const std::string& aName, GameObject* aParent) : mName(aName), mChildren(), mParent(aParent), mComponents(), mActive(true), mStatic(true)
+rubEngine::GameObject::GameObject(const std::string& aName, GameObject* aParent) : mName(aName), mChildren(), mParent(aParent), mComponents(), mActive(true), mStatic(true)
 {
 }
 
-Engine::GameObject::~GameObject()
+rubEngine::GameObject::~GameObject()
 {
 	for (auto& Child : mChildren)
 	{
@@ -17,18 +17,18 @@ Engine::GameObject::~GameObject()
 	}
 }
 
-void Engine::GameObject::AddChild(GameObject* aChild)
+void rubEngine::GameObject::AddChild(GameObject* aChild)
 {
 	mChildren.push_back(aChild);
 }
 
-void Engine::GameObject::AddComponent(Component* aComponent)
+void rubEngine::GameObject::AddComponent(Component* aComponent)
 {
 	mComponents.push_back(aComponent);
 	aComponent->Init();
 }
 
-bool Engine::GameObject::Update(float aDeltaTime)
+bool rubEngine::GameObject::Update(float aDeltaTime)
 {
 	bool Result = true;
 

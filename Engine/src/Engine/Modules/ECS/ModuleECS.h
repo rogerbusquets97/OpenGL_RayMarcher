@@ -5,7 +5,7 @@
 #include "Module.h"
 #include "ECS/ECSManager.h"
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API ModuleECS : public Module
 	{

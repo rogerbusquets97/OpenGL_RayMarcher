@@ -4,7 +4,7 @@
 #include "Core.h"
 #include "ECSManager.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

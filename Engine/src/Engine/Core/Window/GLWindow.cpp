@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 #include "Events/Event.h"
 
-namespace Engine
+namespace rubEngine
 {
 	static void ErrorCallback(int aError, const char* aDescription)
 	{

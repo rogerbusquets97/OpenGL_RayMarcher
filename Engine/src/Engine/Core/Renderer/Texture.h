@@ -1,7 +1,7 @@
 #pragma once
 #include <Core.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API Texture
 	{

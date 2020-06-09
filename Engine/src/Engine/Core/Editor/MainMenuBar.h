@@ -1,7 +1,7 @@
 #pragma once
 #include <Editor/EditorElement.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class MainMenuBar : public EditorElement
 	{

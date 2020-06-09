@@ -1,6 +1,6 @@
 #include "ModuleECS.h"
 
-namespace Engine
+namespace rubEngine
 {
 	ModuleECS::ModuleECS() :
 		Module(),

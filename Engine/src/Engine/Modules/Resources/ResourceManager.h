@@ -8,7 +8,7 @@
 #include <thread>
 #include <Resources/ShaderResource.h>
 
-namespace Engine
+namespace rubEngine
 {
 	typedef std::unordered_map <eResourceType, std::unordered_map<std::string, Resource*>> ResourcesMap;
 

@@ -3,7 +3,7 @@
 #include <glm.hpp>
 #include <Renderer/VertexArray.h>
 
-namespace Engine
+namespace rubEngine
 {
 	enum class RENDER_API
 	{

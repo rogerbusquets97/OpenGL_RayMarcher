@@ -6,7 +6,7 @@
 #include <map>
 #include "CSingleton.h"
 
-namespace Engine
+namespace rubEngine
 {
 	class ResourceManager;
 

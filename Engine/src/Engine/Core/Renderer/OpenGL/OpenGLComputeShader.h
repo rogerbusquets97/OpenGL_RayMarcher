@@ -2,7 +2,7 @@
 #include <Core.h>
 #include <Renderer/ComputeShader.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API OpenGLComputeShader : public ComputeShader
 	{

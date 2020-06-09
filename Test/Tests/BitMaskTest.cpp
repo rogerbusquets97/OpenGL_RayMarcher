@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "Utilities/BitMask.h"
 
-using namespace Engine;
+using namespace rubEngine;
 
 TEST(BitMask, GetSet)
 {

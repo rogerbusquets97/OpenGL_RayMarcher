@@ -3,7 +3,7 @@
 #include <IMGUI/ImGuiPlatformHandler.h>
 #include <imgui.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API IMGUI
 	{

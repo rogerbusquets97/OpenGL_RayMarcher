@@ -1,7 +1,7 @@
 #pragma once
 #include <Log/Log.h>
 
-namespace Engine
+namespace rubEngine
 {
 	enum class eShaderDataType
 	{

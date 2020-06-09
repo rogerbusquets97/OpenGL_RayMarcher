@@ -1,6 +1,6 @@
 #include <Engine.h>
 
-class Sandbox : public Engine::Application
+class Sandbox : public rubEngine::Application
 {
 public:
 	Sandbox()
@@ -13,7 +13,7 @@ public:
 	}
 };
 
-const std::unique_ptr<Engine::Application>& Engine::CreateApplication()
+const std::unique_ptr<rubEngine::Application>& rubEngine::CreateApplication()
 {
 	return Sandbox::GetInstance();
 }

@@ -4,7 +4,7 @@
 #include <vector>
 #include "ByteSwap.h"
 
-namespace Engine
+namespace rubEngine
 {
 	constexpr uint32_t DEFAULT_STREAM_SIZE = 1460;
 

@@ -5,9 +5,9 @@
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
 
-namespace Engine
+namespace rubEngine
 {
-	void Engine::OpenGLImGuiHandler::Init()
+	void rubEngine::OpenGLImGuiHandler::Init()
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -33,21 +33,21 @@ namespace Engine
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-	void Engine::OpenGLImGuiHandler::CleanUp()
+	void rubEngine::OpenGLImGuiHandler::CleanUp()
 	{
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
 	}
 
-	void Engine::OpenGLImGuiHandler::BeginFrame()
+	void rubEngine::OpenGLImGuiHandler::BeginFrame()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 	}
 
-	void Engine::OpenGLImGuiHandler::EndFrame()
+	void rubEngine::OpenGLImGuiHandler::EndFrame()
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.DisplaySize = ImVec2(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());

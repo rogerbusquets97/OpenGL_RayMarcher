@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-namespace Engine
+namespace rubEngine
 {
 	CTimer::CTimer()
 	{

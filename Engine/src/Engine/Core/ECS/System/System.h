@@ -7,7 +7,7 @@
 #include "Utilities/BitMask.h"
 #include "ECS/ECSCommon.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

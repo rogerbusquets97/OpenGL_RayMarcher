@@ -4,7 +4,7 @@
 #include "Window/Inputs.h"
 #include <vector>
 
-namespace Engine
+namespace rubEngine
 {
 	class Application;
 

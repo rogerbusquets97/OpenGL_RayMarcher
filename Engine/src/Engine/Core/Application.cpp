@@ -5,9 +5,9 @@
 #include <Resources/ResourceManager.h>
 #include <Renderer/ModuleRenderer.h>
 
-std::unique_ptr<Engine::Application> Engine::CSingleton<Engine::Application>::mInstance = nullptr;
+std::unique_ptr<rubEngine::Application> rubEngine::CSingleton<rubEngine::Application>::mInstance = nullptr;
 
-namespace Engine
+namespace rubEngine
 {
 	Application::Application() : mModules()
 	{

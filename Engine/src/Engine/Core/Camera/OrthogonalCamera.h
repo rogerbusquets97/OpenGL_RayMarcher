@@ -4,7 +4,7 @@
 #include "Core.h"
 #include "Camera.h"
 
-namespace ENGINE_API Engine
+namespace ENGINE_API rubEngine
 {
 	class ENGINE_API OrthogonalCamera : public Camera
 	{

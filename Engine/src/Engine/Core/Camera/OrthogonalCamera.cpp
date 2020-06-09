@@ -1,7 +1,7 @@
 #include "OrthogonalCamera.h"
 #include <gtc/matrix_transform.hpp>
 
-namespace Engine
+namespace rubEngine
 {
 	OrthogonalCamera::OrthogonalCamera() :
 		Camera(),

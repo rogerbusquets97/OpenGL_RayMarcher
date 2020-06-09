@@ -1,7 +1,7 @@
 #pragma once
 #include <IMGUI/ImGuiPlatformHandler.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class OpenGLImGuiHandler : public ImGuiPlatformHandler
 	{

@@ -3,7 +3,7 @@
 
 #include <chrono>
 
-namespace Engine
+namespace rubEngine
 {
 	class CTimer
 	{

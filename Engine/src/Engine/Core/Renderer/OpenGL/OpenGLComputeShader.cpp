@@ -6,7 +6,7 @@
 #include <glad/glad.h>
 #include <Log/Log.h>
 
-namespace Engine
+namespace rubEngine
 {
 	OpenGLComputeShader::OpenGLComputeShader() : mID(0)
 	{

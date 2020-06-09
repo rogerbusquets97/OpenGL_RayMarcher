@@ -2,9 +2,9 @@
 #include <Renderer/RenderAPI.h>
 #include "OpenGL/OpenGLImGuiHandler.h"
 
-namespace Engine
+namespace rubEngine
 {
-	std::shared_ptr<ImGuiPlatformHandler> Engine::ImGuiPlatformHandler::Create()
+	std::shared_ptr<ImGuiPlatformHandler> rubEngine::ImGuiPlatformHandler::Create()
 	{
 		switch (RenderAPI::GetAPI())
 		{

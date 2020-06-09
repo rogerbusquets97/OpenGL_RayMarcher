@@ -1,7 +1,7 @@
 #pragma once
 #include <Renderer/AttributeArray.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class VertexBuffer
 	{

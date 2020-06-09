@@ -1,7 +1,7 @@
 #pragma once
 #include <Renderer/VertexArray.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class OpenGLVertexArray : public VertexArray
 	{

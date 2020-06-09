@@ -2,9 +2,9 @@
 #include <Renderer/RenderAPI.h>
 #include <Renderer/OpenGL/OpenGLTexture.h>
 
-namespace Engine
+namespace rubEngine
 {
-	std::shared_ptr<Texture2D> Engine::Texture2D::Create(uint32_t aWidth, uint32_t aHeight)
+	std::shared_ptr<Texture2D> rubEngine::Texture2D::Create(uint32_t aWidth, uint32_t aHeight)
 	{
 		switch (RenderAPI::GetAPI())
 		{
@@ -17,7 +17,7 @@ namespace Engine
 		return nullptr;
 	}
 
-	std::shared_ptr<RenderTexture2D> Engine::RenderTexture2D::Create(uint32_t aWidth, uint32_t aHeight)
+	std::shared_ptr<RenderTexture2D> rubEngine::RenderTexture2D::Create(uint32_t aWidth, uint32_t aHeight)
 	{
 		switch (RenderAPI::GetAPI())
 		{

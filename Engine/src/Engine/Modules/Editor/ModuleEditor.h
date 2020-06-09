@@ -4,7 +4,7 @@
 #include <Events/Event.h>
 #include <Editor/EditorElement.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API ModuleEditor : public Module
 	{

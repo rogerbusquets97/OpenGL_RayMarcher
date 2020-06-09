@@ -1,21 +1,21 @@
 #include "Material.h"
 
-namespace Engine
+namespace rubEngine
 {
 	Material::Material(const std::string& aName) : mShader(nullptr), mTextures(), mName(aName)
 	{
 	}
 
-	Engine::Material::Material(const std::shared_ptr<Shader>& aShader, const std::string& aName) : mShader(aShader), mTextures(), mName(aName)
+	rubEngine::Material::Material(const std::shared_ptr<Shader>& aShader, const std::string& aName) : mShader(aShader), mTextures(), mName(aName)
 	{
 		//We should parse the shader to check how many textures does it need and create them (ideally the user should be able to assign them from an editor, let's add them using AddTexture() for now...)
 	}
 
-	Engine::Material::~Material()
+	rubEngine::Material::~Material()
 	{
 	}
 
-	void Engine::Material::Use() const
+	void rubEngine::Material::Use() const
 	{
 		for (int i = 0; i < mTextures.size(); ++i)
 		{
@@ -35,7 +35,7 @@ namespace Engine
 		mTextures.erase(std::find(mTextures.begin(), mTextures.end(), aTexture));
 	}
 
-	std::shared_ptr<Material> Engine::Material::Create(const std::shared_ptr<Shader>& aShader, const std::string& aName)
+	std::shared_ptr<Material> rubEngine::Material::Create(const std::shared_ptr<Shader>& aShader, const std::string& aName)
 	{
 		return std::make_shared<Material>(aShader, aName);
 	}

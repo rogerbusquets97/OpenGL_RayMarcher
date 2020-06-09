@@ -2,11 +2,11 @@
 #include <iostream>
 #include <fstream>
 
-Engine::ShaderResource::ShaderResource(const std::string& aPath) : Resource(aPath, eResourceType::SHADER), mShader(Shader::Create())
+rubEngine::ShaderResource::ShaderResource(const std::string& aPath) : Resource(aPath, eResourceType::SHADER), mShader(Shader::Create())
 {
 }
 
-Engine::ShaderResource::~ShaderResource()
+rubEngine::ShaderResource::~ShaderResource()
 {
 	if (mLoaded)
 	{
@@ -14,7 +14,7 @@ Engine::ShaderResource::~ShaderResource()
 	}
 }
 
-void Engine::ShaderResource::LoadResource()
+void rubEngine::ShaderResource::LoadResource()
 {
 	if (!mLoaded)
 	{
@@ -23,7 +23,7 @@ void Engine::ShaderResource::LoadResource()
 	}
 }
 
-void Engine::ShaderResource::UnloadResource()
+void rubEngine::ShaderResource::UnloadResource()
 {
 	if (mLoaded)
 	{

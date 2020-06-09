@@ -3,7 +3,7 @@
 #include <Renderer/Shader.h>
 #include <vector>
 #include <Renderer/Texture.h>
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API Material
 	{

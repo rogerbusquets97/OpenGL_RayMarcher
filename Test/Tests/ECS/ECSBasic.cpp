@@ -2,8 +2,8 @@
 #include "ECS/ECSManager.h"
 #include "ECS/System/System.h"
 
-using namespace Engine;
-using namespace Engine::ECS;
+using namespace rubEngine;
+using namespace rubEngine::ECS;
 
 
 TEST(ECSManager, AddRemoveEntity)

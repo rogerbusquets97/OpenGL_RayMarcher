@@ -1,9 +1,9 @@
 #include "OpenGLTexture.h"
 #include <Log/Log.h>
 
-namespace Engine
+namespace rubEngine
 {
-	Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t aWidth, uint32_t aHeight) : mWidth(aWidth), mHeight(aHeight), mRendererID(0), mInternalFormat(GL_RGBA8), mDataFormat(GL_RGBA)
+	rubEngine::OpenGLTexture2D::OpenGLTexture2D(uint32_t aWidth, uint32_t aHeight) : mWidth(aWidth), mHeight(aHeight), mRendererID(0), mInternalFormat(GL_RGBA8), mDataFormat(GL_RGBA)
 	{
 		glCreateTextures(GL_TEXTURE_2D, 1, &mRendererID);
 		glTextureStorage2D(mRendererID, 1, mInternalFormat, mWidth, mHeight);

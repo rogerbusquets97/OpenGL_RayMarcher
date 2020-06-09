@@ -3,7 +3,7 @@
 #include <Log/Log.h>
 #include <Renderer/OpenGL/OpenGLShader.h>
 
-namespace Engine
+namespace rubEngine
 {
 	std::shared_ptr<Shader> Shader::Create()
 	{

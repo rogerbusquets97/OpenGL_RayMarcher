@@ -2,9 +2,9 @@
 #include <Renderer/RenderAPI.h>
 #include <Renderer/OpenGL/OpenGLBuffer.h>
 
-namespace Engine
+namespace rubEngine
 {
-	std::shared_ptr<VertexBuffer> Engine::VertexBuffer::Create(float * aVertices, uint32_t aSize)
+	std::shared_ptr<VertexBuffer> rubEngine::VertexBuffer::Create(float * aVertices, uint32_t aSize)
 	{
 		switch (RenderAPI::GetAPI())
 		{

@@ -1,7 +1,7 @@
 #include "ECS/Entity/EntityManager.h"
 #include "ECS/Entity/Entity.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

@@ -1,7 +1,7 @@
 #include "ECS/ECSManager.h"
 #include "ECS/System/System.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

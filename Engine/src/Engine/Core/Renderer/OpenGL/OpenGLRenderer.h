@@ -6,7 +6,7 @@
 #include <Renderer/VertexArray.h>
 
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API OpenGLRenderer : public RenderAPI
 	{

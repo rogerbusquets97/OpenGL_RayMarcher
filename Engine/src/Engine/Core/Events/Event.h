@@ -5,7 +5,7 @@
 #include "Core.h"
 #include "Events/EventHandler.h"
 
-namespace Engine
+namespace rubEngine
 {
 	template<typename... Args>
 	class ENGINE_API Event

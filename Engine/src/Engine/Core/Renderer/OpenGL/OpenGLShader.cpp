@@ -8,7 +8,7 @@
 
 //https://learnopengl.com/
 
-namespace Engine
+namespace rubEngine
 {
 
 	OpenGLShader::OpenGLShader() : mID(0), mLoaded(false)
@@ -20,7 +20,7 @@ namespace Engine
 		Unload();
 	}
 
-	void Engine::OpenGLShader::Load(const std::string& aPath)
+	void rubEngine::OpenGLShader::Load(const std::string& aPath)
 	{
 		if (!mLoaded)
 		{
@@ -62,7 +62,7 @@ namespace Engine
 		}
 	}
 
-	void Engine::OpenGLShader::Bind()
+	void rubEngine::OpenGLShader::Bind()
 	{
 		if (mID != 0)
 		{
@@ -79,17 +79,17 @@ namespace Engine
 		glUseProgram(0);
 	}
 
-	void Engine::OpenGLShader::SetBool(const std::string & aName, bool aValue) const
+	void rubEngine::OpenGLShader::SetBool(const std::string & aName, bool aValue) const
 	{
 		glUniform1i(glGetUniformLocation(mID, aName.c_str()), (int)aValue);
 	}
 
-	void Engine::OpenGLShader::SetInt(const std::string & aName, int aValue) const
+	void rubEngine::OpenGLShader::SetInt(const std::string & aName, int aValue) const
 	{
 		glUniform1i(glGetUniformLocation(mID, aName.c_str()), aValue);
 	}
 
-	void Engine::OpenGLShader::SetFloat(const std::string & aName, float aValue) const
+	void rubEngine::OpenGLShader::SetFloat(const std::string & aName, float aValue) const
 	{
 		glUniform1f(glGetUniformLocation(mID, aName.c_str()), aValue);
 	}

@@ -7,7 +7,7 @@
 
 struct GLFWwindow;
 
-namespace Engine
+namespace rubEngine
 {
 	class ENGINE_API GLWindow : public Window
 	{

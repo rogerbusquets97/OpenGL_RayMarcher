@@ -4,7 +4,7 @@
 #include <functional>
 #include "Events/Event.h"
 
-namespace Engine
+namespace rubEngine
 {
 	std::shared_ptr<Window> ModuleWindow::mWindow = nullptr;
 

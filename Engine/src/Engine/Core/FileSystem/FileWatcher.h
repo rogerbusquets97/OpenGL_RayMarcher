@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <filesystem>
 
-namespace Engine
+namespace rubEngine
 {
 	enum class eFileStatus { CREATED, MODIFIED, ERASED };
 

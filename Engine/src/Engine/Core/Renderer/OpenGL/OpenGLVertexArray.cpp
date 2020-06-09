@@ -2,7 +2,7 @@
 #include <glad/glad.h>
 #include <Log/Log.h>
 
-namespace Engine
+namespace rubEngine
 {
 	static GLenum ToGLType(eShaderDataType aType)
 	{
@@ -24,7 +24,7 @@ namespace Engine
 		ENGINE_CORE_ERROR("ToGLType: Unknown Shader data type");
 		return 0;
 	}
-	Engine::OpenGLVertexArray::OpenGLVertexArray() : mRendererID(0), mCurrentVertexIndex(0), mVertexBuffers(), mIndexBuffer()
+	rubEngine::OpenGLVertexArray::OpenGLVertexArray() : mRendererID(0), mCurrentVertexIndex(0), mVertexBuffers(), mIndexBuffer()
 	{
 		glCreateVertexArrays(1, &mRendererID);
 	}

@@ -4,7 +4,7 @@
 #include <Application.h>
 #include <Window/ModuleWindow.h>
 
-namespace Engine
+namespace rubEngine
 {
 	OpenGLRenderer::OpenGLRenderer()
 	{

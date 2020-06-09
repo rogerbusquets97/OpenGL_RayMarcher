@@ -1,7 +1,7 @@
 #include "Log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
-namespace Engine
+namespace rubEngine
 {
 	std::shared_ptr<spdlog::logger> Log::mCoreLogger;
 	std::shared_ptr<spdlog::logger> Log::mClientLogger;

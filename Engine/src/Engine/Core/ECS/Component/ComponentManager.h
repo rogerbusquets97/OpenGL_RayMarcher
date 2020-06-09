@@ -7,7 +7,7 @@
 #include "ECS/Component/IComponentManager.h"
 #include "ECS/Component/ComponentManagerHelper.h"
 
-namespace Engine
+namespace rubEngine
 {
 	namespace ECS
 	{

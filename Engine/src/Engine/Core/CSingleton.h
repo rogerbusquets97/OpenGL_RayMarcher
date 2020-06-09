@@ -3,7 +3,7 @@
 
 #include <memory>
 
-namespace Engine
+namespace rubEngine
 {
 	template<typename TYPE>
 	class CSingleton

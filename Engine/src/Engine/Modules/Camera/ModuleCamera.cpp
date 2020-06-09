@@ -2,7 +2,7 @@
 #include "Window/ModuleWindow.h"
 #include "Camera/PerspectiveCamera.h"
 
-namespace Engine
+namespace rubEngine
 {
 	const float		CameraDeltaMovement = 2.f;
 	const float		CameraRotationSensibility = 0.5f;
@@ -105,22 +105,22 @@ namespace Engine
 
 			switch (aKeyId)
 			{
-				case Engine::KeyId::W:
+				case rubEngine::KeyId::W:
 					CameraPosition += CameraSpeed * CameraViewDirection;
 				break;
-				case Engine::KeyId::S:
+				case rubEngine::KeyId::S:
 					CameraPosition -= CameraSpeed * CameraViewDirection;
 				break;
-				case Engine::KeyId::A:
+				case rubEngine::KeyId::A:
 					CameraPosition -= CameraSpeed * CameraRightDirection;
 				break;
-				case Engine::KeyId::D:
+				case rubEngine::KeyId::D:
 					CameraPosition += CameraSpeed * CameraRightDirection;
 				break;
-				case Engine::KeyId::Q:
+				case rubEngine::KeyId::Q:
 					CameraPosition += CameraSpeed * CameraUpDirection;
 				break;
-				case Engine::KeyId::E:
+				case rubEngine::KeyId::E:
 					CameraPosition -= CameraSpeed * CameraUpDirection;
 				break;
 				default:

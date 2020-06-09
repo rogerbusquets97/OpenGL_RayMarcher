@@ -4,7 +4,7 @@
 #include "Core.h"
 #include <vector>
 
-namespace Engine
+namespace rubEngine
 {
 
 	class ENGINE_API BitMask

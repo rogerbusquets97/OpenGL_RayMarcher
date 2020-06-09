@@ -4,7 +4,7 @@
 #include <memory>
 #include <Components/Component.h>
 
-namespace Engine
+namespace rubEngine
 {
 	class GameObject
 	{

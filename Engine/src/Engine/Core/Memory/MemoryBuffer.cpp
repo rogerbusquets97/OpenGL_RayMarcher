@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "Log/Log.h"
 
-namespace Engine
+namespace rubEngine
 {
 	void MemoryBuffer::Write(const void * aData, size_t aByteCount)
 	{

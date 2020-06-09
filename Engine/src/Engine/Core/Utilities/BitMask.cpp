@@ -1,6 +1,6 @@
 #include "BitMask.h"
 
-namespace Engine
+namespace rubEngine
 {
 	BitMask::BitMask() :
 		mMask(1U, 0U)

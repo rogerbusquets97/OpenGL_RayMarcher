@@ -13,7 +13,7 @@
 #include "Camera/PerspectiveCamera.h"
 #include <Resources/ResourceManager.h>
 
-namespace Engine
+namespace rubEngine
 {
 	bool ModuleRenderer::mNeedRepaint = true;
 
