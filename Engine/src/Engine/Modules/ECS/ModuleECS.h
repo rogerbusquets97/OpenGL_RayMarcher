@@ -10,7 +10,7 @@ namespace Engine
 	class ENGINE_API ModuleECS : public Module
 	{
 	public:
-		ModuleECS(Application* aApplication);
+		ModuleECS();
 		~ModuleECS();
 
 		virtual bool Awake() override;

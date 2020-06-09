@@ -3,50 +3,49 @@
 #include <Log/Log.h>
 #include <Editor/ModuleEditor.h>
 #include <Resources/ResourceManager.h>
+#include <Renderer/ModuleRenderer.h>
+
+std::unique_ptr<Engine::Application> Engine::CSingleton<Engine::Application>::mInstance = nullptr;
 
 namespace Engine
 {
 	Application::Application() : mModules()
 	{
-		AddModule(new ModuleEditor(this));
-		mResourceManager = new ResourceManager(this);
-		AddModule(mResourceManager);
+		AddModule<ModuleEditor>();
+		AddModule<ModuleWindow>();
+		AddModule<ModuleRenderer>();
 	}
 	
 	Application::~Application()
 	{
-		for (std::vector<Module*>::reverse_iterator It = mModules.rbegin(); It != mModules.rend(); ++It)
-		{
-			delete (*It);
-		}
 	}
 
 	bool Application::Run(float aDeltaTime)
 	{
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			if (!Module->PreUpdate(aDeltaTime))
+			if (!Module.second->PreUpdate(aDeltaTime))
 			{
 				return false;
 			}
 		}
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			if (!Module->Update(aDeltaTime))
+			if (!Module.second->Update(aDeltaTime))
 			{
 				return false;
 			}
 		}
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			Module->OnGUI();
+			Module.second->OnGUI();
 		}
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			if (!Module->PostUpdate(aDeltaTime))
+			if (!Module.second->PostUpdate(aDeltaTime))
 			{
 				return false;
 			}
@@ -58,14 +57,14 @@ namespace Engine
 	{
 		bool ReturnValue(true);
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			ReturnValue = Module->Awake();
+			ReturnValue = Module.second->Awake();
 		}
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			ReturnValue = Module->Init();
+			ReturnValue = Module.second->Init();
 		}
 
 		return ReturnValue;
@@ -74,27 +73,19 @@ namespace Engine
 	{
 		bool ReturnValue(true);
 
-		for (auto& Module : mModules)
+		for (const auto& Module : mModules)
 		{
-			ReturnValue = Module->CleanUp();
+			ReturnValue = Module.second->CleanUp();
 		}
 
 		return ReturnValue;
-	}
-	void Application::AddModule(Module* aModule)
-	{
-		mModules.push_back(aModule);
-	}
-	void Application::RemoveModule(Module* aModule)
-	{
-		mModules.erase(std::find(mModules.begin(), mModules.end(), aModule));
 	}
 	
 	void Application::OnCursorMovedEvent(float aXPos, float aYPos)
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnCursorMovedEvent(aXPos, aYPos);
+			Module.second->OnCursorMovedEvent(aXPos, aYPos);
 		}
 	}
 
@@ -102,7 +93,7 @@ namespace Engine
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnMouseButtonEvent(aMouseButton, aInputAction);
+			Module.second->OnMouseButtonEvent(aMouseButton, aInputAction);
 		}
 	}
 	
@@ -110,7 +101,7 @@ namespace Engine
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnResizeWindowEvent(aWidth, aHeight);
+			Module.second->OnResizeWindowEvent(aWidth, aHeight);
 		}
 	}
 	
@@ -118,18 +109,18 @@ namespace Engine
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnKeyWindowEvent(aKeyId, aInputAction);
+			Module.second->OnKeyWindowEvent(aKeyId, aInputAction);
 		}
 	}
 	void Application::OnFileDropped(const std::string& aPath)
 	{
 		for (auto& Module : mModules)
 		{
-			Module->OnFileDropped(aPath);
+			Module.second->OnFileDropped(aPath);
 		}
 	}
-	ResourceManager* Application::GetResourceManager()
+	/*ResourceManager* Application::GetResourceManager()
 	{
 		return mResourceManager;
-	}
+	}*/
 }

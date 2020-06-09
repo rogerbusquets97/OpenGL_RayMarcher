@@ -15,7 +15,7 @@ namespace Engine
 	class ENGINE_API ModuleRenderer : public Module
 	{
 	public:
-		ModuleRenderer(Application* aApplication);
+		ModuleRenderer();
 		virtual ~ModuleRenderer();
 
 		virtual bool Init() override;

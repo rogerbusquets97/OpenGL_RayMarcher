@@ -15,7 +15,7 @@ namespace Engine
 	class ResourceManager : public Module
 	{
 	public:
-		ResourceManager(Application* aApplication);
+		ResourceManager();
 		~ResourceManager() = default;
 
 		virtual bool Init() override;

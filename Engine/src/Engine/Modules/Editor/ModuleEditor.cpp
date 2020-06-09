@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-	Engine::ModuleEditor::ModuleEditor(Application* aApplication) : Module("Editor", aApplication), mElements(), mOpen(true)
+	Engine::ModuleEditor::ModuleEditor() : Module(), mElements(), mOpen(true)
 	{
 	}
 

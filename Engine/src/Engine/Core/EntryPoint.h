@@ -3,14 +3,14 @@
 #include <chrono>
 
 #ifdef PLATFORM_WINDOWS
-extern Engine::Application* Engine::CreateApplication();
+extern const std::unique_ptr<Engine::Application>& Engine::CreateApplication();
 
 int main(int argc, char** argv)
 {
 
 	Engine::Log::Init();
 	ENGINE_CORE_INFO("Engine Start");
-	auto App = Engine::CreateApplication();
+	const std::unique_ptr<Engine::Application>& App = Engine::CreateApplication();
 
 	if (App->Init())
 	{
@@ -46,7 +46,5 @@ int main(int argc, char** argv)
 	{
 		ENGINE_CORE_ERROR("Failed to Initialize engine");
 	}
-
-	delete App;
 }
 #endif

@@ -9,7 +9,7 @@ namespace Engine
 	class ENGINE_API ModuleEditor : public Module
 	{
 	public:
-		ModuleEditor(Application* aApplication);
+		ModuleEditor();
 		~ModuleEditor();
 		virtual bool Init() override;
 		virtual bool Update(float aDeltaTime) override;

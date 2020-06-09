@@ -12,10 +12,8 @@ namespace Engine
 	{
 	public:
 
-		Module(const std::string& aName, Application* aApplication)
+		Module()
 		{
-			mName = aName;
-			mApplication = aApplication;
 		}
 
 		virtual ~Module() {}
@@ -32,12 +30,6 @@ namespace Engine
 		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) {}
 		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) {}
 		virtual void OnFileDropped(const std::string& aPath) {}
-
-		inline const std::string& GetName() const { return mName; }
-
-	protected:
-		std::string mName;
-		Application* mApplication;
 	};
 }
 

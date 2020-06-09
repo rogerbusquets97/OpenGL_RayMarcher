@@ -2,8 +2,8 @@
 
 namespace Engine
 {
-	ModuleECS::ModuleECS(Application* aApplication) :
-		Module("ECS", aApplication),
+	ModuleECS::ModuleECS() :
+		Module(),
 		mECSManager()
 	{
 

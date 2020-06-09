@@ -12,7 +12,7 @@ namespace Engine
 	{
 	public:
 
-		ModuleCamera(Application* aApplication);
+		ModuleCamera();
 		~ModuleCamera();
 		virtual bool Init() override;
 		virtual bool Update(float aDeltaTime) override;

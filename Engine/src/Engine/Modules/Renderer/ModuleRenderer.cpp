@@ -17,7 +17,7 @@ namespace Engine
 {
 	bool ModuleRenderer::mNeedRepaint = true;
 
-	ModuleRenderer::ModuleRenderer(Application* aApplication) : Module("Renderer", aApplication), mQuadMaterial(nullptr), mShader(nullptr), mComputeShader(nullptr), mQuadVA(nullptr), mQuadTexture(nullptr)
+	ModuleRenderer::ModuleRenderer() : Module(), mQuadMaterial(nullptr), mShader(nullptr), mComputeShader(nullptr), mQuadVA(nullptr), mQuadTexture(nullptr)
 	{
 	}
 
@@ -32,7 +32,7 @@ namespace Engine
 
 		ReturnValue = Renderer::Init();
 		
-		mQuadVA = VertexArray::Create();
+		/*mQuadVA = VertexArray::Create();
 		//Screen Quad
 		float quadVertices[] =
 		{
@@ -65,7 +65,7 @@ namespace Engine
 		mComputeShader->Load(ComputePath.c_str());
 
 		mQuadTexture = RenderTexture2D::Create(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
-		mQuadMaterial = Material::Create(mShader);
+		mQuadMaterial = Material::Create(mShader);*/
 		return ReturnValue;
 	}
 
@@ -73,7 +73,7 @@ namespace Engine
 	{
 		bool ReturnValue(true);
 				
-		mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera()->GetViewMatrix());
+		/*mShader->SetMat4("viewMatrix", ModuleCamera::GetCamera()->GetViewMatrix());
 		mShader->SetMat4("projectionMatrix", ModuleCamera::GetCamera()->GetProjectionMatrix());
 		mShader->Bind();
 
@@ -92,16 +92,16 @@ namespace Engine
 
 		//Draw stuff
 		mQuadMaterial->Use();
-		Renderer::DrawArray(0, 4);
+		Renderer::DrawArray(0, 4);*/
 
 		return ReturnValue;
 	}
 
 	bool ModuleRenderer::CleanUp()
 	{
-		mpShaderResource->Drop();
-		bool ReturnValue = Renderer::CleanUp();
-		return ReturnValue;
+		/*mpShaderResource->Drop();
+		bool ReturnValue = Renderer::CleanUp();*/
+		return true;
 	}
 	bool ModuleRenderer::Awake()
 	{

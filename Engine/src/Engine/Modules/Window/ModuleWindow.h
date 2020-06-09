@@ -8,7 +8,7 @@ namespace Engine
 	class ENGINE_API ModuleWindow : public Module
 	{
 	public:
-		ModuleWindow(Application* aApplication);
+		ModuleWindow();
 		virtual ~ModuleWindow();
 
 		virtual bool Init() override;

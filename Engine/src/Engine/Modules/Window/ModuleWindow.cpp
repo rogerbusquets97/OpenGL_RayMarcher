@@ -8,7 +8,7 @@ namespace Engine
 {
 	std::shared_ptr<Window> ModuleWindow::mWindow = nullptr;
 
-	ModuleWindow::ModuleWindow(Application* aApplication) : Module("Window", aApplication), mMustClose(false)
+	ModuleWindow::ModuleWindow() : Module(), mMustClose(false)
 	{
 	}
 
@@ -36,7 +36,7 @@ namespace Engine
 	{
 		bool ReturnValue(false);
 		mWindow = Window::Create();
-		if (mWindow != nullptr)
+		/*if (mWindow != nullptr)
 		{
 			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
 			(*WindowEvents.mCursorMovedEvent) += std::bind(&Application::OnCursorMovedEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
@@ -46,7 +46,7 @@ namespace Engine
 			(*WindowEvents.mDroppedFileEvent) += std::bind(&Application::OnFileDropped, mApplication, std::placeholders::_1);
 			
 			ReturnValue = true;
-		}
+		}*/
 		return ReturnValue;
 	}
 

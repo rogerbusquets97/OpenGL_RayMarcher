@@ -9,8 +9,8 @@ namespace Engine
 
 	std::shared_ptr<Camera> ModuleCamera::mCamera = std::make_shared<PerspectiveCamera>(); //TODO read params from config file
 
-	ModuleCamera::ModuleCamera(Application* aApplication) :
-		Module("Camera", aApplication),
+	ModuleCamera::ModuleCamera() :
+		Module(),
 		mRotateCamera(false),
 		mPreviousCursorX(0.0f),
 		mPreviousCursorY(0.0f)

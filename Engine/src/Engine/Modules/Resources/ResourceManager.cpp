@@ -3,7 +3,7 @@
 
 namespace Engine
 {
-	Engine::ResourceManager::ResourceManager(Application* aApplication) : Module("Resources", aApplication), mResources(), mFileWatcher(std::filesystem::current_path().string() + "/Assets", std::chrono::milliseconds(5000)), mFileWatcherThread()
+	Engine::ResourceManager::ResourceManager() : Module(), mResources(), mFileWatcher(std::filesystem::current_path().string() + "/Assets", std::chrono::milliseconds(5000)), mFileWatcherThread()
 	{
 	}
 
