@@ -1,6 +1,7 @@
 #include "ModuleCamera.h"
 #include "Window/ModuleWindow.h"
 #include "Camera/PerspectiveCamera.h"
+#include <Application.h>
 
 namespace rubEngine
 {
@@ -23,7 +24,9 @@ namespace rubEngine
 
 	bool ModuleCamera::Init()
 	{
-		mCamera->SetSize(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+
+		mCamera->SetSize(pWindow->GetWidth(), pWindow->GetHeight());
 		mCamera->SetPosition({0.f, 0.f, 2.f});
 		return true;
 	}
@@ -53,7 +56,7 @@ namespace rubEngine
 		return true;
 	}
 
-	void ModuleCamera::OnCursorMovedEvent(float aXPos, float aYPos)
+	/*void ModuleCamera::OnCursorMovedEvent(float aXPos, float aYPos)
 	{
 		if (mRotateCamera)
 		{
@@ -133,8 +136,10 @@ namespace rubEngine
 
 	void ModuleCamera::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
 	{
-		mCamera->SetSize(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
-	}
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+
+		mCamera->SetSize(pWindow->GetWidth(), pWindow->GetHeight());
+	}*/
 
 	const std::shared_ptr<Camera> ModuleCamera::GetCamera()
 	{

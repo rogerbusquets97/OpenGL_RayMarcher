@@ -55,7 +55,7 @@ namespace rubEngine
 		}
 
 		void CreateResource(const std::string& aPath);
-		virtual void OnFileDropped(const std::string& aPath) override;
+		virtual void OnFileDropped(const std::string& aPath);
 
 	private:
 		void OnFileNotify(const std::string& aPath, eFileStatus aFileStatus);

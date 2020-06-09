@@ -12,6 +12,9 @@
 #include <Renderer/Material.h>
 #include "Camera/PerspectiveCamera.h"
 #include <Resources/ResourceManager.h>
+#include <Input/CInput.h>
+#include <Log/Log.h>
+#include <Events/Event.h>
 
 namespace rubEngine
 {
@@ -31,6 +34,10 @@ namespace rubEngine
 		bool ReturnValue(false);
 
 		ReturnValue = Renderer::Init();
+		
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+		WindowEventsContainer& WindowEvents = pWindow->GetWindow()->GetWindowEvents();
+		(*WindowEvents.mResizeWindowsEvent) += std::bind(&ModuleRenderer::OnResizeWindowEvent, this, std::placeholders::_1, std::placeholders::_2);
 		
 		/*mQuadVA = VertexArray::Create();
 		//Screen Quad
@@ -93,6 +100,11 @@ namespace rubEngine
 		//Draw stuff
 		mQuadMaterial->Use();
 		Renderer::DrawArray(0, 4);*/
+
+		if (CInput::GetInstance()->GetKeyState(KeyId::A) == InputAction::Pressed)
+		{
+			ENGINE_CORE_ERROR("A pressed");
+		}
 
 		return ReturnValue;
 	}

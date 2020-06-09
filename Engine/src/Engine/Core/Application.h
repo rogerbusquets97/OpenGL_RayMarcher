@@ -2,14 +2,12 @@
 #include "Core.h"
 #include <vector>
 #include <Module.h>
-#include "Window/Inputs.h"
+#include <Input/Inputs.h>
 #include <map>
 #include "CSingleton.h"
 
 namespace rubEngine
 {
-	class ResourceManager;
-
 	class ENGINE_API Application : public CSingleton<Application>
 	{
 	public:

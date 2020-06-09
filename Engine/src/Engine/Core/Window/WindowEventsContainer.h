@@ -3,7 +3,7 @@
 
 #include <Core.h>
 #include <unordered_map>
-#include "Inputs.h"
+#include <Input/Inputs.h>
 
 namespace rubEngine
 {

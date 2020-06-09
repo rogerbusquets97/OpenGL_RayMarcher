@@ -27,7 +27,7 @@ namespace rubEngine
 
 		static void NeedRepaint(bool aRepaint);
 
-		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight);
 
 	private:
 		std::shared_ptr<Material> mQuadMaterial;

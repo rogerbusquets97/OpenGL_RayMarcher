@@ -80,47 +80,4 @@ namespace rubEngine
 
 		return ReturnValue;
 	}
-	
-	void Application::OnCursorMovedEvent(float aXPos, float aYPos)
-	{
-		for (auto& Module : mModules)
-		{
-			Module.second->OnCursorMovedEvent(aXPos, aYPos);
-		}
-	}
-
-	void Application::OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction)
-	{
-		for (auto& Module : mModules)
-		{
-			Module.second->OnMouseButtonEvent(aMouseButton, aInputAction);
-		}
-	}
-	
-	void Application::OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight)
-	{
-		for (auto& Module : mModules)
-		{
-			Module.second->OnResizeWindowEvent(aWidth, aHeight);
-		}
-	}
-	
-	void Application::OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction)
-	{
-		for (auto& Module : mModules)
-		{
-			Module.second->OnKeyWindowEvent(aKeyId, aInputAction);
-		}
-	}
-	void Application::OnFileDropped(const std::string& aPath)
-	{
-		for (auto& Module : mModules)
-		{
-			Module.second->OnFileDropped(aPath);
-		}
-	}
-	/*ResourceManager* Application::GetResourceManager()
-	{
-		return mResourceManager;
-	}*/
 }

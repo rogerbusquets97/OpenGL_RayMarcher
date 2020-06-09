@@ -4,6 +4,8 @@
 #include <imgui.h>
 #include <examples/imgui_impl_glfw.h>
 #include <examples/imgui_impl_opengl3.h>
+#include <Window/ModuleWindow.h>
+#include <Application.h>
 
 namespace rubEngine
 {
@@ -28,7 +30,8 @@ namespace rubEngine
 			Style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
-		GLFWwindow* Window = static_cast<GLFWwindow*>(ModuleWindow::GetNativeWindow());
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+		GLFWwindow* Window = static_cast<GLFWwindow*>(pWindow->GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(Window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
@@ -50,7 +53,9 @@ namespace rubEngine
 	void rubEngine::OpenGLImGuiHandler::EndFrame()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2(ModuleWindow::GetWidth(), ModuleWindow::GetHeight());
+
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+		io.DisplaySize = ImVec2(pWindow->GetWidth(), pWindow->GetHeight());
 
 		// Rendering
 		ImGui::Render();

@@ -1,5 +1,8 @@
 #include "ResourceManager.h"
 #include <Log/Log.h>
+#include <Window/ModuleWindow.h>
+#include <Application.h>
+#include <Events/Event.h>
 
 namespace rubEngine
 {
@@ -9,6 +12,10 @@ namespace rubEngine
 
 	bool ResourceManager::Init()
 	{
+		const auto& pWindow = Application::GetInstance()->GetModule<ModuleWindow>();
+		WindowEventsContainer& WindowEvents = pWindow->GetWindow()->GetWindowEvents();
+		(*WindowEvents.mDroppedFileEvent) += std::bind(&ResourceManager::OnFileDropped, this, std::placeholders::_1);
+		
 		//Runs in separate thread.
 		mFileWatcherThread = std::thread(std::bind(&FileWatcher::Start, &mFileWatcher, std::placeholders::_1), std::bind(&ResourceManager::OnFileNotify, this, std::placeholders::_1, std::placeholders::_2));
 		return true;

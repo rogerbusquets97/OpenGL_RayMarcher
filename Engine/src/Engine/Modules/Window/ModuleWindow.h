@@ -18,14 +18,14 @@ namespace rubEngine
 		virtual bool PreUpdate(float aDeltaTime) override;
 		virtual bool PostUpdate(float aDeltaTime) override;
 
-		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) override;
+		uint32_t GetWidth() const noexcept;
+		uint32_t GetHeight() const noexcept;
+		void* GetNativeWindow() const noexcept;
 
-		static uint32_t GetWidth();
-		static uint32_t GetHeight();
-		static void* GetNativeWindow();
+		const std::shared_ptr<Window>& GetWindow() const noexcept;
 
 	private:
-		static std::shared_ptr<Window> mWindow;
+		std::shared_ptr<Window> mWindow;
 		bool mMustClose;
 	};
 }

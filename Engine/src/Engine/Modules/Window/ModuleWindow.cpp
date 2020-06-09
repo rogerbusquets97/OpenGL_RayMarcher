@@ -3,12 +3,11 @@
 #include <memory>
 #include <functional>
 #include "Events/Event.h"
+#include <Input/CInput.h>
 
 namespace rubEngine
 {
-	std::shared_ptr<Window> ModuleWindow::mWindow = nullptr;
-
-	ModuleWindow::ModuleWindow() : Module(), mMustClose(false)
+	ModuleWindow::ModuleWindow() : Module(), mWindow(Window::Create()), mMustClose(false)
 	{
 	}
 
@@ -35,18 +34,21 @@ namespace rubEngine
 	bool ModuleWindow::Awake()
 	{
 		bool ReturnValue(false);
-		mWindow = Window::Create();
-		/*if (mWindow != nullptr)
+
+		//First call to GetInstance, hence Input is created here.
+		const std::unique_ptr<CInput>& pInput = CInput::GetInstance();
+
+		if (mWindow != nullptr)
 		{
 			WindowEventsContainer& WindowEvents = mWindow->GetWindowEvents();
-			(*WindowEvents.mCursorMovedEvent) += std::bind(&Application::OnCursorMovedEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
-			(*WindowEvents.mMouseButtonEvent) += std::bind(&Application::OnMouseButtonEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
-			(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
-			(*WindowEvents.mKeyEvent) += std::bind(&Application::OnKeyWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
-			(*WindowEvents.mDroppedFileEvent) += std::bind(&Application::OnFileDropped, mApplication, std::placeholders::_1);
+			//(*WindowEvents.mCursorMovedEvent) += std::bind(&Application::OnCursorMovedEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			//(*WindowEvents.mMouseButtonEvent) += std::bind(&Application::OnMouseButtonEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			//(*WindowEvents.mResizeWindowsEvent) += std::bind(&Application::OnResizeWindowEvent, mApplication, std::placeholders::_1, std::placeholders::_2);
+			(*WindowEvents.mKeyEvent) += std::bind(&CInput::OnKeyEvent, pInput.get(), std::placeholders::_1, std::placeholders::_2);
+			//(*WindowEvents.mDroppedFileEvent) += std::bind(&Application::OnFileDropped, mApplication, std::placeholders::_1);
 			
 			ReturnValue = true;
-		}*/
+		}
 		return ReturnValue;
 	}
 
@@ -60,15 +62,12 @@ namespace rubEngine
 		return true;
 	}
 
-	void ModuleWindow::OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction)
+	const std::shared_ptr<Window>& ModuleWindow::GetWindow() const noexcept
 	{
-		if (aKeyId == KeyId::Escape)
-		{
-			mMustClose = true;
-		}
+		return mWindow;
 	}
 
-	uint32_t ModuleWindow::GetWidth()
+	uint32_t ModuleWindow::GetWidth() const noexcept
 	{
 		uint32_t Return(0U);
 
@@ -79,7 +78,7 @@ namespace rubEngine
 
 		return Return;
 	}
-	uint32_t ModuleWindow::GetHeight()
+	uint32_t ModuleWindow::GetHeight() const noexcept
 	{
 		uint32_t Return(0U);
 
@@ -90,7 +89,7 @@ namespace rubEngine
 
 		return Return;
 	}
-	void* ModuleWindow::GetNativeWindow()
+	void* ModuleWindow::GetNativeWindow() const noexcept
 	{
 		return mWindow->GetNativeWindow();
 	}

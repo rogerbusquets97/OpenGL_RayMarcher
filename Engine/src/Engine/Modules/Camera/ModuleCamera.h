@@ -21,10 +21,10 @@ namespace rubEngine
 		virtual bool PreUpdate(float aDeltaTime) override;
 		virtual bool PostUpdate(float aDeltaTime) override;
 
-		virtual void OnCursorMovedEvent(float aXPos, float aYPos) override;
+		/*virtual void OnCursorMovedEvent(float aXPos, float aYPos) override;
 		virtual void OnMouseButtonEvent(MouseButton aMouseButton, InputAction aInputAction) override;
 		virtual void OnKeyWindowEvent(KeyId aKeyId, InputAction aInputAction) override;
-		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;
+		virtual void OnResizeWindowEvent(unsigned int aWidth, unsigned int aHeight) override;*/
 
 		static const std::shared_ptr<Camera> GetCamera();
 
