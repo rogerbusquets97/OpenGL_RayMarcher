@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "ByteSwap.h"
+#define NOMINMAX
 
 namespace rubEngine
 {
