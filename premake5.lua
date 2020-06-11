@@ -37,18 +37,20 @@ project "Engine"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/ThirdParty/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/ThirdParty/nlohmann/json/include/**.hpp"
 	}
 
 	includedirs
 	{
 		"%{prj.name}/ThirdParty/spdlog/include",
+		"%{prj.name}/ThirdParty/nlohmann/json/include",
 		"%{prj.name}/src/Engine/Core",
 		"%{prj.name}/src/Engine/Modules",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.GLM}",
-		"%{IncludeDir.IMGUI}"
+		"%{IncludeDir.IMGUI}",
 	}
 
 	links
@@ -81,6 +83,7 @@ project "Engine"
 function useEngineLib()
 	includedirs 
 	{
+		"Engine/ThirdParty/nlohmann/json/include",
 		"Engine/ThirdParty/spdlog/include",
 		"Engine/ThirdParty/glm/glm",
 		"Engine/ThirdParty/IMGUI",
