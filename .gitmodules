@@ -13,3 +13,6 @@
 [submodule "Engine/ThirdParty/GLFW"]
 	path = Engine/ThirdParty/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "Engine/ThirdParty/nlohmann/json"]
+	path = Engine/ThirdParty/nlohmann/json
+	url = https://github.com/nlohmann/json
